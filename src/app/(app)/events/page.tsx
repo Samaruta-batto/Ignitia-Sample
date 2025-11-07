@@ -76,40 +76,42 @@ export default function EventsPage() {
       </section>
 
       <WarpBackground>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
-          {filteredItems.map(item => (
-            <MagicCard
-              key={item.id}
-              className="overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105"
-            >
-              <Card className="bg-card/50 backdrop-blur-sm border-0 shadow-none overflow-hidden group">
-                <div className="relative aspect-video overflow-hidden">
-                  <Image
-                    src={item.image.imageUrl}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
-                    data-ai-hint={item.image.imageHint}
-                  />
-                </div>
-                <CardContent className="p-6 text-center">
-                  <h3 className="font-headline text-2xl text-white mb-4">{item.title}</h3>
-                  <Button
-                    variant="outline"
-                    className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full"
-                  >
-                    ₹ {item.prize || '75,000'}/-
-                  </Button>
-                </CardContent>
-              </Card>
-            </MagicCard>
-          ))}
-          {filteredItems.length === 0 && (
-            <div className="col-span-full text-center py-16">
-              <h3 className="text-2xl font-headline">No Events Found</h3>
-              <p className="text-muted-foreground">Please select a different category.</p>
-            </div>
-          )}
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
+            {filteredItems.map(item => (
+              <MagicCard
+                key={item.id}
+                className="overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105"
+              >
+                <Card className="bg-card/50 backdrop-blur-sm border-0 shadow-none overflow-hidden group">
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
+                      src={item.image.imageUrl}
+                      alt={item.title}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      data-ai-hint={item.image.imageHint}
+                    />
+                  </div>
+                  <CardContent className="p-6 text-center">
+                    <h3 className="font-headline text-2xl text-white mb-4">{item.title}</h3>
+                    <Button
+                      variant="outline"
+                      className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full"
+                    >
+                      ₹ {item.prize || '75,000'}/-
+                    </Button>
+                  </CardContent>
+                </Card>
+              </MagicCard>
+            ))}
+            {filteredItems.length === 0 && (
+              <div className="col-span-full text-center py-16">
+                <h3 className="text-2xl font-headline">No Events Found</h3>
+                <p className="text-muted-foreground">Please select a different category.</p>
+              </div>
+            )}
+          </div>
         </div>
       </WarpBackground>
     </div>
