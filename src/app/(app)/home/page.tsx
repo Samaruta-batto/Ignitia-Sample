@@ -42,10 +42,10 @@ export default function HomePage() {
             October 15-17, 2024 | College Campus
           </p>
           <div className="mt-8 flex gap-4">
-            <ShimmerButton className="px-8 py-6">
+            <ShimmerButton className="px-8 py-3">
               <Link href="/events" className="flex items-center gap-2">Register Now <ArrowRight /></Link>
             </ShimmerButton>
-            <Button size="lg" variant="outline" asChild>
+            <Button size="lg" variant="outline" asChild className="h-auto py-3">
               <Link href="/events">Explore Events <Ticket className="ml-2"/></Link>
             </Button>
           </div>
