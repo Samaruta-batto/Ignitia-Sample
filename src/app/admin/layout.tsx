@@ -1,10 +1,13 @@
 import { AdminSidebar } from '@/components/layout/admin-sidebar';
+import { useAuth } from '@/contexts/auth-context';
+import { redirect } from 'next/navigation';
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  
   return (
     <div className="flex min-h-screen">
       <AdminSidebar />

@@ -35,7 +35,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      router.push('/login');
+      router.push('/user-login');
     }
   }, [isAuthenticated, isLoading, router]);
 
@@ -43,7 +43,7 @@ export default function ProfilePage() {
     setEditedUser(user);
   }, [user]);
 
-  if (isLoading) {
+  if (isLoading || !isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#1A1625]">
         <div className="text-center">
@@ -71,6 +71,7 @@ export default function ProfilePage() {
   };
 
   const handleSaveProfile = () => {
+    // In a real app, you'd call an API to save the user data
     setIsEditing(false);
   };
 
@@ -469,15 +470,19 @@ export default function ProfilePage() {
                       </div>
                       <div className="flex gap-3">
                         {user.githubUrl && (
-                          <Button className="flex-1 bg-[#1A1625] hover:bg-[#1A1625]/80 text-white">
-                            <Github className="w-4 h-4 mr-2" />
-                            GitHub
+                          <Button asChild className="flex-1 bg-[#1A1625] hover:bg-[#1A1625]/80 text-white">
+                            <a href={user.githubUrl} target="_blank" rel="noopener noreferrer">
+                              <Github className="w-4 h-4 mr-2" />
+                              GitHub
+                            </a>
                           </Button>
                         )}
                         {user.linkedinUrl && (
-                          <Button className="flex-1 bg-[#0077B5] hover:bg-[#0077B5]/90 text-white">
-                            <Linkedin className="w-4 h-4 mr-2" />
-                            LinkedIn
+                          <Button asChild className="flex-1 bg-[#0077B5] hover:bg-[#0077B5]/90 text-white">
+                            <a href={user.linkedinUrl} target="_blank" rel="noopener noreferrer">
+                              <Linkedin className="w-4 h-4 mr-2" />
+                              LinkedIn
+                            </a>
                           </Button>
                         )}
                       </div>

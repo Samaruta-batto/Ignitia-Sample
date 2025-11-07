@@ -37,16 +37,43 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const initialUser: User = {
+  id: 'dev-user-1',
+  name: 'Dev User',
+  email: 'dev@ignitia.in',
+  phone: '+91 98765 43210',
+  college: 'IGNITIA Institute of Technology',
+  year: 'Final Year',
+  role: 'ATTENDEE',
+  profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=DevUser',
+  walletBalance: 2500,
+  registeredEvents: ['event-1', 'event-3'],
+  participatedEvents: ['event-1'],
+};
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-      setIsAuthenticated(true);
+    try {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+        setIsAuthenticated(true);
+      } else {
+        // For development, you can start with a default logged-in user.
+        // In production, you might want to remove this.
+        if (process.env.NODE_ENV === 'development') {
+           setUser(initialUser);
+           setIsAuthenticated(true);
+           localStorage.setItem('user', JSON.stringify(initialUser));
+        }
+      }
+    } catch (error) {
+        console.error("Failed to parse user from localStorage", error);
+        localStorage.removeItem('user');
     }
     setIsLoading(false);
   }, []);
