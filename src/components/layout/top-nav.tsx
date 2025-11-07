@@ -1,0 +1,104 @@
+'use client';
+
+import * as React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import {
+  Ticket,
+  ShoppingBag,
+  Wallet,
+  Image as ImageIcon,
+  LayoutDashboard,
+  Home,
+  Info,
+  Users,
+  Award,
+  Contact,
+  Menu,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Button } from '../ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
+import { Logo } from '../icons/logo';
+import { Separator } from '../ui/separator';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+
+const menuItems = [
+  { href: '/home', label: 'Home', icon: Home },
+  { href: '/events', label: 'Events', icon: Ticket },
+  { href: '/merchandise', label: 'Merchandise', icon: ShoppingBag },
+  { href: '/sponsors', label: 'Sponsors', icon: Award },
+  { href: '/wallet', label: 'Wallet', icon: Wallet },
+  { href: '/archive', label: 'Gallery', icon: ImageIcon },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/about', label: 'About Us', icon: Info },
+  { href: '/teams', label: 'Team', icon: Users },
+  { href: '/contact', label: 'Contact', icon: Contact },
+];
+
+export function TopNav() {
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  return (
+    <>
+      <nav className="hidden md:flex items-center gap-1">
+        {menuItems.map((item) => (
+          <Button
+            key={item.label}
+            variant={pathname.startsWith(item.href) ? 'secondary' : 'ghost'}
+            asChild
+            className="text-sm"
+          >
+            <Link href={item.href}>{item.label}</Link>
+          </Button>
+        ))}
+      </nav>
+      <div className="md:hidden">
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon">
+              <Menu />
+              <span className="sr-only">Open Menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="flex flex-col p-0">
+            <div className="p-4">
+              <Link href="/" onClick={() => setIsOpen(false)}>
+                <Logo className="w-36" />
+              </Link>
+            </div>
+            <Separator />
+            <nav className="flex-1 flex flex-col gap-2 p-4">
+              {menuItems.map((item) => (
+                <Button
+                  key={item.label}
+                  variant={pathname.startsWith(item.href) ? 'secondary' : 'ghost'}
+                  asChild
+                  className="justify-start gap-2"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Link href={item.href}>
+                    <item.icon className="h-4 w-4 text-accent" />
+                    {item.label}
+                  </Link>
+                </Button>
+              ))}
+            </nav>
+             <Separator />
+             <div className="p-4 flex items-center gap-3">
+                <Avatar>
+                    <AvatarImage src="https://picsum.photos/seed/user/40/40" data-ai-hint="user avatar"/>
+                    <AvatarFallback>U</AvatarFallback>
+                </Avatar>
+                <div className="flex flex-col">
+                    <span className="font-semibold text-sm">User</span>
+                    <span className="text-xs text-muted-foreground">user@festconnect.com</span>
+                </div>
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
+    </>
+  );
+}

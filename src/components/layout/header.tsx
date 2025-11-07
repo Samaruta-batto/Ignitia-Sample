@@ -1,25 +1,26 @@
+'use client';
 import { Button } from '@/components/ui/button';
-import { SidebarTrigger } from '@/components/ui/sidebar';
 import { ShoppingCart } from 'lucide-react';
+import { TopNav } from './top-nav';
+import { Logo } from '../icons/logo';
+import Link from 'next/link';
 
-type AppHeaderProps = {
-  title: string;
-};
-
-export function AppHeader({ title }: AppHeaderProps) {
+export function AppHeader() {
   return (
-    <header className="sticky top-0 z-10 flex h-16 items-center justify-between gap-4 border-b bg-background/80 px-4 backdrop-blur-sm md:px-8">
-      <div className="flex items-center gap-4">
-        <SidebarTrigger className="md:hidden" />
-        <h1 className="font-headline text-xl md:text-2xl uppercase tracking-wider text-foreground">
-          {title}
-        </h1>
-      </div>
-      <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon">
-          <ShoppingCart className="text-accent" />
-          <span className="sr-only">Shopping Cart</span>
-        </Button>
+    <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
+      <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4 md:px-8">
+        <div className="flex items-center gap-4">
+          <Link href="/">
+            <Logo className="w-36 hidden sm:block" />
+          </Link>
+        </div>
+        <TopNav />
+        <div className="flex items-center gap-2">
+          <Button variant="ghost" size="icon">
+            <ShoppingCart className="text-accent" />
+            <span className="sr-only">Shopping Cart</span>
+          </Button>
+        </div>
       </div>
     </header>
   );

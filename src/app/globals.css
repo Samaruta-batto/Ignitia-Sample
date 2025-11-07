@@ -84,4 +84,17 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    cursor:
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="2" fill="hsl(45 65% 52%)" /></svg>')
+        10 10,
+      auto;
+  }
+  a,
+  button {
+    cursor:
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="hsl(45 65% 52%)" stroke-width="2"><path d="M5 12h14m-7-7v14" /></svg>')
+        12 12,
+      pointer;
+  }
 }
