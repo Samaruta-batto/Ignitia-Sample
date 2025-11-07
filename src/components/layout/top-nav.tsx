@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import {
   Ticket,
-  ShoppingBag,
-  Wallet,
   Image as ImageIcon,
   LayoutDashboard,
   Home,
@@ -25,15 +23,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
 const menuItems = [
   { href: '/home', label: 'Home', icon: Home },
+  { href: '/about', label: 'About', icon: Info },
   { href: '/events', label: 'Events', icon: Ticket },
-  { href: '/merchandise', label: 'Merchandise', icon: ShoppingBag },
-  { href: '/sponsors', label: 'Sponsors', icon: Award },
-  { href: '/wallet', label: 'Wallet', icon: Wallet },
+  { href: '/dashboard', label: 'Leaderboard', icon: LayoutDashboard },
   { href: '/archive', label: 'Gallery', icon: ImageIcon },
-  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/about', label: 'About Us', icon: Info },
-  { href: '/teams', label: 'Team', icon: Users },
-  { href: '/contact', label: 'Contact', icon: Contact },
+  { href: '/sponsors', label: 'Sponsors', icon: Award },
+  { href: '/teams', label: 'Teams', icon: Users },
 ];
 
 export function TopNav() {
@@ -42,17 +37,21 @@ export function TopNav() {
 
   return (
     <>
-      <nav className="hidden md:flex items-center gap-1">
-        {menuItems.map((item) => (
-          <Button
-            key={item.label}
-            variant={pathname.startsWith(item.href) ? 'secondary' : 'ghost'}
-            asChild
-            className="text-sm"
-          >
-            <Link href={item.href}>{item.label}</Link>
-          </Button>
-        ))}
+      <nav className="hidden md:flex items-center justify-center flex-1">
+        <div className="bg-card/50 backdrop-blur-md rounded-full border border-border/20 shadow-lg px-4 py-2">
+          <div className="flex items-center gap-1">
+            {menuItems.map((item) => (
+              <Button
+                key={item.label}
+                variant={pathname.startsWith(item.href) ? 'secondary' : 'ghost'}
+                asChild
+                className="text-sm rounded-full"
+              >
+                <Link href={item.href}>{item.label}</Link>
+              </Button>
+            ))}
+          </div>
+        </div>
       </nav>
       <div className="md:hidden">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -70,7 +69,7 @@ export function TopNav() {
             </div>
             <Separator />
             <nav className="flex-1 flex flex-col gap-2 p-4">
-              {menuItems.map((item) => (
+              {[...menuItems, { href: '/contact', label: 'Contact', icon: Contact }].map((item) => (
                 <Button
                   key={item.label}
                   variant={pathname.startsWith(item.href) ? 'secondary' : 'ghost'}
@@ -93,7 +92,7 @@ export function TopNav() {
                 </Avatar>
                 <div className="flex flex-col">
                     <span className="font-semibold text-sm">User</span>
-                    <span className="text-xs text-muted-foreground">user@festconnect.com</span>
+                    <span className="text-xs text-muted-foreground">user@ignitia.in</span>
                 </div>
             </div>
           </SheetContent>

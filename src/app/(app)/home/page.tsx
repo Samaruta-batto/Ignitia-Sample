@@ -8,15 +8,17 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { events } from '@/lib/placeholder-data';
+import { products } from '@/lib/placeholder-data';
 import { ArrowRight, Ticket, Users, Award, Youtube, Instagram, Facebook, Linkedin, Twitter } from 'lucide-react';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { formatCurrency } from '@/lib/utils';
 
 
 export default function HomePage() {
-  const featuredEvent = events[0];
   const heroImage = PlaceHolderImages.find(p => p.id === 'techno-background')!;
+  const featuredProduct = products[0];
+  const featuredProductImage = PlaceHolderImages.find(p => p.id === 'merch-tshirt-showcase')!;
 
   return (
     <div className="space-y-16 -mt-8 -mx-8">
@@ -75,6 +77,36 @@ export default function HomePage() {
             </div>
         </div>
       </section>
+
+       <section className="container mx-auto py-10">
+        <div className="text-center mb-12">
+            <h2 className="font-headline text-5xl uppercase tracking-wider">Official Merchandise</h2>
+            <p className="mt-2 text-lg text-muted-foreground">Get your hands on exclusive IGNITIA merchandise</p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          <div className="space-y-4">
+            <h3 className="font-headline text-4xl text-accent" style={{letterSpacing: '0.1em', textShadow: '0 0 5px hsl(var(--accent) / 0.5)'}}>LIMITED EDITION T-SHIRT</h3>
+            <p className="text-muted-foreground text-lg">Be a part of IGNITIA 2K25 with our exclusive merchandise. Each piece is crafted with premium quality materials and features unique designs inspired by our theme.</p>
+            <p className="text-4xl font-bold text-accent">₹350</p>
+            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
+              <Link href="#">Buy Now <ArrowRight className="ml-2"/></Link>
+            </Button>
+          </div>
+          <div className="flex items-center justify-center">
+             <Card className="border-2 border-accent/50 p-2 bg-transparent overflow-hidden">
+                <div className="relative aspect-square w-[400px] h-[400px]">
+                    <Image
+                        src={featuredProductImage.imageUrl}
+                        alt={featuredProduct.name}
+                        fill
+                        className="object-contain"
+                        data-ai-hint={featuredProductImage.imageHint}
+                    />
+                </div>
+             </Card>
+          </div>
+        </div>
+       </section>
 
     </div>
   );
