@@ -28,7 +28,7 @@ export default function LandingPage() {
             Your ultimate gateway to the most exciting college festivals. Discover events, grab merchandise, and connect with the community.
           </p>
           <div className="mt-8 flex gap-4">
-            <ShimmerButton className="px-8 py-6">
+            <ShimmerButton className="px-8 h-11 flex items-center">
               <Link href="/home" className="flex items-center gap-2">Explore Now <ArrowRight /></Link>
             </ShimmerButton>
             <Button size="lg" variant="outline">
