@@ -45,9 +45,9 @@ export default function HomePage() {
             <ShimmerButton className="px-8 py-3">
               <Link href="/events" className="flex items-center gap-2">Register Now <ArrowRight /></Link>
             </ShimmerButton>
-            <Button size="lg" variant="outline" asChild className="h-auto py-3">
+            <ShimmerButton asChild className="px-8 py-3 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
               <Link href="/events">Explore Events <Ticket className="ml-2"/></Link>
-            </Button>
+            </ShimmerButton>
           </div>
         </div>
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4">
