@@ -18,9 +18,11 @@ import {
   Wallet,
   Image as ImageIcon,
   LayoutDashboard,
-  UserCircle,
   Home,
-  Info
+  Info,
+  Users,
+  Award,
+  Contact
 } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
@@ -41,6 +43,11 @@ const menuItems = [
     label: 'Merchandise',
     icon: ShoppingBag,
   },
+   {
+    href: '/sponsors',
+    label: 'Sponsors',
+    icon: Award,
+  },
   {
     href: '/wallet',
     label: 'Wallet',
@@ -48,7 +55,7 @@ const menuItems = [
   },
   {
     href: '/archive',
-    label: 'Archive',
+    label: 'Gallery',
     icon: ImageIcon,
   },
   {
@@ -60,6 +67,16 @@ const menuItems = [
     href: '/about',
     label: 'About Us',
     icon: Info,
+  },
+  {
+    href: '/teams',
+    label: 'Team',
+    icon: Users,
+  },
+   {
+    href: '/contact',
+    label: 'Contact',
+    icon: Contact,
   },
 ];
 
@@ -79,7 +96,7 @@ export function AppSidebar() {
             <SidebarMenuItem key={item.label}>
               <Link href={item.href} passHref legacyBehavior>
                 <SidebarMenuButton
-                  isActive={pathname === item.href}
+                  isActive={pathname.startsWith(item.href)}
                   tooltip={item.label}
                 >
                   <item.icon className="text-accent" />
