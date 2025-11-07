@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Calendar, Ticket } from 'lucide-react';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Sponsors } from '@/components/sponsors';
 
 export default function LandingPage() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'event-1')!;
@@ -22,7 +21,7 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-foreground p-4">
           <h1 className="font-headline text-5xl md:text-7xl uppercase tracking-wider text-shadow-lg">
-            FestConnect
+            Ignitia
           </h1>
           <p className="mt-4 max-w-2xl text-lg md:text-xl text-foreground/80">
             Your ultimate gateway to the most exciting college festivals. Discover events, grab merchandise, and connect with the community.
@@ -40,9 +39,9 @@ export default function LandingPage() {
 
       <section className="container mx-auto">
          <div className="text-center">
-            <h2 className="font-headline text-4xl uppercase tracking-wider">What is FestConnect?</h2>
+            <h2 className="font-headline text-4xl uppercase tracking-wider">What is Ignitia?</h2>
             <p className="mt-4 max-w-3xl mx-auto text-muted-foreground text-lg">
-                FestConnect is a comprehensive platform designed to unify the college festival experience. From discovering the hottest events to managing your digital wallet and buying exclusive merchandise, we've got you covered.
+                Ignitia is a comprehensive platform designed to unify the college festival experience. From discovering the hottest events to managing your digital wallet and buying exclusive merchandise, we've got you covered.
             </p>
          </div>
       </section>

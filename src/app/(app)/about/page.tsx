@@ -11,7 +11,7 @@ const aboutImage =
 const milestones = [
   {
     year: '2021',
-    description: 'FestConnect was born, hosting its first virtual festival and bringing together 1,000+ attendees.',
+    description: 'Ignitia was born, hosting its first virtual festival and bringing together 1,000+ attendees.',
     icon: Milestone,
   },
   {
@@ -36,7 +36,7 @@ export default function AboutPage() {
     <div className="space-y-12">
       <section className="text-center">
         <h1 className="font-headline text-5xl tracking-wider uppercase">
-          About FestConnect
+          About Ignitia
         </h1>
         <p className="mt-4 max-w-3xl mx-auto text-lg text-muted-foreground">
           Your one-stop platform for event discovery, merchandise, and unforgettable experiences.
@@ -46,7 +46,7 @@ export default function AboutPage() {
       <section className="relative w-full h-80 rounded-lg overflow-hidden">
         <Image
           src={aboutImage.imageUrl}
-          alt="FestConnect event"
+          alt="Ignitia event"
           fill
           className="object-cover"
           data-ai-hint="event networking"
@@ -64,7 +64,7 @@ export default function AboutPage() {
         <div>
           <h2 className="font-headline text-3xl mb-4 text-accent">Our Legacy</h2>
           <p className="text-lg leading-relaxed">
-            Founded by a group of passionate festival-goers and tech enthusiasts, FestConnect started as a small project to solve a big problem: the fragmented and often frustrating experience of attending large-scale events. Today, we are proud to be a leading platform in the industry, trusted by organizers and loved by millions of users.
+            Founded by a group of passionate festival-goers and tech enthusiasts, Ignitia started as a small project to solve a big problem: the fragmented and often frustrating experience of attending large-scale events. Today, we are proud to be a leading platform in the industry, trusted by organizers and loved by millions of users.
           </p>
         </div>
       </section>

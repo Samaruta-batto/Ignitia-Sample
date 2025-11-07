@@ -47,7 +47,7 @@ export const events: Event[] = [
 export const products: Product[] = [
   {
     id: '1',
-    name: 'FestConnect Official Tee',
+    name: 'Ignitia Official Tee',
     price: 29.99,
     image: getImage('merch-1'),
   },

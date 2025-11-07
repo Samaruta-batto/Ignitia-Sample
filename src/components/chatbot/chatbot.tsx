@@ -34,7 +34,7 @@ const initialMessages: Message[] = [
   {
     role: 'assistant',
     content:
-      "Hello! I'm the FestConnect AI assistant. How can I help you today? You can ask me about events, merchandise, or general questions.",
+      "Hello! I'm the Ignitia AI assistant. How can I help you today? You can ask me about events, merchandise, or general questions.",
   },
 ];
 

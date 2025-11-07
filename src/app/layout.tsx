@@ -3,7 +3,7 @@ import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'FestConnect',
+  title: 'Ignitia',
   description: 'Your one-stop platform for event discovery, merchandise, and more.',
 };
 

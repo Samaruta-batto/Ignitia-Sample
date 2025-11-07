@@ -29,7 +29,7 @@ const prompt = ai.definePrompt({
   name: 'answerQuestionPrompt',
   input: {schema: AnswerQuestionInputSchema},
   output: {schema: AnswerQuestionOutputSchema},
-  prompt: `You are a chatbot for FestConnect, an event and merchandise marketplace. Answer the following question about the event, merchandise, or FAQs. Be concise and helpful.\n\nQuestion: {{{question}}}`,
+  prompt: `You are a chatbot for Ignitia, an event and merchandise marketplace. Answer the following question about the event, merchandise, or FAQs. Be concise and helpful.\n\nQuestion: {{{question}}}`,
 });
 
 const answerQuestionFlow = ai.defineFlow(
