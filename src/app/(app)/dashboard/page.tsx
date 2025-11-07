@@ -5,38 +5,82 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Users, DollarSign, Ticket, ShoppingBag } from 'lucide-react';
-import { SalesChart } from '@/components/dashboard/sales-chart';
-import { RegistrationsChart } from '@/components/dashboard/registrations-chart';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { Trophy, Users, IndianRupee } from 'lucide-react';
+import { events } from '@/lib/placeholder-data';
+import { formatCurrency } from '@/lib/utils';
+import type { Event } from '@/lib/types';
 
-const stats = [
-    { title: 'Total Revenue', value: '$45,231.89', icon: DollarSign, change: '+20.1% from last month' },
-    { title: 'Total Registrations', value: '+2350', icon: Users, change: '+180.1% from last month' },
-    { title: 'Tickets Sold', value: '+12,234', icon: Ticket, change: '+19% from last month' },
-    { title: 'Merch Sales', value: '+573', icon: ShoppingBag, change: '+21 from last month' },
-]
+// Add mock participant data to events
+const eventsWithParticipants: (Event & { participants: number })[] = events
+  .map(event => ({
+    ...event,
+    participants: Math.floor(Math.random() * (500 - 50 + 1)) + 50, // Random participants between 50 and 500
+  }))
+  .sort((a, b) => b.participants - a.participants);
 
-export default function DashboardPage() {
+export default function LeaderboardPage() {
   return (
     <div className="space-y-8">
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        {stats.map(stat => (
-            <Card key={stat.title}>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-                    <stat.icon className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                    <div className="text-2xl font-bold">{stat.value}</div>
-                    <p className="text-xs text-muted-foreground">{stat.change}</p>
-                </CardContent>
-            </Card>
-        ))}
+       <div className="text-center">
+        <h1 className="font-headline text-5xl tracking-wider uppercase">Event Leaderboard</h1>
+        <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
+          See which events are drawing the biggest crowds.
+        </p>
       </div>
-      <div className="grid gap-8 md:grid-cols-2">
-        <RegistrationsChart />
-        <SalesChart />
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="font-headline text-2xl flex items-center gap-2">
+            <Trophy className="text-accent"/>
+            Top Events by Participation
+          </CardTitle>
+          <CardDescription>
+            Events sorted by the number of registered participants.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[80px]">Rank</TableHead>
+                <TableHead>Event Title</TableHead>
+                <TableHead className="text-right">
+                  <div className="flex items-center justify-end gap-2">
+                    <Users /> Participants
+                  </div>
+                </TableHead>
+                <TableHead className="text-right">
+                   <div className="flex items-center justify-end gap-2">
+                    <IndianRupee /> Prize Money
+                  </div>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {eventsWithParticipants.map((event, index) => (
+                <TableRow key={event.id} className={index < 3 ? 'bg-card/50' : ''}>
+                  <TableCell className="font-bold text-lg text-accent">
+                     <div className="flex items-center gap-2">
+                        {index < 3 ? <Trophy className="w-5 h-5 text-yellow-400" /> : null}
+                        {index + 1}
+                     </div>
+                  </TableCell>
+                  <TableCell className="font-medium">{event.title}</TableCell>
+                  <TableCell className="text-right font-semibold">{event.participants}</TableCell>
+                  <TableCell className="text-right font-bold text-green-400">{formatCurrency(Number(event.prize) || 0)}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 }

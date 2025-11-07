@@ -6,15 +6,15 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { DollarSign, PlusCircle, History } from 'lucide-react';
+import { IndianRupee, PlusCircle, History } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { formatCurrency } from '@/lib/utils';
 
 const transactions = [
-    { id: 1, description: 'Merchandise: Official Tee', amount: -29.99, date: '2024-08-16' },
-    { id: 2, description: 'UPI Top-up', amount: 100.00, date: '2024-08-15' },
-    { id: 3, description: 'Food Stall: Pizza', amount: -12.50, date: '2024-08-15' },
-    { id: 4, description: 'Initial Deposit', amount: 50.00, date: '2024-08-14' },
+    { id: 1, description: 'Merchandise: Official Tee', amount: -350, date: '2024-08-16' },
+    { id: 2, description: 'UPI Top-up', amount: 2000, date: '2024-08-15' },
+    { id: 3, description: 'Food Stall: Pizza', amount: -250, date: '2024-08-15' },
+    { id: 4, description: 'Initial Deposit', amount: 1000, date: '2024-08-14' },
 ];
 
 const currentBalance = transactions.reduce((acc, t) => acc + t.amount, 0);
@@ -33,7 +33,7 @@ export default function WalletPage() {
             <span className="text-5xl font-bold tracking-tighter">
               {formatCurrency(currentBalance)}
             </span>
-            <DollarSign className="ml-2 h-8 w-8 text-accent" />
+            <IndianRupee className="ml-2 h-8 w-8 text-accent" />
           </div>
         </CardContent>
       </Card>
@@ -59,7 +59,7 @@ export default function WalletPage() {
           <CardTitle className="font-headline text-2xl flex items-center gap-2">
             <History className="text-accent"/>
             Transaction History
-          </CardTitle>
+          </Title>
         </CardHeader>
         <CardContent>
           <ul className="space-y-4">
