@@ -80,23 +80,35 @@
 @layer base {
   * {
     @apply border-border;
+    cursor: none !important;
   }
   body {
     @apply bg-background text-foreground;
     background-image: radial-gradient(circle at 1px 1px, hsl(var(--border)) 1px, transparent 0);
     background-size: 2rem 2rem;
   }
-  html {
-    cursor:
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="3" fill="hsl(45 65% 52% / 0.5)" /></svg>')
-        10 10,
-      auto;
-  }
-  a,
+
+  input,
+  textarea,
+  select,
+  a[href],
   button {
-    cursor:
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="hsl(45 65% 52%)" stroke-width="2"><path d="M5 12h14m-7-7v14" /></svg>')
-        12 12,
-      pointer;
+    cursor: none !important;
+  }
+
+  a:hover, button:hover {
+    ~ .cursor-outline {
+      transform: translate(-50%, -50%) scale(1.5);
+      background-color: hsl(var(--accent) / 0.2);
+    }
+  }
+
+  input:hover, textarea:hover, select:hover {
+    ~ .cursor-outline {
+      transform: translate(-50%, -50%) scale(1.5) rotate(90deg);
+      background-color: hsl(var(--accent) / 0.1);
+      border-radius: 2px;
+      border-width: 1px;
+    }
   }
 }

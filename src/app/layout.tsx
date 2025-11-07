@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Toaster } from '@/components/ui/toaster';
 import './globals.css';
+import { SmoothCursor } from '@/components/ui/smooth-cursor';
 
 export const metadata: Metadata = {
   title: 'Ignitia',
@@ -19,7 +20,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
       </head>
-      <body className="font-body antialiased">
+      <body className="font-body antialiased cursor-none">
+        <SmoothCursor />
         {children}
         <Toaster />
       </body>
