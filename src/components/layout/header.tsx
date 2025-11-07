@@ -16,8 +16,10 @@ export function AppHeader() {
         </div>
         <TopNav />
         <div className="flex items-center gap-2">
-          <Button className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20">
-            <LogIn className="mr-2 h-4 w-4" /> Login
+          <Button asChild className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20">
+            <Link href="/login">
+              <LogIn className="mr-2 h-4 w-4" /> Login
+            </Link>
           </Button>
         </div>
       </div>
