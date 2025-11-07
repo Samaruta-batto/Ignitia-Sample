@@ -26,6 +26,17 @@ export default function LoginPage() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    if (!supabase) {
+      toast({
+        variant: 'destructive',
+        title: 'Supabase not configured',
+        description: 'Please set up your Supabase credentials in the .env file.',
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
