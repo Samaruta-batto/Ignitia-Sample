@@ -14,6 +14,7 @@ import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { formatCurrency } from '@/lib/utils';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
+import NumberTicker from '@/components/ui/number-ticker';
 
 
 export default function HomePage() {
@@ -42,10 +43,10 @@ export default function HomePage() {
             October 15-17, 2024 | College Campus
           </p>
           <div className="mt-8 flex gap-4">
-            <ShimmerButton className="px-8 py-3">
+            <ShimmerButton className="px-8 py-3 h-11">
               <Link href="/events" className="flex items-center gap-2">Register Now <ArrowRight /></Link>
             </ShimmerButton>
-            <ShimmerButton asChild className="px-8 py-3 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
+            <ShimmerButton asChild className="px-8 py-3 h-11 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
               <Link href="/events">Explore Events <Ticket className="ml-2"/></Link>
             </ShimmerButton>
           </div>
@@ -63,17 +64,17 @@ export default function HomePage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="border-r border-border last:border-r-0">
                 <Ticket className="h-12 w-12 text-accent mx-auto mb-4"/>
-                <p className="text-4xl font-bold">50+</p>
+                <p className="text-4xl font-bold"><NumberTicker value={50} />+</p>
                 <p className="text-muted-foreground">Events</p>
             </div>
             <div className="border-r border-border last:border-r-0">
                 <Users className="h-12 w-12 text-accent mx-auto mb-4"/>
-                <p className="text-4xl font-bold">100+</p>
+                <p className="text-4xl font-bold"><NumberTicker value={100} />+</p>
                 <p className="text-muted-foreground">Teams</p>
             </div>
             <div>
                 <Award className="h-12 w-12 text-accent mx-auto mb-4"/>
-                <p className="text-4xl font-bold">20+</p>
+                <p className="text-4xl font-bold"><NumberTicker value={20} />+</p>
                 <p className="text-muted-foreground">Sponsors</p>
             </div>
         </div>
