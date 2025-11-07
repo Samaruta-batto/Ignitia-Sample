@@ -19,13 +19,20 @@ import {
   Image as ImageIcon,
   LayoutDashboard,
   UserCircle,
+  Home,
+  Info
 } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
 const menuItems = [
   {
-    href: '/',
+    href: '/home',
+    label: 'Home',
+    icon: Home,
+  },
+  {
+    href: '/events',
     label: 'Events',
     icon: Ticket,
   },
@@ -49,6 +56,11 @@ const menuItems = [
     label: 'Dashboard',
     icon: LayoutDashboard,
   },
+  {
+    href: '/about',
+    label: 'About Us',
+    icon: Info,
+  },
 ];
 
 export function AppSidebar() {
@@ -57,7 +69,9 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
-        <Logo className="w-36" />
+        <Link href="/">
+          <Logo className="w-36" />
+        </Link>
       </SidebarHeader>
       <SidebarContent>
         <SidebarMenu>

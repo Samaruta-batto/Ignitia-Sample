@@ -5,7 +5,8 @@ import { usePathname } from 'next/navigation';
 
 // Helper to convert pathname to title
 function pathnameToTitle(pathname: string): string {
-  if (pathname === '/') return 'Events';
+  if (pathname === '/') return 'Welcome';
+  if (pathname === '/home') return 'Home';
   const title = pathname.replace('/', '').replace(/-/g, ' ');
   return title.charAt(0).toUpperCase() + title.slice(1);
 }
