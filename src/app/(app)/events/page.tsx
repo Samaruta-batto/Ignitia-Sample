@@ -8,9 +8,10 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { events, eventCategories, eventSubCategories } from '@/lib/placeholder-data';
-import type { Event, EventCategory, EventSubCategory } from '@/lib/types';
+import type { Event } from '@/lib/types';
 import { cn } from '@/lib/utils';
-import { formatCurrency } from '@/lib/utils';
+import { MagicCard } from '@/components/ui/magic-card';
+
 
 export default function EventsPage() {
     const [activeCategory, setActiveCategory] = React.useState<string>('entrepreneurial');
@@ -42,7 +43,14 @@ export default function EventsPage() {
                     <Button 
                         key={category.id} 
                         variant="ghost" 
-                        onClick={() => setActiveCategory(category.id)}
+                        onClick={() => {
+                            setActiveCategory(category.id)
+                            // Set the active subcategory to the first one in the new category
+                            const firstSubCategory = eventSubCategories[category.id]?.[0];
+                            if (firstSubCategory) {
+                                setActiveSubCategory(firstSubCategory.id);
+                            }
+                        }}
                         className={cn(
                             "mx-4 py-6 text-lg uppercase tracking-widest rounded-none hover:bg-transparent hover:text-accent",
                             activeCategory === category.id ? "border-b-2 border-accent text-accent" : "text-muted-foreground"
@@ -53,7 +61,7 @@ export default function EventsPage() {
                 ))}
             </div>
             {eventSubCategories[activeCategory] && (
-                 <div className="flex justify-center border-b border-accent/20">
+                 <div className="flex justify-center border-b border-accent/20 flex-wrap">
                     {eventSubCategories[activeCategory].map((sub) => (
                          <Button 
                             key={sub.id} 
@@ -73,23 +81,25 @@ export default function EventsPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredItems.map((item) => (
-                <Card key={item.id} className="bg-card/60 backdrop-blur-sm border-accent/30 overflow-hidden group hover:border-accent transition-all duration-300 transform hover:-translate-y-2">
-                    <div className="relative aspect-video overflow-hidden">
-                        <Image
-                        src={item.image.imageUrl}
-                        alt={item.title}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-110"
-                        data-ai-hint={item.image.imageHint}
-                        />
-                    </div>
-                     <CardContent className="p-6 text-center">
-                        <h3 className="font-headline text-2xl text-white mb-4">{item.title}</h3>
-                        <Button variant="outline" className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full">
-                           ₹ {item.prize || '75,000'}/-
-                        </Button>
-                    </CardContent>
-                </Card>
+                <MagicCard key={item.id} className="overflow-hidden">
+                    <Card className="bg-transparent border-0 shadow-none overflow-hidden group">
+                        <div className="relative aspect-video overflow-hidden">
+                            <Image
+                            src={item.image.imageUrl}
+                            alt={item.title}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-110"
+                            data-ai-hint={item.image.imageHint}
+                            />
+                        </div>
+                        <CardContent className="p-6 text-center">
+                            <h3 className="font-headline text-2xl text-white mb-4">{item.title}</h3>
+                            <Button variant="outline" className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full">
+                            ₹ {item.prize || '75,000'}/-
+                            </Button>
+                        </CardContent>
+                    </Card>
+                </MagicCard>
             ))}
             {filteredItems.length === 0 && (
                 <div className="col-span-full text-center py-16">
