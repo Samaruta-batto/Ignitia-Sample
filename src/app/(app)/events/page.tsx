@@ -81,9 +81,9 @@ export default function EventsPage() {
             {filteredItems.map(item => (
               <MagicCard
                 key={item.id}
-                className="overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105"
+                className="w-[350px] flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105"
               >
-                <Card className="bg-card/50 backdrop-blur-sm border-0 shadow-none overflow-hidden group">
+                <Card className="bg-card/50 backdrop-blur-sm border-0 shadow-none overflow-hidden group w-full h-full flex flex-col">
                   <div className="relative aspect-video overflow-hidden">
                     <Image
                       src={item.image.imageUrl}
@@ -93,14 +93,16 @@ export default function EventsPage() {
                       data-ai-hint={item.image.imageHint}
                     />
                   </div>
-                  <CardContent className="p-6 text-center">
+                  <CardContent className="p-6 text-center flex flex-col flex-grow">
                     <h3 className="font-headline text-2xl text-white mb-4">{item.title}</h3>
-                    <Button
-                      variant="outline"
-                      className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full"
-                    >
-                      ₹ {item.prize || '75,000'}/-
-                    </Button>
+                    <div className="mt-auto">
+                        <Button
+                        variant="outline"
+                        className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full"
+                        >
+                        ₹ {item.prize || '75,000'}/-
+                        </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </MagicCard>
