@@ -47,7 +47,6 @@ export default function LandingPage() {
          </div>
       </section>
 
-      <Sponsors />
     </div>
   );
 }
