@@ -64,6 +64,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const parsedUser = JSON.parse(storedUser);
         setUser(parsedUser);
         setIsAuthenticated(true);
+      } else {
+        // If no user in localStorage, set the initial mock user for demonstration
+        setUser(initialUser);
+        setIsAuthenticated(true); // Treat as authenticated for mock purposes
+        localStorage.setItem('user', JSON.stringify(initialUser));
       }
     } catch (error) {
         console.error("Failed to parse user from localStorage", error);

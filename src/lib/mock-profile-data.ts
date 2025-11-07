@@ -1,3 +1,4 @@
+
 import type { WalletTransaction, EventRegistration } from './types';
 
 export const mockWalletTransactions: WalletTransaction[] = [

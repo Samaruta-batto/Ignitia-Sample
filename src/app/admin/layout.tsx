@@ -1,3 +1,4 @@
+
 'use client';
 import { AdminSidebar } from '@/components/layout/admin-sidebar';
 import { useAuth } from '@/contexts/auth-context';
