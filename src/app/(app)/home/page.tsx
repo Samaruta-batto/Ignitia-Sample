@@ -13,6 +13,7 @@ import { ArrowRight, Ticket, Users, Award, Youtube, Instagram, Facebook, Linkedi
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { formatCurrency } from '@/lib/utils';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
 
 
 export default function HomePage() {
@@ -41,9 +42,9 @@ export default function HomePage() {
             October 15-17, 2024 | College Campus
           </p>
           <div className="mt-8 flex gap-4">
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-              <Link href="/events">Register Now <ArrowRight className="ml-2"/></Link>
-            </Button>
+            <ShimmerButton className="px-8 py-6">
+              <Link href="/events" className="flex items-center gap-2">Register Now <ArrowRight /></Link>
+            </ShimmerButton>
             <Button size="lg" variant="outline" asChild>
               <Link href="/events">Explore Events <Ticket className="ml-2"/></Link>
             </Button>
@@ -88,9 +89,9 @@ export default function HomePage() {
             <h3 className="font-headline text-4xl text-accent" style={{letterSpacing: '0.1em', textShadow: '0 0 5px hsl(var(--accent) / 0.5)'}}>LIMITED EDITION T-SHIRT</h3>
             <p className="text-muted-foreground text-lg">Be a part of IGNITIA 2K25 with our exclusive merchandise. Each piece is crafted with premium quality materials and features unique designs inspired by our theme.</p>
             <p className="text-4xl font-bold text-accent">₹350</p>
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-              <Link href="#">Buy Now <ArrowRight className="ml-2"/></Link>
-            </Button>
+            <ShimmerButton>
+              <Link href="#" className='flex items-center gap-2'>Buy Now <ArrowRight /></Link>
+            </ShimmerButton>
           </div>
           <div className="flex items-center justify-center">
              <Card className="border-2 border-accent/50 p-2 bg-transparent overflow-hidden">

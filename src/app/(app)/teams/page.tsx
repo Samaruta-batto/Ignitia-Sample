@@ -84,7 +84,7 @@ export default function TeamsPage() {
         <h2 className="font-headline text-4xl text-center mb-10 uppercase tracking-wider text-accent">Core Organizers</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {coreTeam.map((member) => (
-            <Card key={member.name} className="text-center overflow-hidden group">
+            <Card key={member.name} className="text-center overflow-hidden group transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
               <div className="relative h-40 bg-gradient-to-r from-primary to-accent">
                  <Image src={member.avatar} alt={member.name} width={120} height={120} className="rounded-full border-4 border-background absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[-50%] object-cover mx-auto transition-transform duration-300 group-hover:scale-110" data-ai-hint="person portrait"/>
               </div>
@@ -108,7 +108,7 @@ export default function TeamsPage() {
         <h2 className="font-headline text-4xl text-center mb-10 uppercase tracking-wider text-accent">Development Team</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-center">
            {devTeam.map((member) => (
-            <Card key={member.name} className="text-center overflow-hidden group">
+            <Card key={member.name} className="text-center overflow-hidden group transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
               <div className="relative h-40 bg-gradient-to-r from-primary to-accent">
                  <Image src={member.avatar} alt={member.name} width={120} height={120} className="rounded-full border-4 border-background absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[-50%] object-cover mx-auto transition-transform duration-300 group-hover:scale-110" data-ai-hint="person portrait"/>
               </div>

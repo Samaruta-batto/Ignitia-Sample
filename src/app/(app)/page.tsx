@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Calendar, Ticket } from 'lucide-react';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
 
 export default function LandingPage() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'event-1')!;
@@ -27,9 +28,9 @@ export default function LandingPage() {
             Your ultimate gateway to the most exciting college festivals. Discover events, grab merchandise, and connect with the community.
           </p>
           <div className="mt-8 flex gap-4">
-            <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90" asChild>
-              <Link href="/home">Explore Now <ArrowRight className="ml-2"/></Link>
-            </Button>
+            <ShimmerButton className="px-8 py-6">
+              <Link href="/home" className="flex items-center gap-2">Explore Now <ArrowRight /></Link>
+            </ShimmerButton>
             <Button size="lg" variant="outline">
               <Link href="/events">View All Events <Ticket className="ml-2"/></Link>
             </Button>
