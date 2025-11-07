@@ -52,16 +52,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
+    const isAdmin = email.toLowerCase() === 'admin@ignitia.in';
+    
     const mockUser: User = {
-      id: '1',
-      name: 'John Doe',
+      id: isAdmin ? 'admin-1' : '1',
+      name: isAdmin ? 'Admin User' : 'John Doe',
       email: email,
       phone: '+1 234 567 8900',
-      college: 'MIT',
-      year: '3rd Year',
-      role: 'ATTENDEE',
-      profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=John',
-      walletBalance: 1500,
+      college: isAdmin ? 'IGNITIA' : 'MIT',
+      year: isAdmin ? 'Admin' : '3rd Year',
+      role: isAdmin ? 'ADMIN' : 'ATTENDEE',
+      profilePhoto: isAdmin 
+        ? 'https://api.dicebear.com/7.x/avataaars/svg?seed=Admin' 
+        : 'https://api.dicebear.com/7.x/avataaars/svg?seed=John',
+      walletBalance: isAdmin ? 5000 : 1500,
       registeredEvents: ['event-1', 'event-2', 'event-3'],
       participatedEvents: ['event-1'],
     };

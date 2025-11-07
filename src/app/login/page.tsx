@@ -46,10 +46,10 @@ export default function LoginPage() {
 
       toast({
         title: 'Login Successful',
-        description: 'Welcome back to IGNITIA!',
+        description: 'Welcome back to IGNITIA Admin!',
       });
       
-      router.push('/profile');
+      router.push('/admin');
       router.refresh();
     } catch (error: any) {
       toast({

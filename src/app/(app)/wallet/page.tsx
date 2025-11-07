@@ -60,7 +60,7 @@ export default function WalletPage() {
           <CardTitle className="font-headline text-2xl flex items-center gap-2">
             <History className="text-accent"/>
             Transaction History
-          </Title>
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <ul className="space-y-4">
