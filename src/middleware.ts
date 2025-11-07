@@ -18,12 +18,13 @@ export async function middleware(request: NextRequest) {
     },
   })
 
-  // If credentials aren't set, bypass Supabase logic
+  // If credentials aren't set, bypass Supabase logic for public pages
   if (!areCredentialsSet) {
     if (request.nextUrl.pathname.startsWith('/admin')) {
-      return NextResponse.redirect(new URL('/login', request.url))
+        // If trying to access admin without Supabase, redirect to login
+        return NextResponse.redirect(new URL('/login', request.url))
     }
-    return response
+    return response;
   }
 
   const supabase = createServerClient(
@@ -76,9 +77,16 @@ export async function middleware(request: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession()
 
+  // If the user is trying to access an admin route and is not logged in, redirect to login
   if (request.nextUrl.pathname.startsWith('/admin') && !session) {
     return NextResponse.redirect(new URL('/login', request.url))
   }
+
+  // If the user is logged in and tries to access the login page, redirect to the admin dashboard
+  if (session && (request.nextUrl.pathname === '/login')) {
+      return NextResponse.redirect(new URL('/admin', request.url));
+  }
+
 
   return response
 }
