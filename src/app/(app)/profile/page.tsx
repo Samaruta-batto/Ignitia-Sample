@@ -26,12 +26,14 @@ import {
   MessageSquare
 } from 'lucide-react';
 import { mockWalletTransactions, mockEventRegistrations, mockMerchOrders } from '@/lib/mock-profile-data';
+import Loading from '../loading';
+import type { User as AuthUser } from '@/contexts/auth-context';
 
 export default function ProfilePage() {
   const { user, isAuthenticated, isLoading, logout, switchRole } = useAuth();
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
-  const [editedUser, setEditedUser] = useState(user);
+  const [editedUser, setEditedUser] = useState<AuthUser | null>(user);
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
@@ -43,18 +45,8 @@ export default function ProfilePage() {
     setEditedUser(user);
   }, [user]);
 
-  if (isLoading || !isAuthenticated) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#1A1625]">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold mb-4 text-white">Loading...</h2>
-        </div>
-      </div>
-    );
-  }
-
-  if (!user) {
-    return null;
+  if (isLoading || !isAuthenticated || !user) {
+    return <Loading />;
   }
 
   const getRoleBadgeColor = (role: string) => {

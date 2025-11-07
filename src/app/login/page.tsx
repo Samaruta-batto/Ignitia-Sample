@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { createClient } from '@/lib/supabase/client';
 import { useAuth } from '@/contexts/auth-context';
 import { useRouter } from 'next/navigation';
 import { LogIn } from 'lucide-react';
@@ -22,7 +21,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState('password');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const supabase = createClient();
   const { login } = useAuth();
   const { toast } = useToast();
 
@@ -33,24 +31,12 @@ export default function LoginPage() {
     try {
       await login(email, password);
       
-      if (supabase) {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
-
-        if (error) {
-          console.log('Supabase login failed, but mock auth succeeded:', error.message);
-        }
-      }
-
       toast({
         title: 'Login Successful',
         description: 'Welcome back to IGNITIA Admin!',
       });
       
       router.push('/admin');
-      router.refresh();
     } catch (error: any) {
       toast({
         variant: 'destructive',

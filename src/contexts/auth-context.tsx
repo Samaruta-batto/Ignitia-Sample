@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
@@ -60,16 +61,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     try {
       const storedUser = localStorage.getItem('user');
       if (storedUser) {
-        setUser(JSON.parse(storedUser));
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
         setIsAuthenticated(true);
-      } else {
-        // For development, you can start with a default logged-in user.
-        // In production, you might want to remove this.
-        if (process.env.NODE_ENV === 'development') {
-           setUser(initialUser);
-           setIsAuthenticated(true);
-           localStorage.setItem('user', JSON.stringify(initialUser));
-        }
       }
     } catch (error) {
         console.error("Failed to parse user from localStorage", error);
@@ -79,20 +73,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
-    const isAdmin = email.toLowerCase() === 'admin@ignitia.in';
+    // This is a mock login. In a real app, you'd verify credentials.
+    const isAdmin = email.toLowerCase() === 'admin@ignitia.in' && password === 'password';
+    
+    if (!isAdmin) {
+      // For now, only the admin login is mocked for the /login page
+      throw new Error("Invalid credentials");
+    }
     
     const mockUser: User = {
-      id: isAdmin ? 'admin-1' : '1',
-      name: isAdmin ? 'Admin User' : 'John Doe',
+      id: 'admin-1',
+      name: 'Admin User',
       email: email,
       phone: '+1 234 567 8900',
-      college: isAdmin ? 'IGNITIA' : 'MIT',
-      year: isAdmin ? 'Admin' : '3rd Year',
-      role: isAdmin ? 'ADMIN' : 'ATTENDEE',
-      profilePhoto: isAdmin 
-        ? 'https://api.dicebear.com/7.x/avataaars/svg?seed=Admin' 
-        : 'https://api.dicebear.com/7.x/avataaars/svg?seed=John',
-      walletBalance: isAdmin ? 5000 : 1500,
+      college: 'IGNITIA',
+      year: 'Admin',
+      role: 'ADMIN',
+      profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Admin',
+      walletBalance: 5000,
       registeredEvents: ['event-1', 'event-2', 'event-3'],
       participatedEvents: ['event-1'],
     };
