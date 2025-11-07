@@ -16,7 +16,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function HomePage() {
   const featuredEvent = events[0];
-  const heroImage = PlaceHolderImages.find(p => p.id === 'event-1')!;
+  const heroImage = PlaceHolderImages.find(p => p.id === 'techno-background')!;
 
   return (
     <div className="space-y-16 -mt-8 -mx-8">

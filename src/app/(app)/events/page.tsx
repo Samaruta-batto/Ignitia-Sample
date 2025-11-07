@@ -1,58 +1,103 @@
+'use client';
+
+import * as React from 'react';
 import Image from 'next/image';
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { events } from '@/lib/placeholder-data';
-import { Calendar, MapPin, ArrowRight } from 'lucide-react';
+import { events, eventCategories, eventSubCategories } from '@/lib/placeholder-data';
+import type { Event, EventCategory, EventSubCategory } from '@/lib/types';
+import { cn } from '@/lib/utils';
+import { formatCurrency } from '@/lib/utils';
 
 export default function EventsPage() {
+    const [activeCategory, setActiveCategory] = React.useState<string>('entrepreneurial');
+    const [activeSubCategory, setActiveSubCategory] = React.useState<string>('fintech');
+    const [filteredItems, setFilteredItems] = React.useState<Event[]>([]);
+
+    React.useEffect(() => {
+        const subCategory = eventSubCategories[activeCategory]?.find(sc => sc.id === activeSubCategory);
+        if (subCategory) {
+            const items = events.filter(event => subCategory.eventIds.includes(event.id));
+            setFilteredItems(items);
+        } else {
+            // Fallback to first subcategory if current is not in the new active category
+            const firstSubCategory = eventSubCategories[activeCategory]?.[0];
+            if (firstSubCategory) {
+                setActiveSubCategory(firstSubCategory.id);
+            } else {
+                setFilteredItems([]);
+            }
+        }
+    }, [activeCategory, activeSubCategory]);
+
+
   return (
-    <div className="space-y-12">
-      <section>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {events.map((event) => (
-            <Card
-              key={event.id}
-              className="overflow-hidden flex flex-col hover:shadow-accent/20 hover:shadow-lg transition-shadow duration-300"
-            >
-              <CardHeader className="p-0 relative h-60">
-                <Image
-                  src={event.image.imageUrl}
-                  alt={event.title}
-                  fill
-                  className="object-cover"
-                  data-ai-hint={event.image.imageHint}
-                />
-              </CardHeader>
-              <CardContent className="p-6 flex-grow">
-                <h3 className="font-headline text-2xl mb-2 uppercase tracking-wide">
-                  {event.title}
-                </h3>
-                <div className="flex items-center text-muted-foreground text-sm mb-1">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  <span>{event.date}</span>
+    <div className="space-y-8 text-white">
+        <section className="space-y-4">
+            <div className="flex justify-center border-b border-accent/20">
+                {eventCategories.map((category) => (
+                    <Button 
+                        key={category.id} 
+                        variant="ghost" 
+                        onClick={() => setActiveCategory(category.id)}
+                        className={cn(
+                            "mx-4 py-6 text-lg uppercase tracking-widest rounded-none hover:bg-transparent hover:text-accent",
+                            activeCategory === category.id ? "border-b-2 border-accent text-accent" : "text-muted-foreground"
+                        )}
+                    >
+                        {category.name}
+                    </Button>
+                ))}
+            </div>
+            {eventSubCategories[activeCategory] && (
+                 <div className="flex justify-center border-b border-accent/20">
+                    {eventSubCategories[activeCategory].map((sub) => (
+                         <Button 
+                            key={sub.id} 
+                            variant="ghost"
+                            onClick={() => setActiveSubCategory(sub.id)}
+                            className={cn(
+                                "mx-2 py-4 text-md rounded-none hover:bg-transparent hover:text-accent",
+                                activeSubCategory === sub.id ? "border-b-2 border-accent text-accent" : "text-muted-foreground"
+                            )}
+                        >
+                            {sub.name}
+                        </Button>
+                    ))}
                 </div>
-                <div className="flex items-center text-muted-foreground text-sm mb-4">
-                  <MapPin className="w-4 h-4 mr-2" />
-                  <span>{event.location}</span>
+            )}
+        </section>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredItems.map((item) => (
+                <Card key={item.id} className="bg-card/60 backdrop-blur-sm border-accent/30 overflow-hidden group hover:border-accent transition-all duration-300 transform hover:-translate-y-2">
+                    <div className="relative aspect-video overflow-hidden">
+                        <Image
+                        src={item.image.imageUrl}
+                        alt={item.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
+                        data-ai-hint={item.image.imageHint}
+                        />
+                    </div>
+                     <CardContent className="p-6 text-center">
+                        <h3 className="font-headline text-2xl text-white mb-4">{item.title}</h3>
+                        <Button variant="outline" className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full">
+                           ₹ {item.prize || '75,000'}/-
+                        </Button>
+                    </CardContent>
+                </Card>
+            ))}
+            {filteredItems.length === 0 && (
+                <div className="col-span-full text-center py-16">
+                    <h3 className="text-2xl font-headline">No Events Found</h3>
+                    <p className="text-muted-foreground">Please select a different category.</p>
                 </div>
-                <CardDescription>{event.description}</CardDescription>
-              </CardContent>
-              <CardFooter className="p-6 pt-0">
-                <Button className="w-full bg-accent hover:bg-accent/90 text-accent-foreground font-bold">
-                  Register Now <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+            )}
         </div>
-      </section>
     </div>
   );
 }

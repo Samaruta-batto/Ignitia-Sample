@@ -7,6 +7,20 @@ export interface Event {
   location: string;
   description: string;
   image: ImagePlaceholder;
+  prize?: string;
+  category: string;
+  subCategory: string;
+}
+
+export interface EventCategory {
+    id: string;
+    name: string;
+}
+
+export interface EventSubCategory {
+    id: string;
+    name: string;
+    eventIds: string[];
 }
 
 export interface Product {

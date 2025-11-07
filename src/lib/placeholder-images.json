@@ -25,6 +25,18 @@
       "imageHint": "food festival"
     },
     {
+      "id": "fintech-1",
+      "description": "A trading desk with multiple monitors showing stock charts.",
+      "imageUrl": "https://images.unsplash.com/photo-1643223652822-8d5334a1b9a2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "trading desk"
+    },
+    {
+      "id": "fintech-2",
+      "description": "A finger pointing at a rising stock chart on a digital screen.",
+      "imageUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "stock chart"
+    },
+    {
       "id": "merch-1",
       "description": "Black t-shirt with a cool graphic design.",
       "imageUrl": "https://images.unsplash.com/photo-1600944632391-609f547666f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z3JhcGhpYyUyMHRzaGlydHxlbnwwfHx8fDE3NjIzODczMjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
@@ -119,6 +131,12 @@
       "description": "Happy attendees at a food festival.",
       "imageUrl": "https://images.unsplash.com/photo-1660796115883-5e2ba15b34ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxoYXBweSUyMGF0dGVuZGVlc3xlbnwwfHx8fDE3NjI1MDQ3MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "happy attendees"
+    },
+    {
+      "id": "techno-background",
+      "description": "Abstract background with glowing blue techno grid.",
+      "imageUrl": "https://images.unsplash.com/photo-1533652810334-219b8df05aa7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "techno grid"
     }
   ]
 }

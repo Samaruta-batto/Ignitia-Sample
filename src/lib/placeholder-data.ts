@@ -1,38 +1,70 @@
-import type { Event, Product, Sponsor, ArchiveItem } from './types';
+import type { Event, Product, Sponsor, ArchiveItem, EventCategory, EventSubCategory } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 
 const getImage = (id: string) => {
   const image = PlaceHolderImages.find((img) => img.id === id);
   if (!image) {
-    throw new Error(`Image with id ${id} not found`);
+    // Fallback to a default image if not found, to prevent crashes
+    console.warn(`Image with id ${id} not found. Using default.`);
+    return PlaceHolderImages.find(i => i.id === 'event-1') || PlaceHolderImages[0];
   }
   return image;
+};
+
+export const eventCategories: EventCategory[] = [
+    { id: 'technical', name: 'Technical' },
+    { id: 'entrepreneurial', name: 'Entrepreneurial' },
+    { id: 'miscellaneous', name: 'Miscellaneous' },
+];
+
+export const eventSubCategories: { [key: string]: EventSubCategory[] } = {
+    'technical': [
+        { id: 'coding', name: 'Coding', eventIds: ['5'] },
+        { id: 'robotics', name: 'Robotics', eventIds: [] },
+    ],
+    'entrepreneurial': [
+        { id: 'fintech', name: 'FinTech', eventIds: ['1', '2'] },
+        { id: 'business-events', name: 'Business Events', eventIds: ['3'] },
+        { id: 'startup', name: 'Startup', eventIds: [] },
+    ],
+    'miscellaneous': [
+        { id: 'gaming', name: 'Gaming', eventIds: ['4'] },
+        { id: 'art', name: 'Art', eventIds: [] },
+    ]
 };
 
 export const events: Event[] = [
   {
     id: '1',
-    title: 'Synthwave Summer Fest',
-    date: 'August 15-17, 2024',
-    location: 'Miami Beach, FL',
-    description: 'The biggest electronic music festival of the year, featuring artists from around the globe.',
-    image: getImage('event-1'),
+    title: 'Beat the Market',
+    date: 'August 15, 2024',
+    location: 'Trading Arena',
+    description: 'A high-stakes stock trading simulation challenge. Show off your market knowledge and risk management skills to build the winning portfolio.',
+    image: getImage('fintech-1'),
+    prize: '75,000',
+    category: 'entrepreneurial',
+    subCategory: 'fintech'
   },
   {
     id: '2',
+    title: 'Trade Quest',
+    date: 'August 16, 2024',
+    location: 'Trading Arena',
+    description: 'An algorithmic trading competition where your bot battles others in a fast-paced virtual market.',
+    image: getImage('fintech-2'),
+     prize: '75,000',
+    category: 'entrepreneurial',
+    subCategory: 'fintech'
+  },
+  {
+    id: '3',
     title: 'Innovate & Create Tech Summit',
     date: 'September 5, 2024',
     location: 'Silicon Valley, CA',
     description: 'A summit for the brightest minds in technology and design to share ideas that shape the future.',
     image: getImage('event-2'),
-  },
-  {
-    id: '3',
-    title: 'Modern Art Showcase: The Digital Age',
-    date: 'October 10-20, 2024',
-    location: 'New York, NY',
-    description: 'An immersive art exhibition exploring the intersection of art and digital technology.',
-    image: getImage('event-3'),
+    category: 'entrepreneurial',
+    subCategory: 'business-events'
   },
   {
     id: '4',
@@ -41,6 +73,18 @@ export const events: Event[] = [
     location: 'Napa Valley, CA',
     description: 'Experience world-class cuisine and wines in the beautiful Napa Valley.',
     image: getImage('event-4'),
+    category: 'miscellaneous',
+    subCategory: 'gaming'
+  },
+  {
+    id: '5',
+    title: 'Synthwave Summer Fest',
+    date: 'August 15-17, 2024',
+    location: 'Miami Beach, FL',
+    description: 'The biggest electronic music festival of the year, featuring artists from around the globe.',
+    image: getImage('event-1'),
+    category: 'technical',
+    subCategory: 'coding'
   },
 ];
 
