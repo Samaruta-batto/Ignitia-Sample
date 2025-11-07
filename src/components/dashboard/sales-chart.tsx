@@ -40,7 +40,7 @@ export function SalesChart() {
               fontSize={12}
               tickLine={false}
               axisLine={false}
-              tickFormatter={(value) => `$${value}`}
+              tickFormatter={(value) => `₹${value}`}
             />
             <Bar dataKey="total" fill="hsl(var(--accent))" radius={[4, 4, 0, 0]} />
           </BarChart>
