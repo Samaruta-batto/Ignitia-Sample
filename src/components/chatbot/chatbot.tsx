@@ -149,7 +149,10 @@ export function Chatbot({ isOpen, onClose }: { isOpen: boolean, onClose: () => v
                 >
                   {message.role !== 'user' && (
                     <Avatar className="w-8 h-8">
-                      <AvatarFallback className={cn("text-white", message.role === 'assistant' ? 'bg-primary' : 'bg-destructive')}>
+                      <AvatarFallback className={cn(
+                        "text-white", 
+                        message.role === 'assistant' ? 'bg-primary' : 'bg-destructive'
+                      )}>
                         {message.role === 'assistant' ? <Bot size={20}/> : <AlertTriangle size={20} />}
                       </AvatarFallback>
                     </Avatar>
@@ -159,7 +162,9 @@ export function Chatbot({ isOpen, onClose }: { isOpen: boolean, onClose: () => v
                       'max-w-[75%] rounded-2xl p-3 text-sm whitespace-pre-wrap shadow-md',
                       message.role === 'user'
                         ? 'bg-accent text-accent-foreground rounded-br-none'
-                        : message.role === 'assistant' ? 'bg-primary rounded-bl-none' : 'bg-destructive text-destructive-foreground rounded-bl-none',
+                        : message.role === 'assistant' 
+                          ? 'bg-primary rounded-bl-none' 
+                          : 'bg-destructive text-destructive-foreground rounded-bl-none',
                     )}
                   >
                     {message.content}
