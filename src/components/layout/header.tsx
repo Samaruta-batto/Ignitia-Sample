@@ -1,6 +1,7 @@
+
 'use client';
 import { Button } from '@/components/ui/button';
-import { LogIn } from 'lucide-react';
+import { LogIn, UserPlus } from 'lucide-react';
 import { TopNav } from './top-nav';
 import { Logo } from '../icons/logo';
 import Link from 'next/link';
@@ -16,9 +17,14 @@ export function AppHeader() {
         </div>
         <TopNav />
         <div className="flex items-center gap-2">
-          <Button asChild className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20">
-            <Link href="/login">
+          <Button asChild variant="ghost">
+            <Link href="/user-login">
               <LogIn className="mr-2 h-4 w-4" /> Login
+            </Link>
+          </Button>
+           <Button asChild className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20">
+            <Link href="/signup">
+              <UserPlus className="mr-2 h-4 w-4" /> Sign Up
             </Link>
           </Button>
         </div>
