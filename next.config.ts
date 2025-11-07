@@ -8,6 +8,9 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  allowedDevOrigins: [
+    '71d56cfb-5dd8-41f8-a3a9-172a3407c68b-00-9xdpzdd6ejjx.worf.replit.dev'
+  ],
   images: {
     remotePatterns: [
       {
