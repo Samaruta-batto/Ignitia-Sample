@@ -7,14 +7,10 @@ import { Chatbot } from '@/components/chatbot/chatbot';
 
 export function AppLayout({
   children,
-  headerTitle,
 }: {
   children: React.ReactNode;
-  headerTitle: string;
 }) {
-  const handleChatbotOpen = () => {
-    window.dispatchEvent(new CustomEvent('open-chatbot'));
-  };
+  const [isChatOpen, setIsChatOpen] = React.useState(false);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -22,8 +18,8 @@ export function AppLayout({
       <main className="flex-1 p-4 md:p-8 animate-fade-in container mx-auto">
         {children}
       </main>
-      <Chatbot />
-      <ChatbotTrigger onClick={handleChatbotOpen} />
+      <Chatbot isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
+      <ChatbotTrigger onClick={() => setIsChatOpen(true)} />
     </div>
   );
 }

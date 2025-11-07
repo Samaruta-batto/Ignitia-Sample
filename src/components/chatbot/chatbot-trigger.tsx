@@ -13,10 +13,10 @@ export function ChatbotTrigger({ onClick }: ChatbotTriggerProps) {
       <Button
         onClick={onClick}
         size="icon"
-        className="h-14 w-14 rounded-full bg-accent text-accent-foreground shadow-lg transition-transform hover:scale-110 hover:bg-accent/90"
+        className="h-16 w-16 rounded-full bg-accent text-accent-foreground shadow-lg transition-transform hover:scale-110 hover:bg-accent/90 animate-fade-in"
         aria-label="Open Chatbot"
       >
-        <Bot size={28} />
+        <Bot size={32} />
       </Button>
     </div>
   );

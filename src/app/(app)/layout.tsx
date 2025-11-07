@@ -8,5 +8,5 @@ export default function MainAppLayout({
   children: React.ReactNode;
 }) {
 
-  return <AppLayout headerTitle="">{children}</AppLayout>;
+  return <AppLayout>{children}</AppLayout>;
 }
