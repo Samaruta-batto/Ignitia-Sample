@@ -4,6 +4,7 @@ import * as React from 'react';
 import { AppHeader } from './header';
 import { ChatbotTrigger } from '@/components/chatbot/chatbot-trigger';
 import { Chatbot } from '@/components/chatbot/chatbot';
+import { ConsoleWarning } from '@/components/layout/console-warning';
 
 export function AppLayout({
   children,
@@ -14,6 +15,7 @@ export function AppLayout({
 
   return (
     <div className="min-h-screen flex flex-col">
+      <ConsoleWarning />
       <AppHeader />
       <main className="flex-1 p-4 md:p-8 animate-fade-in container mx-auto">
         {children}
