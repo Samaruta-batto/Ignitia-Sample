@@ -31,9 +31,9 @@ export default function LandingPage() {
             <ShimmerButton className="px-8 h-11 flex items-center">
               <Link href="/home" className="flex items-center gap-2">Explore Now <ArrowRight /></Link>
             </ShimmerButton>
-            <Button size="lg" variant="outline">
-              <Link href="/events">View All Events <Ticket className="ml-2"/></Link>
-            </Button>
+            <ShimmerButton className="px-8 h-11 flex items-center bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
+              <Link href="/events" className='flex items-center gap-2'>View All Events <Ticket className="ml-2"/></Link>
+            </ShimmerButton>
           </div>
         </div>
       </section>
