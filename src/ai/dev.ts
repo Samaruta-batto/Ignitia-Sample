@@ -1,1 +1,5 @@
-// Flows will be imported for their side effects in this file.
+import { config } from 'dotenv';
+config();
+
+import '@/ai/flows/chatbot-escalates-complex-issues.ts';
+import '@/ai/flows/chatbot-answers-faqs.ts';
