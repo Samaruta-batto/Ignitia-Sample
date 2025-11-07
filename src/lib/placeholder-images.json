@@ -15,7 +15,7 @@
     {
       "id": "event-3",
       "description": "Art exhibition in a modern gallery.",
-      "imageUrl": "https://images.unsplash.com/photo-1605429523419-d828acb941d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxhcnQlMjBnYWxsZXJ5fGVufDB8fHx8MTc2MjM5MTkxNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1605429523419-d828acb941d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxhcnQlMjBnYWxsZXJ5fGVufDB8fHx8MTc2MjM5MTkxNXww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "art gallery"
     },
     {
@@ -45,13 +45,13 @@
     {
       "id": "merch-2",
       "description": "A stylish branded cap.",
-      "imageUrl": "https://images.unsplash.com/photo-1713918927331-6c85fe904cda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzdHlsaXNoJTIwY2FwfGVufDB8fHx8MTc2MjUwNDcyNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1713918927331-6c85fe904cda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzdHlsaXNoJTIwY2FwfGVufDB8fHx8MTc2MjUwNDcyNnww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "stylish cap"
     },
     {
       "id": "merch-3",
       "description": "A reusable water bottle with a logo.",
-      "imageUrl": "https://images.unsplash.com/photo-1544003484-3cd181d17917?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx3YXRlciUyMGJvdHRsZXxlbnwwfHx8fDE3NjI0NDQxOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1544003484-3cd181d17917?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx3YXRlciUyMGJvdHRsZXxlbnwwfHx8fDE3NjI0NDQxOTh8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "water bottle"
     },
     {
@@ -63,13 +63,13 @@
     {
       "id": "merch-5",
       "description": "A set of enamel pins.",
-      "imageUrl": "https://images.unsplash.com/photo-1754677701203-23b7eb7497d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxlbmFtZWwlMjBwaW5zfGVufDB8fHx8MTc2MjQxNDAyOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1754677701203-23b7eb7497d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxlbmFtZWwlMjBwaW5zfGVufDB8fHx8MTc2MjQxNDAyOXww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "enamel pins"
     },
     {
       "id": "merch-6",
       "description": "A tote bag with a unique design.",
-      "imageUrl": "https://images.unsplash.com/photo-1621466550398-ac8062907657?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx0b3RlJTIwYmFnfGVufDB8fHx8MTc2MjUwNDcyNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1621466550398-ac8062907657?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx0b3RlJTIwYmFnfGVufDB8fHx8MTc2MjUwNDcyNnww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "tote bag"
     },
     {
@@ -103,9 +103,33 @@
       "imageHint": "finance logo"
     },
     {
+      "id": "sponsor-quantumleap",
+      "description": "QuantumLeap company logo.",
+      "imageUrl": "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsb2dvfGVufDB8fHx8MTc2MjU5MjY4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "sponsor-starlight",
+      "description": "Starlight Studios company logo.",
+      "imageUrl": "https://images.unsplash.com/photo-1611162616805-467335790d95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtZWRpYSUyMGxvZ298ZW58MHx8fHwxNzYyNTkyNzM5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "media logo"
+    },
+    {
+      "id": "sponsor-bytebuilders",
+      "description": "ByteBuilders company logo.",
+      "imageUrl": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2RpbmclMjBsb2dvfGVufDB8fHx8MTc2MjU5MjkxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coding logo"
+    },
+    {
+      "id": "sponsor-innovateinc",
+      "description": "Innovate Inc. company logo.",
+      "imageUrl": "https://images.unsplash.com/photo-1600880292210-859b91487857?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbm5vdmF0aW9uJTIwbG9nb3xlbnwwfHx8fDE3NjI1OTI5MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "innovation logo"
+    },
+    {
       "id": "archive-1",
       "description": "Photo from a past music festival.",
-      "imageUrl": "https://images.unsplash.com/photo-1501238295340-c810d3c156d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZmVzdGl2YWwlMjBjcm93ZHxlbnwwfHx8fDE3NjI0MTU2NjB8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1501238295340-c810d3c156d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZmVzdGl2YWwlMjBjcm93ZHxlbnwwfHx8fDE3NjI0MTU2NjB8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "festival crowd"
     },
     {
@@ -135,7 +159,7 @@
     {
       "id": "archive-6",
       "description": "Happy attendees at a food festival.",
-      "imageUrl": "https://images.unsplash.com/photo-1660796115883-5e2ba15b34ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxoYXBweSUyMGF0dGVuZGVlc3xlbnwwfHx8fDE3NjI1MDQ3MjZ8MA&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1660796115883-5e2ba15b34ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxoYXBweSUyMGF0dGVuZGVlc3xlbnwwfHx8fDE3NjI1MDQ3MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "happy attendees"
     },
     {

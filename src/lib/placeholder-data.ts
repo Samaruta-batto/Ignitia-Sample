@@ -128,10 +128,14 @@ export const products: Product[] = [
 ];
 
 export const sponsors: Sponsor[] = [
-    { id: '1', name: 'TechCorp', logo: getImage('sponsor-1') },
-    { id: '2', name: 'AquaFizz', logo: getImage('sponsor-2') },
-    { id: '3', name: 'MediaStream', logo: getImage('sponsor-3') },
-    { id: '4', name: 'CapitalBank', logo: getImage('sponsor-4') },
+    { id: '1', name: 'TechCorp', logo: getImage('sponsor-1'), tier: 'Platinum' },
+    { id: '5', name: 'QuantumLeap', logo: getImage('sponsor-quantumleap'), tier: 'Platinum' },
+    { id: '2', name: 'AquaFizz', logo: getImage('sponsor-2'), tier: 'Gold' },
+    { id: '6', name: 'Starlight Studios', logo: getImage('sponsor-starlight'), tier: 'Gold' },
+    { id: '3', name: 'MediaStream', logo: getImage('sponsor-3'), tier: 'Silver' },
+    { id: '7', name: 'ByteBuilders', logo: getImage('sponsor-bytebuilders'), tier: 'Silver' },
+    { id: '4', name: 'CapitalBank', logo: getImage('sponsor-4'), tier: 'Partner' },
+    { id: '8', name: 'Innovate Inc.', logo: getImage('sponsor-innovateinc'), tier: 'Partner' },
 ];
 
 export const archiveItems: ArchiveItem[] = [

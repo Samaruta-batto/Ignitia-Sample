@@ -34,6 +34,7 @@ export interface Sponsor {
   id: string;
   name: string;
   logo: ImagePlaceholder;
+  tier: 'Platinum' | 'Gold' | 'Silver' | 'Partner';
 }
 
 export interface ArchiveItem {
