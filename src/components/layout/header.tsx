@@ -10,22 +10,25 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { LogIn, UserPlus, LogOut, Wallet } from 'lucide-react';
+import { LogIn, UserPlus, LogOut, Wallet, User as UserIcon } from 'lucide-react';
 import { TopNav } from './top-nav';
 import { Logo } from '../icons/logo';
 import Link from 'next/link';
 import type { User } from '@supabase/supabase-js';
 import { createClient } from '@/lib/supabase/client';
+import { useAuth } from '@/contexts/auth-context';
 import { useRouter } from 'next/navigation';
 
 export function AppHeader({ user }: { user: User | null }) {
   const router = useRouter();
   const supabase = createClient();
+  const { user: authUser, isAuthenticated, logout } = useAuth();
 
   const handleSignOut = async () => {
     if (supabase) {
       await supabase.auth.signOut();
     }
+    logout();
     router.push('/home');
     router.refresh();
   };
@@ -40,26 +43,34 @@ export function AppHeader({ user }: { user: User | null }) {
         </div>
         <TopNav />
         <div className="flex items-center gap-2">
-          {user ? (
+          {user || isAuthenticated ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                   <Avatar className="h-10 w-10">
-                     <AvatarImage src={`https://i.pravatar.cc/150?u=${user.id}`} />
-                    <AvatarFallback>{user.email?.charAt(0).toUpperCase()}</AvatarFallback>
+                     <AvatarImage src={authUser?.profilePhoto || `https://i.pravatar.cc/150?u=${user?.id}`} />
+                    <AvatarFallback>{authUser?.name?.charAt(0).toUpperCase() || user?.email?.charAt(0).toUpperCase()}</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">Signed In</p>
+                    <p className="text-sm font-medium leading-none">{authUser?.name || 'Signed In'}</p>
                     <p className="text-xs leading-none text-muted-foreground">
-                      {user.email}
+                      {authUser?.email || user?.email}
                     </p>
                   </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator />
+                {isAuthenticated && (
+                  <DropdownMenuItem asChild>
+                    <Link href="/profile">
+                      <UserIcon className="mr-2 h-4 w-4" />
+                      <span>My Profile</span>
+                    </Link>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuItem asChild>
                    <Link href="/wallet">
                     <Wallet className="mr-2 h-4 w-4" />

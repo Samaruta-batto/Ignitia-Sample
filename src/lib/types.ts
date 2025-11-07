@@ -44,3 +44,20 @@ export interface ArchiveItem {
   topic: string;
   image: ImagePlaceholder;
 }
+
+export interface WalletTransaction {
+  id: string;
+  type: 'credit' | 'debit';
+  amount: number;
+  description: string;
+  date: string;
+  status: 'completed' | 'pending' | 'failed';
+}
+
+export interface EventRegistration {
+  eventId: string;
+  eventName: string;
+  registrationDate: string;
+  status: 'registered' | 'participated' | 'cancelled';
+  paymentAmount?: number;
+}

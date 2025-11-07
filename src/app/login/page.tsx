@@ -12,6 +12,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { createClient } from '@/lib/supabase/client';
+import { useAuth } from '@/contexts/auth-context';
 import { useRouter } from 'next/navigation';
 import { LogIn } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -22,38 +23,43 @@ export default function LoginPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
   const supabase = createClient();
+  const { login } = useAuth();
   const { toast } = useToast();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (!supabase) {
+    try {
+      await login(email, password);
+      
+      if (supabase) {
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (error) {
+          console.log('Supabase login failed, but mock auth succeeded:', error.message);
+        }
+      }
+
+      toast({
+        title: 'Login Successful',
+        description: 'Welcome back to IGNITIA!',
+      });
+      
+      router.push('/profile');
+      router.refresh();
+    } catch (error: any) {
       toast({
         variant: 'destructive',
-        title: 'Supabase not configured',
-        description: 'Please set up your Supabase credentials in the .env file.',
+        title: 'Login Failed',
+        description: error.message || 'Please check your credentials and try again.',
       });
+    } finally {
       setIsSubmitting(false);
-      return;
     }
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-        toast({
-            variant: "destructive",
-            title: "Login Failed",
-            description: error.message,
-        });
-    } else {
-      router.push('/admin');
-      router.refresh();
-    }
-    setIsSubmitting(false);
   };
 
   return (

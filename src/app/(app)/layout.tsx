@@ -25,7 +25,6 @@ export default function MainAppLayout({
         setUser(session?.user ?? null);
       });
 
-      // Get initial session
       supabase.auth.getSession().then(({ data: { session } }) => {
         setUser(session?.user ?? null);
       });
