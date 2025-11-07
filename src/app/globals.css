@@ -83,10 +83,12 @@
   }
   body {
     @apply bg-background text-foreground;
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--border)) 1px, transparent 0);
+    background-size: 2rem 2rem;
   }
   html {
     cursor:
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="2" fill="hsl(45 65% 52%)" /></svg>')
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="3" fill="hsl(45 65% 52% / 0.5)" /></svg>')
         10 10,
       auto;
   }
