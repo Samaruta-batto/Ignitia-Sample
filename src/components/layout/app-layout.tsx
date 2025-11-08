@@ -7,6 +7,7 @@ import { ChatbotTrigger } from '@/components/chatbot/chatbot-trigger';
 import { Chatbot } from '@/components/chatbot/chatbot';
 import { ConsoleWarning } from '@/components/layout/console-warning';
 import type { User } from '@supabase/supabase-js';
+import { WarpBackground } from '../ui/warp-background';
 
 export function AppLayout({
   children,
@@ -21,8 +22,12 @@ export function AppLayout({
     <div className="min-h-screen flex flex-col">
       <ConsoleWarning />
       <AppHeader user={user} />
-      <main className="flex-1 p-4 md:p-8 animate-fade-in container mx-auto">
-        {children}
+      <main className="flex-1 animate-fade-in container mx-auto">
+        <WarpBackground>
+          <div className="p-4 md:p-8">
+            {children}
+          </div>
+        </WarpBackground>
       </main>
       <Chatbot isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
       <ChatbotTrigger onClick={() => setIsChatOpen(true)} />

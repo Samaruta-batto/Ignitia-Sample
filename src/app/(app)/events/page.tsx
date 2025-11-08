@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import * as React from 'react';
@@ -9,7 +10,6 @@ import { events, eventCategories, eventSubCategories } from '@/lib/placeholder-d
 import type { Event } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { MagicCard } from '@/components/ui/magic-card';
-import { WarpBackground } from '@/components/ui/warp-background';
 
 export default function EventsPage() {
   const [activeCategory, setActiveCategory] = React.useState<string>('entrepreneurial');
@@ -76,7 +76,7 @@ export default function EventsPage() {
         )}
       </section>
 
-      <WarpBackground>
+      
         <div className="flex justify-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
             {filteredItems.map(item => (
@@ -116,7 +116,7 @@ export default function EventsPage() {
             )}
           </div>
         </div>
-      </WarpBackground>
+      
     </div>
   );
 }
