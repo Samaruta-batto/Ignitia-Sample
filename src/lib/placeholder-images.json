@@ -117,7 +117,7 @@
     {
       "id": "sponsor-bytebuilders",
       "description": "ByteBuilders company logo.",
-      "imageUrl": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2RpbmclMjBsb2dvfGVufDB8fHx8MTc2MjU5MjkxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2RpbmclMjBsb2dvfGVufDB8fHx8MTc2MjU5MjkxNnww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "coding logo"
     },
     {
@@ -153,7 +153,7 @@
     {
       "id": "archive-5",
       "description": "Close up of an art installation.",
-      "imageUrl": "https://images.unsplash.com/photo-1527698952067-61fc35796fcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhcnQlMjBpbnN0YWxsYXRpb258ZW58MHx8fHwxNzYyNDYxMTM4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1527698952067-61fc35796fcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhcnQlMjBpbnN0YWxsYXRpb258ZW58MHx8fHwxNzYyNDYxMTM4fDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "art installation"
     },
     {
@@ -167,6 +167,36 @@
       "description": "Abstract background with glowing blue techno grid.",
       "imageUrl": "https://images.unsplash.com/photo-1533652810334-219b8df05aa7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "imageHint": "techno grid"
+    },
+    {
+      "id": "about-ignitia",
+      "description": "A vibrant, colorful abstract image representing innovation and energy.",
+      "imageUrl": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "abstract vibrant"
+    },
+    {
+      "id": "about-psit",
+      "description": "A modern college campus building with a clear blue sky.",
+      "imageUrl": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "college campus"
+    },
+    {
+      "id": "celebrity-1",
+      "description": "Portrait of a famous musician.",
+      "imageUrl": "https://images.unsplash.com/photo-1758225709244-532b6f7a765b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZmFtb3VzJTIwbXVzaWNpYW58ZW58MHx8fHwxNzYyNjA1MzgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "famous musician"
+    },
+    {
+      "id": "celebrity-2",
+      "description": "Portrait of a well-known tech influencer.",
+      "imageUrl": "https://images.unsplash.com/photo-1618667177435-3ded25f48b8a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0ZWNoJTIwaW5mbHVlbmNlcnxlbnwwfHx8fDE3NjI2MDUzODN8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tech influencer"
+    },
+    {
+      "id": "celebrity-3",
+      "description": "Portrait of a popular entertainer.",
+      "imageUrl": "https://images.unsplash.com/photo-1580188928585-0ef5c1a5c4dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3B1bGFyJTIwZW50ZXJ0YWluZXJ8ZW58MHx8fHwxNzYyNjA1MzgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "popular entertainer"
     }
   ]
 }

@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { products } from '@/lib/placeholder-data';
-import { ArrowRight, Ticket, Users, Award, Youtube, Instagram, Facebook, Linkedin, Twitter } from 'lucide-react';
+import { ArrowRight, Ticket, Users, Award, Youtube, Instagram, Facebook, Linkedin, Twitter, Star } from 'lucide-react';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { formatCurrency } from '@/lib/utils';
@@ -21,9 +21,29 @@ export default function HomePage() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'techno-background')!;
   const featuredProduct = products[0];
   const featuredProductImage = PlaceHolderImages.find(p => p.id === 'merch-tshirt-showcase')!;
+  const aboutIgnitiaImage = PlaceHolderImages.find(p => p.id === 'about-ignitia')!;
+  const aboutPsitImage = PlaceHolderImages.find(p => p.id === 'about-psit')!;
+
+  const celebrities = [
+    {
+        name: 'Arijit Singh',
+        title: 'Playback Singer',
+        image: PlaceHolderImages.find(p => p.id === 'celebrity-1')!
+    },
+    {
+        name: 'Ankit Tiwari',
+        title: 'Music Composer',
+        image: PlaceHolderImages.find(p => p.id === 'celebrity-2')!
+    },
+    {
+        name: 'Sonu Nigam',
+        title: 'Playback Singer',
+        image: PlaceHolderImages.find(p => p.id === 'celebrity-3')!
+    }
+  ];
 
   return (
-    <div className="space-y-16 -mt-8 -mx-8">
+    <div className="space-y-24 -mt-8 -mx-8">
        <section className="relative h-[70vh]">
         <Image
           src={heroImage.imageUrl}
@@ -60,7 +80,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="container mx-auto py-10">
+      <section className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="border-r border-border last:border-r-0">
                 <Ticket className="h-12 w-12 text-accent mx-auto mb-4"/>
@@ -80,7 +100,83 @@ export default function HomePage() {
         </div>
       </section>
 
-       <section className="container mx-auto py-10">
+      <section className="container mx-auto">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-4">
+                <h2 className="font-headline text-5xl uppercase tracking-wider text-accent">About Ignitia</h2>
+                <p className="text-lg text-muted-foreground">
+                IGNITIA is the annual techno-cultural fest of PSIT, a vibrant convergence of innovation, creativity, and culture. It's a platform for students to showcase their talents, compete in exciting events, and connect with peers and industry leaders. From coding marathons to electrifying concerts, Ignitia is an experience you won't forget.
+                </p>
+                <Button asChild variant="outline">
+                    <Link href="/about">Learn More <ArrowRight className="ml-2" /></Link>
+                </Button>
+            </div>
+            <div className="relative h-80 rounded-lg overflow-hidden shadow-2xl">
+                 <Image
+                    src={aboutIgnitiaImage.imageUrl}
+                    alt="About Ignitia"
+                    fill
+                    className="object-cover"
+                    data-ai-hint={aboutIgnitiaImage.imageHint}
+                />
+            </div>
+        </div>
+      </section>
+      
+      <section className="container mx-auto">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="relative h-80 rounded-lg overflow-hidden shadow-2xl md:order-2">
+                 <Image
+                    src={aboutPsitImage.imageUrl}
+                    alt="About PSIT"
+                    fill
+                    className="object-cover"
+                    data-ai-hint={aboutPsitImage.imageHint}
+                />
+            </div>
+            <div className="space-y-4 md:order-1">
+                <h2 className="font-headline text-5xl uppercase tracking-wider text-accent">About PSIT</h2>
+                <p className="text-lg text-muted-foreground">
+                Pranveer Singh Institute of Technology (PSIT) is a leading institution in Kanpur, renowned for its commitment to academic excellence and holistic development. With state-of-the-art infrastructure and a world-class faculty, PSIT provides an environment where students can thrive and achieve their full potential.
+                </p>
+                 <Button asChild variant="outline">
+                    <a href="https://psit.ac.in/" target="_blank" rel="noopener noreferrer">Visit PSIT <ArrowRight className="ml-2" /></a>
+                </Button>
+            </div>
+        </div>
+      </section>
+
+      <section className="container mx-auto">
+        <div className="text-center mb-12">
+            <h2 className="font-headline text-5xl uppercase tracking-wider">Celebrity Guests</h2>
+            <p className="mt-2 text-lg text-muted-foreground">Meet the stars of IGNITIA 2k26!</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {celebrities.map((celebrity) => (
+                <Card key={celebrity.name} className="overflow-hidden group text-center border-accent/20">
+                     <div className="relative aspect-[4/5] overflow-hidden">
+                        <Image
+                            src={celebrity.image.imageUrl}
+                            alt={celebrity.name}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            data-ai-hint={celebrity.image.imageHint}
+                        />
+                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    </div>
+                    <CardHeader className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+                        <CardTitle className="text-2xl text-white">{celebrity.name}</CardTitle>
+                        <CardDescription className="text-accent flex items-center justify-center gap-2">
+                            <Star className="w-4 h-4" /> {celebrity.title}
+                        </CardDescription>
+                    </CardHeader>
+                </Card>
+            ))}
+        </div>
+      </section>
+
+
+       <section className="container mx-auto">
         <div className="text-center mb-12">
             <h2 className="font-headline text-5xl uppercase tracking-wider">Official Merchandise</h2>
             <p className="mt-2 text-lg text-muted-foreground">Get your hands on exclusive IGNITIA merchandise</p>
@@ -113,3 +209,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
