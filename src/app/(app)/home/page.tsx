@@ -36,11 +36,11 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-background/70 backdrop-blur-sm" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-foreground p-4">
           <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg">
-            IGNITIA '24
+            IGNITIA 2k26
           </h1>
            <p className="font-semibold text-accent text-xl md:text-2xl mt-2">Where Technology Meets Culture</p>
           <p className="mt-4 max-w-2xl text-lg md:text-xl text-foreground/80">
-            October 15-17, 2024 | College Campus
+            April 28-29, 2026 | PSIT Kanpur
           </p>
           <div className="mt-8 flex gap-4">
             <ShimmerButton className="px-8 py-3 h-11">
@@ -88,7 +88,7 @@ export default function HomePage() {
         <div className="grid md:grid-cols-2 gap-8 items-center">
           <div className="space-y-4">
             <h3 className="font-headline text-4xl text-accent" style={{letterSpacing: '0.1em', textShadow: '0 0 5px hsl(var(--accent) / 0.5)'}}>LIMITED EDITION T-SHIRT</h3>
-            <p className="text-muted-foreground text-lg">Be a part of IGNITIA 2K25 with our exclusive merchandise. Each piece is crafted with premium quality materials and features unique designs inspired by our theme.</p>
+            <p className="text-muted-foreground text-lg">Be a part of IGNITIA 2K26 with our exclusive merchandise. Each piece is crafted with premium quality materials and features unique designs inspired by our theme.</p>
             <p className="text-4xl font-bold text-accent">₹350</p>
             <ShimmerButton>
               <Link href="#" className='flex items-center gap-2'>Buy Now <ArrowRight /></Link>

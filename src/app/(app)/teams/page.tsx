@@ -76,7 +76,7 @@ export default function TeamsPage() {
       <section className="text-center">
         <h1 className="font-headline text-5xl tracking-wider uppercase">Meet the Team</h1>
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-          The passionate individuals working behind the scenes to make Ignitia 2024 a reality.
+          The passionate individuals working behind the scenes to make Ignitia 2026 a reality.
         </p>
       </section>
 

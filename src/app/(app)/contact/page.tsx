@@ -67,7 +67,7 @@ export default function ContactPage() {
             </div>
             <div>
               <h3 className="font-semibold text-lg">Fest Location</h3>
-              <p className="text-muted-foreground">College Campus, Tech City, 12345</p>
+              <p className="text-muted-foreground">PSIT, Kanpur</p>
             </div>
           </div>
           <div className="flex items-start gap-4">
@@ -94,7 +94,7 @@ export default function ContactPage() {
                 <CardContent className="p-2">
                      <div className="aspect-video bg-muted rounded-md">
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.663339178973!2d77.21389181511527!3d28.61291298242426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x52c2b7494e204dce!2sIndia%20Gate!5e0!3m2!1sen!2sin!4v1672924532899!5m2!1sen!2sin"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3573.308259463768!2d80.20810931503448!3d26.41285198334543!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399c37bd7ac9f473%3A0xA66a1a2858852329!2sPranveer%20Singh%20Institute%20of%20Technology%20(PSIT)!5e0!3m2!1sen!2sin!4v1672924532900!5m2!1sen!2sin"
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
