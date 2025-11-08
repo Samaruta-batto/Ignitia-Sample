@@ -142,9 +142,9 @@ export default function AboutPage() {
               <ShimmerButton asChild className="px-8 py-3 h-11">
                   <Link href="/events">Explore Events <ArrowRight className="ml-2" /></Link>
               </ShimmerButton>
-              <Button asChild variant="outline" size="lg">
+              <ShimmerButton asChild className="px-8 py-3 h-11 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground" size="lg">
                   <Link href="/contact">Contact Us</Link>
-              </Button>
+              </ShimmerButton>
           </div>
       </section>
     </div>
