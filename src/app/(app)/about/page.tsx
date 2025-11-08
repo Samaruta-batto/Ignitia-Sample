@@ -6,6 +6,7 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Target, Trophy, Milestone, BrainCircuit, Lightbulb, Users, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
 
 const aboutImage =
   PlaceHolderImages.find((img) => img.id === 'archive-3') || PlaceHolderImages[0];
@@ -138,9 +139,9 @@ export default function AboutPage() {
               Whether you want to attend, sponsor, or volunteer, there's a place for you at Ignitia.
           </p>
           <div className="flex gap-4 justify-center">
-              <Button asChild size="lg">
+              <ShimmerButton asChild className="px-8 py-3 h-11">
                   <Link href="/events">Explore Events <ArrowRight className="ml-2" /></Link>
-              </Button>
+              </ShimmerButton>
               <Button asChild variant="outline" size="lg">
                   <Link href="/contact">Contact Us</Link>
               </Button>

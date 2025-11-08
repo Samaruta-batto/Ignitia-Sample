@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { IndianRupee, PlusCircle, History } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { formatCurrency } from '@/lib/utils';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
 
 const transactions = [
     { id: 1, description: 'Merchandise: Official Tee', amount: -350, date: '2024-08-16' },
@@ -49,9 +50,9 @@ export default function WalletPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Button size="lg" className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90">
+          <ShimmerButton className="w-full sm:w-auto">
             Top-Up via UPI
-          </Button>
+          </ShimmerButton>
         </CardContent>
       </Card>
 

@@ -24,6 +24,7 @@ import {
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
@@ -168,9 +169,9 @@ export default function ContactPage() {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="w-full" disabled={form.formState.isSubmitting}>
+              <ShimmerButton type="submit" className="w-full" disabled={form.formState.isSubmitting}>
                 {form.formState.isSubmitting ? 'Sending...' : 'Send Message'}
-              </Button>
+              </ShimmerButton>
             </form>
           </Form>
         </CardContent>

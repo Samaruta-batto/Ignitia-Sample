@@ -186,7 +186,7 @@ export default function HomePage() {
             <h3 className="font-headline text-4xl text-accent" style={{letterSpacing: '0.1em', textShadow: '0 0 5px hsl(var(--accent) / 0.5)'}}>LIMITED EDITION T-SHIRT</h3>
             <p className="text-muted-foreground text-lg">Be a part of IGNITIA 2K26 with our exclusive merchandise. Each piece is crafted with premium quality materials and features unique designs inspired by our theme.</p>
             <p className="text-4xl font-bold text-accent">₹350</p>
-            <ShimmerButton>
+            <ShimmerButton asChild>
               <Link href="#" className='flex items-center gap-2'>Buy Now <ArrowRight /></Link>
             </ShimmerButton>
           </div>
