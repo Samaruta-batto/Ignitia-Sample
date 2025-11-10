@@ -19,17 +19,16 @@ import {
 } from '@/components/ui/table';
 import { Trophy, Users, IndianRupee } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
-import { useFirebase } from '@/firebase';
 import { useCollection, type WithId } from '@/firebase/firestore/use-collection';
 import { collection, query, orderBy } from 'firebase/firestore';
 import type { Event } from '@/lib/types';
-import { useMemoFirebase } from '@/firebase/provider';
+import { useMemoFirebase, useFirestore } from '@/firebase/provider';
 
 type EventWithRegistrations = WithId<Event & { registeredAttendees: number }>;
 
 export default function LeaderboardPage() {
   const router = useRouter();
-  const { firestore } = useFirebase();
+  const firestore = useFirestore();
 
   const eventsQuery = useMemoFirebase(() => {
     if (!firestore) return null;
