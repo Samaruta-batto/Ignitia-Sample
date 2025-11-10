@@ -98,116 +98,11 @@ export default {
             transform: 'translateY(0)',
           },
         },
-        first: {
-          "0%": {
-            transform: "translate(0px, 0px) rotate(0deg)"
-          },
-          "20%": {
-            transform: "translate(73px, -1px) rotate(36deg)"
-          },
-          "40%": {
-            transform: "translate(141px, 72px) rotate(72deg)"
-          },
-          "60%": {
-            transform: "translate(83px, 122px) rotate(108deg)"
-          },
-          "80%": {
-            transform: "translate(-40px, 72px) rotate(144deg)"
-          },
-          "100%": {
-            transform: "translate(0px, 0px) rotate(0deg)"
-          }
-        },
-        second: {
-          "0%": {
-            transform: "translate(0px, 0px) rotate(0deg)"
-          },
-          "20%": {
-            transform: "translate(-73px, 1px) rotate(-36deg)"
-          },
-          "40%": {
-            transform: "translate(-141px, -72px) rotate(-72deg)"
-          },
-          "60%": {
-            transform: "translate(-83px, -122px) rotate(-108deg)"
-          },
-          "80%": {
-            transform: "translate(40px, -72px) rotate(-144deg)"
-          },
-          "100%": {
-            transform: "translate(0px, 0px) rotate(0deg)"
-          }
-        },
-        third: {
-          "0%": {
-            transform: "translate(0px, 0px) rotate(0deg)"
-          },
-          "20%": {
-            transform: "translate(73px, -1px) rotate(36deg)"
-          },
-          "40%": {
-            transform: "translate(141px, 72px) rotate(72deg)"
-          },
-          "60%": {
-            transform: "translate(83px, 122px) rotate(108deg)"
-          },
-          "80%": {
-            transform: "translate(-40px, 72px) rotate(144deg)"
-          },
-          "100%": {
-            transform: "translate(0px, 0px) rotate(0deg)"
-          }
-        },
-        fourth: {
-          "0%": {
-            transform: "translate(0px, 0px) rotate(0deg)"
-          },
-          "20%": {
-            transform: "translate(73px, -1px) rotate(36deg)"
-          },
-          "40%": {
-            transform: "translate(141px, 72px) rotate(72deg)"
-          },
-          "60%": {
-            transform: "translate(83px, 122px) rotate(108deg)"
-          },
-          "80%": {
-            transform: "translate(-40px, 72px) rotate(144deg)"
-          },
-          "100%": {
-            transform: "translate(0px, 0px) rotate(0deg)"
-          }
-        },
-        fifth: {
-          "0%": {
-            transform: "translate(0px, 0px) rotate(0deg)"
-          },
-          "20%": {
-            transform: "translate(73px, -1px) rotate(36deg)"
-          },
-          "40%": {
-            transform: "translate(141px, 72px) rotate(72deg)"
-          },
-          "60%": {
-            transform: "translate(83px, 122px) rotate(108deg)"
-          },
-          "80%": {
-            transform: "translate(-40px, 72px) rotate(144deg)"
-          },
-          "100%": {
-            transform: "translate(0px, 0px) rotate(0deg)"
-          }
-        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fade-in 0.5s ease-out',
-        first: "first 15s linear infinite",
-        second: "second 15s linear infinite",
-        third: "third 15s linear infinite",
-        fourth: "fourth 15s linear infinite",
-        fifth: "fifth 15s linear infinite",
       },
     },
   },

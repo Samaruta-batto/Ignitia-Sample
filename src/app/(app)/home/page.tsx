@@ -16,7 +16,7 @@ import { formatCurrency } from '@/lib/utils';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import NumberTicker from '@/components/ui/number-ticker';
 import { PastGuests } from '@/components/home/past-guests';
-import { BackgroundGradientAnimation } from '@/components/ui/background-gradient-animation';
+import { LightRays } from '@/components/ui/light-rays';
 
 
 export default function HomePage() {
@@ -28,25 +28,27 @@ export default function HomePage() {
 
   return (
     <div className="space-y-24 -mt-8 -mx-8">
-       <BackgroundGradientAnimation>
-        <div className="absolute z-50 inset-0 flex flex-col items-center justify-center text-center text-white font-bold px-4 pointer-events-none">
-          <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
-            IGNITIA 2k26
-          </h1>
-          <p className="font-semibold text-accent text-xl md:text-2xl mt-2 bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">Where Technology Meets Culture</p>
-          <p className="mt-4 max-w-2xl text-lg md:text-xl text-foreground/80 bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
-            April 28-29, 2026 | PSIT Kanpur
-          </p>
-          <div className="mt-8 flex gap-4 pointer-events-auto">
-            <ShimmerButton className="px-8 py-3">
-              <Link href="/events" className="flex items-center gap-2">Register Now <ArrowRight /></Link>
-            </ShimmerButton>
-            <ShimmerButton asChild className="px-8 py-3 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
-              <Link href="/events">Explore Events <Ticket className="ml-2"/></Link>
-            </ShimmerButton>
-          </div>
+      <LightRays>
+        <div className="relative h-[70vh]">
+            <div className="absolute z-10 inset-0 flex flex-col items-center justify-center text-center text-white font-bold px-4">
+            <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg">
+                IGNITIA 2k26
+            </h1>
+            <p className="font-semibold text-accent text-xl md:text-2xl mt-2">Where Technology Meets Culture</p>
+            <p className="mt-4 max-w-2xl text-lg md:text-xl text-foreground/80">
+                April 28-29, 2026 | PSIT Kanpur
+            </p>
+            <div className="mt-8 flex gap-4">
+                <ShimmerButton className="px-8 py-3 h-11">
+                <Link href="/events" className="flex items-center gap-2">Register Now <ArrowRight /></Link>
+                </ShimmerButton>
+                <ShimmerButton asChild className="px-8 py-3 h-11 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
+                <Link href="/events">Explore Events <Ticket className="ml-2"/></Link>
+                </ShimmerButton>
+            </div>
+            </div>
         </div>
-      </BackgroundGradientAnimation>
+      </LightRays>
 
       <section className="container mx-auto">
         <div className="text-center mb-12">
