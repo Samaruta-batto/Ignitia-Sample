@@ -19,5 +19,11 @@ export default function MainAppLayout({
     return <>{children}</>;
   }
 
-  return <AppLayout user={user}>{children}</AppLayout>;
+  return (
+    <AppLayout user={user}>
+        <div className="p-4 md:p-8">
+            {children}
+        </div>
+    </AppLayout>
+  );
 }

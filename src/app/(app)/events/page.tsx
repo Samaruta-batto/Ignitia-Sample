@@ -20,6 +20,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useCollection, type WithId } from '@/firebase/firestore/use-collection';
 import { query, where } from 'firebase/firestore';
 import { useMemoFirebase, useUser } from '@/firebase/provider';
+import { WarpBackground } from '@/components/ui/warp-background';
 
 type Event = WithId<StaticEvent>;
 
@@ -112,87 +113,89 @@ export default function EventsPage() {
   }, [activeCategory, activeSubCategory]);
 
   return (
-    <div className="space-y-8">
-      <section className="space-y-4">
-        <div className="flex justify-center border-b border-accent/20">
-          {eventCategories.map(category => (
-            <ShimmerButton
-              key={category.id}
-              variant="ghost"
-              onClick={() => setActiveCategory(category.id)}
-              className={cn(
-                'mx-4 py-6 text-lg uppercase tracking-widest rounded-none hover:bg-transparent hover:text-accent',
-                activeCategory === category.id ? 'border-b-2 border-accent text-accent' : 'text-muted-foreground'
-              )}
-            >
-              {category.name}
-            </ShimmerButton>
-          ))}
-        </div>
-        {eventSubCategories[activeCategory] && (
-          <div className="flex justify-center border-b border-accent/20 flex-wrap">
-            {eventSubCategories[activeCategory].map(sub => (
+    <WarpBackground>
+      <div className="space-y-8">
+        <section className="space-y-4">
+          <div className="flex justify-center border-b border-accent/20">
+            {eventCategories.map(category => (
               <ShimmerButton
-                key={sub.id}
+                key={category.id}
                 variant="ghost"
-                onClick={() => setActiveSubCategory(sub.id)}
+                onClick={() => setActiveCategory(category.id)}
                 className={cn(
-                  'mx-2 py-4 text-md rounded-none hover:bg-transparent hover:text-accent',
-                  activeSubCategory === sub.id ? 'border-b-2 border-accent text-accent' : 'text-muted-foreground'
+                  'mx-4 py-6 text-lg uppercase tracking-widest rounded-none hover:bg-transparent hover:text-accent',
+                  activeCategory === category.id ? 'border-b-2 border-accent text-accent' : 'text-muted-foreground'
                 )}
               >
-                {sub.name}
+                {category.name}
               </ShimmerButton>
             ))}
           </div>
-        )}
-      </section>
+          {eventSubCategories[activeCategory] && (
+            <div className="flex justify-center border-b border-accent/20 flex-wrap">
+              {eventSubCategories[activeCategory].map(sub => (
+                <ShimmerButton
+                  key={sub.id}
+                  variant="ghost"
+                  onClick={() => setActiveSubCategory(sub.id)}
+                  className={cn(
+                    'mx-2 py-4 text-md rounded-none hover:bg-transparent hover:text-accent',
+                    activeSubCategory === sub.id ? 'border-b-2 border-accent text-accent' : 'text-muted-foreground'
+                  )}
+                >
+                  {sub.name}
+                </ShimmerButton>
+              ))}
+            </div>
+          )}
+        </section>
 
-      
-        <div className="flex justify-center">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
-             {isLoading && <p>Loading events...</p>}
-            {filteredItems && filteredItems.map(item => (
-              <MagicCard
-                key={item.id}
-                className="w-[350px] flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105"
-              >
-                <Card className="bg-card/50 backdrop-blur-sm border-0 shadow-none overflow-hidden group w-full h-full flex flex-col">
-                  <div className="relative aspect-video overflow-hidden">
-                    <Image
-                      src={item.image.imageUrl}
-                      alt={item.title}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-110"
-                      data-ai-hint={item.image.imageHint}
-                    />
-                  </div>
-                  <CardContent className="p-6 text-center flex flex-col flex-grow">
-                    <h3 className="font-headline text-2xl text-white mb-2">{item.name}</h3>
-                    <p className="text-muted-foreground text-sm flex-grow">{item.description}</p>
-                    <div className="mt-4">
-                      <p className="font-bold text-lg text-accent mb-4">{formatCurrency(150)}</p>
-                        <ShimmerButton
-                        variant="outline"
-                        onClick={() => handleRegister(item.id)}
-                        className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full"
-                        >
-                        Register Now
-                        </ShimmerButton>
+        
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
+               {isLoading && <p>Loading events...</p>}
+              {filteredItems && filteredItems.map(item => (
+                <MagicCard
+                  key={item.id}
+                  className="w-[350px] flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105"
+                >
+                  <Card className="bg-card/50 backdrop-blur-sm border-0 shadow-none overflow-hidden group w-full h-full flex flex-col">
+                    <div className="relative aspect-video overflow-hidden">
+                      <Image
+                        src={item.image.imageUrl}
+                        alt={item.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
+                        data-ai-hint={item.image.imageHint}
+                      />
                     </div>
-                  </CardContent>
-                </Card>
-              </MagicCard>
-            ))}
-            {!isLoading && (!filteredItems || filteredItems.length === 0) && (
-              <div className="col-span-full text-center py-16">
-                <h3 className="text-2xl font-headline">No Events Found</h3>
-                <p className="text-muted-foreground">Please select a different category.</p>
-              </div>
-            )}
+                    <CardContent className="p-6 text-center flex flex-col flex-grow">
+                      <h3 className="font-headline text-2xl text-white mb-2">{item.name}</h3>
+                      <p className="text-muted-foreground text-sm flex-grow">{item.description}</p>
+                      <div className="mt-4">
+                        <p className="font-bold text-lg text-accent mb-4">{formatCurrency(150)}</p>
+                          <ShimmerButton
+                          variant="outline"
+                          onClick={() => handleRegister(item.id)}
+                          className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full"
+                          >
+                          Register Now
+                          </ShimmerButton>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </MagicCard>
+              ))}
+              {!isLoading && (!filteredItems || filteredItems.length === 0) && (
+                <div className="col-span-full text-center py-16">
+                  <h3 className="text-2xl font-headline">No Events Found</h3>
+                  <p className="text-muted-foreground">Please select a different category.</p>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      
-    </div>
+        
+      </div>
+    </WarpBackground>
   );
 }

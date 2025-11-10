@@ -7,7 +7,6 @@ import { ChatbotTrigger } from '@/components/chatbot/chatbot-trigger';
 import { Chatbot } from '@/components/chatbot/chatbot';
 import { ConsoleWarning } from '@/components/layout/console-warning';
 import type { User } from 'firebase/auth';
-import { WarpBackground } from '../ui/warp-background';
 import { CartSheet } from '../cart/cart-sheet';
 import { useCartStore } from '@/hooks/use-cart-store';
 import { useUser } from '@/firebase';
@@ -60,11 +59,7 @@ export function AppLayout({
       <ConsoleWarning />
       <AppHeader user={user} />
       <main className="flex-1 animate-fade-in container mx-auto">
-        <WarpBackground>
-          <div className="p-4 md:p-8">
-            {children}
-          </div>
-        </WarpBackground>
+        {children}
       </main>
       <CartSheet />
       <Chatbot isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
