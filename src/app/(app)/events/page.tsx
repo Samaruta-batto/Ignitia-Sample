@@ -120,11 +120,12 @@ export default function EventsPage() {
             {eventCategories.map(category => (
               <ShimmerButton
                 key={category.id}
-                variant="ghost"
                 onClick={() => setActiveCategory(category.id)}
                 className={cn(
-                  'mx-4 py-6 text-lg uppercase tracking-widest rounded-none hover:bg-transparent hover:text-accent',
-                  activeCategory === category.id ? 'border-b-2 border-accent text-accent' : 'text-muted-foreground'
+                  'mx-4 py-6 text-lg uppercase tracking-widest rounded-none border-b-2 bg-transparent',
+                  activeCategory === category.id 
+                    ? 'border-accent text-accent' 
+                    : 'border-transparent text-muted-foreground hover:text-accent'
                 )}
               >
                 {category.name}
@@ -136,11 +137,12 @@ export default function EventsPage() {
               {eventSubCategories[activeCategory].map(sub => (
                 <ShimmerButton
                   key={sub.id}
-                  variant="ghost"
                   onClick={() => setActiveSubCategory(sub.id)}
                   className={cn(
-                    'mx-2 py-4 text-md rounded-none hover:bg-transparent hover:text-accent',
-                    activeSubCategory === sub.id ? 'border-b-2 border-accent text-accent' : 'text-muted-foreground'
+                    'mx-2 py-4 text-md rounded-none border-b-2 bg-transparent',
+                     activeSubCategory === sub.id 
+                      ? 'border-accent text-accent' 
+                      : 'border-transparent text-muted-foreground hover:text-accent'
                   )}
                 >
                   {sub.name}
