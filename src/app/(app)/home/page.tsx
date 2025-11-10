@@ -72,11 +72,11 @@ export default function HomePage() {
           </div>
         </div>
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4">
-            <ShimmerButton variant="ghost" size="icon" asChild><a href="#"><Youtube className="text-white"/></a></ShimmerButton>
-            <ShimmerButton variant="ghost" size="icon" asChild><a href="#"><Instagram className="text-white"/></a></ShimmerButton>
-            <ShimmerButton variant="ghost" size="icon" asChild><a href="#"><Facebook className="text-white"/></a></ShimmerButton>
-            <ShimmerButton variant="ghost" size="icon" asChild><a href="#"><Linkedin className="text-white"/></a></ShimmerButton>
-            <ShimmerButton variant="ghost" size="icon" asChild><a href="#"><Twitter className="text-white"/></a></ShimmerButton>
+            <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Youtube className="text-white"/></a></ShimmerButton>
+            <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Instagram className="text-white"/></a></ShimmerButton>
+            <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Facebook className="text-white"/></a></ShimmerButton>
+            <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Linkedin className="text-white"/></a></ShimmerButton>
+            <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Twitter className="text-white"/></a></ShimmerButton>
         </div>
       </section>
 

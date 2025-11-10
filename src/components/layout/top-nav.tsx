@@ -43,19 +43,23 @@ export function TopNav() {
       <nav className="hidden md:flex items-center justify-center flex-1">
         <div className="bg-card/50 backdrop-blur-md rounded-full border border-border/20 shadow-lg px-4 py-2">
           <div className="flex items-center gap-1">
-            {menuItems.map((item) => (
-              <ShimmerButton
-                key={item.label}
-                variant={pathname.startsWith(item.href) ? 'secondary' : 'ghost'}
-                asChild
-                className={cn(
-                  "text-sm rounded-full",
-                  !pathname.startsWith(item.href) && "text-muted-foreground"
-                )}
-              >
-                <Link href={item.href}>{item.label}</Link>
-              </ShimmerButton>
-            ))}
+            {menuItems.map((item) => {
+              const isActive = pathname.startsWith(item.href);
+              return (
+                <ShimmerButton
+                  key={item.label}
+                  asChild
+                  className={cn(
+                    "text-sm rounded-full",
+                    isActive 
+                      ? "bg-secondary text-secondary-foreground" 
+                      : "bg-transparent text-muted-foreground hover:bg-accent/10 hover:text-foreground"
+                  )}
+                >
+                  <Link href={item.href}>{item.label}</Link>
+                </ShimmerButton>
+              );
+            })}
           </div>
         </div>
       </nav>
