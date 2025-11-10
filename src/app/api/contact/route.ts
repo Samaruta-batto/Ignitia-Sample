@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
     const mailOptions = {
       from: `"${name}" <${process.env.EMAIL_SERVER_USER}>`,
-      to: 'ignitia.fest@gmail.com', // Messages will be sent to this address
+      to: process.env.EMAIL_TO,
       replyTo: email,
       subject: `New Contact Form Submission from ${name}`,
       html: `
