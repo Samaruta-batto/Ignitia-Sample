@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -133,16 +134,16 @@ export default function EventsPage() {
             ))}
           </div>
           {eventSubCategories[activeCategory] && (
-            <div className="flex justify-center border-b border-accent/20 flex-wrap">
+            <div className="flex justify-center border-b border-accent/20 flex-wrap py-2 gap-2">
               {eventSubCategories[activeCategory].map(sub => (
                 <ShimmerButton
                   key={sub.id}
                   onClick={() => setActiveSubCategory(sub.id)}
                   className={cn(
-                    'mx-2 py-4 text-md rounded-none border-b-2 bg-transparent',
+                    'py-2 px-4 text-md rounded-full border bg-transparent',
                      activeSubCategory === sub.id 
-                      ? 'border-accent text-accent' 
-                      : 'border-transparent text-muted-foreground hover:text-accent'
+                      ? 'border-accent text-accent bg-accent/10' 
+                      : 'border-input text-muted-foreground hover:text-accent hover:border-accent'
                   )}
                 >
                   {sub.name}
