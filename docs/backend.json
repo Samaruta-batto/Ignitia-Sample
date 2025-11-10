@@ -1,300 +1,47 @@
+
 {
   "entities": {
     "Event": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "Event",
       "type": "object",
       "description": "Represents an event within the FestConnect application.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the Event entity."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the event."
-        },
-        "description": {
-          "type": "string",
-          "description": "Detailed description of the event."
-        },
-        "startTime": {
-          "type": "string",
-          "description": "Date and time when the event starts.",
-          "format": "date-time"
-        },
-        "endTime": {
-          "type": "string",
-          "description": "Date and time when the event ends.",
-          "format": "date-time"
-        },
-        "location": {
-          "type": "string",
-          "description": "Location where the event takes place."
-        },
-        "price": {
-          "type": "number",
-          "description": "Price of the event, set to 150 RS as per the user request."
-        },
-        "maxCapacity": {
-          "type": "number",
-          "description": "Maximum number of attendees allowed for the event."
-        },
-        "registeredAttendees": {
-          "type": "number",
-          "description": "Number of attendees currently registered for the event."
-        },
-        "imageUrl": {
-          "type": "string",
-          "description": "URL to the event image.",
-          "format": "uri"
-        }
+        "name": { "type": "string", "description": "Name of the event." },
+        "description": { "type": "string", "description": "Detailed description of the event." },
+        "date": { "type": "string", "format": "date-time", "description": "Date and time when the event starts." },
+        "location": { "type": "string", "description": "Location where the event takes place." },
+        "price": { "type": "number", "description": "Price of the event, set to 150 RS as per the user request." },
+        "registeredAttendees": { "type": "number", "description": "Number of attendees currently registered for the event." },
+        "image": { "type": "object", "properties": {
+            "imageUrl": { "type": "string", "format": "uri" },
+            "imageHint": { "type": "string" }
+        } }
       },
-      "required": [
-        "id",
-        "name",
-        "description",
-        "startTime",
-        "endTime",
-        "location",
-        "price",
-        "maxCapacity",
-        "registeredAttendees",
-        "imageUrl"
-      ]
+      "required": ["name", "description", "date", "location", "price", "image"]
     },
     "Registration": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
       "title": "Registration",
       "type": "object",
       "description": "Represents a user's registration for an event.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the Registration entity."
-        },
-        "eventId": {
-          "type": "string",
-          "description": "Reference to Event. (Relationship: Event 1:N Registration)"
-        },
-        "userId": {
-          "type": "string",
-          "description": "Reference to UserProfile. (Relationship: UserProfile 1:N Registration)"
-        },
-        "registrationDate": {
-          "type": "string",
-          "description": "Date and time when the user registered for the event.",
-          "format": "date-time"
-        },
-        "paymentStatus": {
-          "type": "string",
-          "description": "The status of the payment for registration."
-        }
+        "userId": { "type": "string", "description": "Reference to User's auth ID." },
+        "registrationDate": { "type": "string", "format": "date-time", "description": "Date and time when the user registered for the event." },
+        "paymentStatus": { "type": "string", "enum": ["paid", "unpaid", "refunded"], "description": "The status of the payment for registration." }
       },
-      "required": [
-        "id",
-        "eventId",
-        "userId",
-        "registrationDate",
-        "paymentStatus"
-      ]
-    },
-    "UserProfile": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "UserProfile",
-      "type": "object",
-      "description": "Represents a user profile within the FestConnect application.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the UserProfile entity."
-        },
-        "firstName": {
-          "type": "string",
-          "description": "First name of the user."
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last name of the user."
-        },
-        "email": {
-          "type": "string",
-          "description": "Email address of the user.",
-          "format": "email"
-        },
-        "phone": {
-          "type": "string",
-          "description": "Phone number of the user."
-        },
-        "walletId": {
-          "type": "string",
-          "description": "Reference to Wallet. (Relationship: UserProfile 1:1 Wallet)"
-        }
-      },
-      "required": [
-        "id",
-        "firstName",
-        "lastName",
-        "email",
-        "phone",
-        "walletId"
-      ]
-    },
-    "Leaderboard": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "Leaderboard",
-      "type": "object",
-      "description": "Represents a leaderboard entry for event participation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the Leaderboard entry."
-        },
-        "userId": {
-          "type": "string",
-          "description": "Reference to UserProfile. (Relationship: UserProfile 1:N Leaderboard)"
-        },
-        "eventId": {
-          "type": "string",
-          "description": "Reference to Event. (Relationship: Event 1:N Leaderboard)"
-        },
-        "score": {
-          "type": "number",
-          "description": "Score of the user on the leaderboard for the event."
-        },
-        "lastUpdated": {
-          "type": "string",
-          "description": "Date and time when the leaderboard entry was last updated.",
-          "format": "date-time"
-        }
-      },
-      "required": [
-        "id",
-        "userId",
-        "eventId",
-        "score",
-        "lastUpdated"
-      ]
-    },
-    "Wallet": {
-      "$schema": "http://json-schema.org/draft-07/schema#",
-      "title": "Wallet",
-      "type": "object",
-      "description": "Represents a digital wallet for users to manage payments.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the Wallet entity."
-        },
-        "balance": {
-          "type": "number",
-          "description": "Current balance in the wallet."
-        },
-        "currency": {
-          "type": "string",
-          "description": "Currency of the wallet balance."
-        }
-      },
-      "required": [
-        "id",
-        "balance",
-        "currency"
-      ]
+      "required": ["userId", "registrationDate", "paymentStatus"]
     }
   },
   "auth": {
-    "providers": [
-      "password",
-      "anonymous"
-    ]
+    "providers": [ "password", "anonymous" ]
   },
   "firestore": {
-    "structure": [
-      {
-        "path": "/events/{eventId}",
-        "definition": {
-          "entityName": "Event",
-          "schema": {
-            "$ref": "#/backend/entities/Event"
-          },
-          "description": "Stores event details, including name, description, start/end times, location, price (fixed at 150 RS), max capacity, registered attendees, and image URL.",
-          "params": [
-            {
-              "name": "eventId",
-              "description": "Unique identifier for the event."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/events/{eventId}/registrations/{registrationId}",
-        "definition": {
-          "entityName": "Registration",
-          "schema": {
-            "$ref": "#/backend/entities/Registration"
-          },
-          "description": "Stores user registrations for specific events. Contains references to the event and user profile, registration date, and payment status.",
-          "params": [
-            {
-              "name": "eventId",
-              "description": "Unique identifier for the event."
-            },
-            {
-              "name": "registrationId",
-              "description": "Unique identifier for the registration."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/users/{userId}",
-        "definition": {
-          "entityName": "UserProfile",
-          "schema": {
-            "$ref": "#/backend/entities/UserProfile"
-          },
-          "description": "Stores user profile information, including first name, last name, email, phone, and a reference to the user's wallet.",
-          "params": [
-            {
-              "name": "userId",
-              "description": "Unique identifier for the user."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/users/{userId}/wallet",
-        "definition": {
-          "entityName": "Wallet",
-          "schema": {
-            "$ref": "#/backend/entities/Wallet"
-          },
-          "description": "Stores wallet information for each user, including balance and currency.",
-          "params": [
-            {
-              "name": "userId",
-              "description": "Unique identifier for the user."
-            }
-          ]
-        }
-      },
-      {
-        "path": "/leaderboard/{leaderboardId}",
-        "definition": {
-          "entityName": "Leaderboard",
-          "schema": {
-            "$ref": "#/backend/entities/Leaderboard"
-          },
-          "description": "Stores leaderboard entries for event participation, including references to the user and event, score, and last updated timestamp.",
-          "params": [
-            {
-              "name": "leaderboardId",
-              "description": "Unique identifier for the leaderboard entry."
-            }
-          ]
-        }
-      }
-    ],
-    "reasoning": "The Firestore data structure is designed to support event registration, user profiles, and leaderboards within the FestConnect application. It emphasizes authorization independence through denormalization and structural segregation for enhanced security and scalability. The design incorporates the user's request to set all event prices to 150 RS and enable event registration.  The structure is optimized for efficient data retrieval and management, especially for displaying leaderboard results and handling event registrations.\n\nAuthorization Independence is achieved primarily through path-based ownership for user profiles and wallets (`/users/{userId}` and `/users/{userId}/wallet`), combined with denormalization where necessary. For example, if access to registrations or leaderboard entries needed to be limited based on event ownership, the event owner's ID could be denormalized into the registration and leaderboard documents, though based on the current requirements this isn't needed. This eliminates the need for complex `get()` calls in security rules, ensuring atomic operations and easier debugging.\n\nQAPs (Rules are not Filters) are supported by segregating data based on access requirements.  User-specific data (profiles, wallets) is stored under `/users/{userId}`, allowing straightforward security rules based on `request.auth.uid`.  The `/events` collection contains event data, and security rules can control who can create, read, update, and delete events.  Registrations, stored in a subcollection `/events/{eventId}/registrations/{registrationId}`, allows only authenticated users to create registrations for themselves (verified by matching `request.auth.uid` with the `userId` in the registration document).\n\nThis design facilitates secure `list` operations by avoiding the need to filter based on document content. For instance, listing events is allowed for everyone but with pagination/limits, while listing registrations is restricted to the event creator/admin or the user who created the registration, determined by the security rules applied to the `/events/{eventId}/registrations` subcollection."
+    "/events/{eventId}": {
+        "schema": { "$ref": "#/entities/Event" },
+        "description": "Stores details for each event."
+    },
+    "/events/{eventId}/registrations/{registrationId}": {
+      "schema": { "$ref": "#/entities/Registration" },
+      "description": "Subcollection storing registrations for a specific event."
+    }
   }
 }

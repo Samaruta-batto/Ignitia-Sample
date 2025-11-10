@@ -5,39 +5,108 @@ import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { events, eventCategories, eventSubCategories } from '@/lib/placeholder-data';
-import type { Event } from '@/lib/types';
-import { cn } from '@/lib/utils';
+import { eventCategories, eventSubCategories } from '@/lib/placeholder-data';
+import type { Event as StaticEvent } from '@/lib/types';
+import { cn, formatCurrency } from '@/lib/utils';
 import { MagicCard } from '@/components/ui/magic-card';
+import { useFirebase } from '@/firebase';
+import {
+  runTransaction,
+  doc,
+  collection,
+  serverTimestamp,
+} from 'firebase/firestore';
+import { useToast } from '@/hooks/use-toast';
+import { useCollection, type WithId } from '@/firebase/firestore/use-collection';
+import { query, where } from 'firebase/firestore';
+import { useMemoFirebase, useUser } from '@/firebase/provider';
+
+type Event = WithId<StaticEvent>;
 
 export default function EventsPage() {
   const searchParams = useSearchParams();
   const categoryParam = searchParams.get('category');
   const subCategoryParam = searchParams.get('subCategory');
 
+  const { firestore } = useFirebase();
+  const { user } = useUser();
+  const { toast } = useToast();
+
   const [activeCategory, setActiveCategory] = React.useState<string>(categoryParam || 'entrepreneurial');
   const [activeSubCategory, setActiveSubCategory] = React.useState<string>(subCategoryParam || 'fintech');
-  const [filteredItems, setFilteredItems] = React.useState<Event[]>([]);
+  
+  const eventsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    const subCategory = eventSubCategories[activeCategory]?.find(sc => sc.id === activeSubCategory);
+    if (!subCategory || subCategory.eventIds.length === 0) {
+      return null;
+    }
+    return query(
+      collection(firestore, 'events'), 
+      where('__name__', 'in', subCategory.eventIds)
+    );
+  }, [firestore, activeCategory, activeSubCategory]);
+
+  const { data: filteredItems, isLoading } = useCollection<Event>(eventsQuery);
+
+  const handleRegister = async (eventId: string) => {
+    if (!firestore || !user) {
+      toast({
+        variant: 'destructive',
+        title: 'Authentication Required',
+        description: 'You must be logged in to register for an event.',
+      });
+      return;
+    }
+
+    const eventRef = doc(firestore, 'events', eventId);
+    const registrationRef = doc(collection(firestore, 'events', eventId, 'registrations'));
+
+    try {
+      await runTransaction(firestore, async (transaction) => {
+        const eventDoc = await transaction.get(eventRef);
+        if (!eventDoc.exists()) {
+          throw new Error("Event does not exist!");
+        }
+
+        // Increment the registered attendees count
+        const newAttendeeCount = (eventDoc.data().registeredAttendees || 0) + 1;
+        transaction.update(eventRef, { registeredAttendees: newAttendeeCount });
+
+        // Create a new registration document
+        transaction.set(registrationRef, {
+          userId: user.uid,
+          registrationDate: serverTimestamp(),
+          paymentStatus: 'paid', // Assuming payment is handled
+        });
+      });
+
+      toast({
+        title: 'Registration Successful!',
+        description: "You're all set for the event.",
+      });
+    } catch (error) {
+      console.error('Registration failed: ', error);
+      toast({
+        variant: 'destructive',
+        title: 'Registration Failed',
+        description: 'Something went wrong. Please try again.',
+      });
+    }
+  };
+
 
   React.useEffect(() => {
-    if (categoryParam && subCategoryParam) {
-      setActiveCategory(categoryParam);
-      setActiveSubCategory(subCategoryParam);
-    }
+    if (categoryParam) setActiveCategory(categoryParam);
+    if (subCategoryParam) setActiveSubCategory(subCategoryParam);
   }, [categoryParam, subCategoryParam]);
 
-  React.useEffect(() => {
-    const subCategory = eventSubCategories[activeCategory]?.find(sc => sc.id === activeSubCategory);
-    if (subCategory) {
-      const items = events.filter(event => subCategory.eventIds.includes(event.id));
-      setFilteredItems(items);
-    } else {
-      // Fallback to first subcategory if current is not in the new active category
+   React.useEffect(() => {
+    const subCategoryExists = eventSubCategories[activeCategory]?.some(sc => sc.id === activeSubCategory);
+    if (!subCategoryExists) {
       const firstSubCategory = eventSubCategories[activeCategory]?.[0];
       if (firstSubCategory) {
         setActiveSubCategory(firstSubCategory.id);
-      } else {
-        setFilteredItems([]);
       }
     }
   }, [activeCategory, activeSubCategory]);
@@ -50,14 +119,7 @@ export default function EventsPage() {
             <Button
               key={category.id}
               variant="ghost"
-              onClick={() => {
-                setActiveCategory(category.id);
-                // Set the active subcategory to the first one in the new category
-                const firstSubCategory = eventSubCategories[category.id]?.[0];
-                if (firstSubCategory) {
-                  setActiveSubCategory(firstSubCategory.id);
-                }
-              }}
+              onClick={() => setActiveCategory(category.id)}
               className={cn(
                 'mx-4 py-6 text-lg uppercase tracking-widest rounded-none hover:bg-transparent hover:text-accent',
                 activeCategory === category.id ? 'border-b-2 border-accent text-accent' : 'text-muted-foreground'
@@ -89,7 +151,8 @@ export default function EventsPage() {
       
         <div className="flex justify-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
-            {filteredItems.map(item => (
+             {isLoading && <p>Loading events...</p>}
+            {filteredItems && filteredItems.map(item => (
               <MagicCard
                 key={item.id}
                 className="w-[350px] flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105"
@@ -105,20 +168,23 @@ export default function EventsPage() {
                     />
                   </div>
                   <CardContent className="p-6 text-center flex flex-col flex-grow">
-                    <h3 className="font-headline text-2xl text-white mb-4">{item.title}</h3>
-                    <div className="mt-auto">
+                    <h3 className="font-headline text-2xl text-white mb-2">{item.name}</h3>
+                    <p className="text-muted-foreground text-sm flex-grow">{item.description}</p>
+                    <div className="mt-4">
+                      <p className="font-bold text-lg text-accent mb-4">{formatCurrency(150)}</p>
                         <Button
                         variant="outline"
+                        onClick={() => handleRegister(item.id)}
                         className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full"
                         >
-                        ₹ {item.prize || '75,000'}/-
+                        Register Now
                         </Button>
                     </div>
                   </CardContent>
                 </Card>
               </MagicCard>
             ))}
-            {filteredItems.length === 0 && (
+            {!isLoading && (!filteredItems || filteredItems.length === 0) && (
               <div className="col-span-full text-center py-16">
                 <h3 className="text-2xl font-headline">No Events Found</h3>
                 <p className="text-muted-foreground">Please select a different category.</p>

@@ -4,13 +4,17 @@ import type { ImagePlaceholder } from './placeholder-images';
 export interface Event {
   id: string;
   title: string;
+  name: string;
   date: string;
   location: string;
   description: string;
   image: ImagePlaceholder;
+  price?: number;
   prize?: string;
   category: string;
   subCategory: string;
+  registeredAttendees?: number;
+  imageUrl?: string;
 }
 
 export interface EventCategory {

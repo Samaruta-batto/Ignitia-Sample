@@ -1,5 +1,7 @@
 'use client';
 
+import * as React from 'react';
+import { useRouter } from 'next/navigation';
 import {
   Card,
   CardContent,
@@ -16,35 +18,36 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Trophy, Users, IndianRupee } from 'lucide-react';
-import { events } from '@/lib/placeholder-data';
 import { formatCurrency } from '@/lib/utils';
+import { useFirebase } from '@/firebase';
+import { useCollection, type WithId } from '@/firebase/firestore/use-collection';
+import { collection, query, orderBy } from 'firebase/firestore';
 import type { Event } from '@/lib/types';
-import { useRouter } from 'next/navigation';
+import { useMemoFirebase } from '@/firebase/provider';
 
-// Add mock participant data to events
-const eventsWithParticipants: (Event & { participants: number })[] = events
-  .map(event => ({
-    ...event,
-    participants: Math.floor(Math.random() * (500 - 50 + 1)) + 50, // Random participants between 50 and 500
-  }))
-  .sort((a, b) => b.participants - a.participants);
+type EventWithRegistrations = WithId<Event & { registeredAttendees: number }>;
 
 export default function LeaderboardPage() {
   const router = useRouter();
+  const { firestore } = useFirebase();
+
+  const eventsQuery = useMemoFirebase(() => {
+    if (!firestore) return null;
+    return query(collection(firestore, 'events'), orderBy('registeredAttendees', 'desc'));
+  }, [firestore]);
+  
+  const { data: events, isLoading } = useCollection<EventWithRegistrations>(eventsQuery);
 
   const handleRowClick = (event: Event) => {
-    // Navigate to events page and pass category/subcategory info
-    // This is a simple implementation. A more robust one might use query params
-    // to pre-select the filters on the events page.
-    router.push(`/events?category=${event.category}&subCategory=${event.subCategory}`);
+    router.push(`/events`);
   };
 
   return (
     <div className="space-y-8">
-       <div className="text-center">
+      <div className="text-center">
         <h1 className="font-headline text-5xl tracking-wider uppercase">Event Leaderboard</h1>
         <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
-          See which events are drawing the biggest crowds.
+          See which events are drawing the biggest crowds in real-time.
         </p>
       </div>
       <Card>
@@ -54,7 +57,7 @@ export default function LeaderboardPage() {
             Top Events by Participation
           </CardTitle>
           <CardDescription>
-            Events sorted by the number of registered participants. Click a row to view the event.
+            Events sorted by the number of registered participants. Click a row to view events.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -70,13 +73,18 @@ export default function LeaderboardPage() {
                 </TableHead>
                 <TableHead className="text-right">
                    <div className="flex items-center justify-end gap-2">
-                    <IndianRupee /> Prize Money
+                    <IndianRupee /> Entry Fee
                   </div>
                 </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {eventsWithParticipants.map((event, index) => (
+              {isLoading && (
+                <TableRow>
+                  <TableCell colSpan={4} className="text-center">Loading leaderboard...</TableCell>
+                </TableRow>
+              )}
+              {events && events.map((event, index) => (
                 <TableRow 
                   key={event.id} 
                   className={`cursor-pointer ${index < 3 ? 'bg-card/50' : ''}`}
@@ -88,9 +96,9 @@ export default function LeaderboardPage() {
                         {index + 1}
                      </div>
                   </TableCell>
-                  <TableCell className="font-medium">{event.title}</TableCell>
-                  <TableCell className="text-right font-semibold">{event.participants}</TableCell>
-                  <TableCell className="text-right font-bold text-green-400">{formatCurrency(Number(event.prize) || 0)}</TableCell>
+                  <TableCell className="font-medium">{event.name}</TableCell>
+                  <TableCell className="text-right font-semibold">{event.registeredAttendees}</TableCell>
+                  <TableCell className="text-right font-bold text-green-400">{formatCurrency(event.price || 0)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
