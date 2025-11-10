@@ -164,12 +164,12 @@ export default function HomePage() {
                         />
                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                     </div>
-                    <CardHeader className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
-                        <CardTitle className="text-2xl text-white">{celebrity.name}</CardTitle>
-                        <CardDescription className="text-accent flex items-center justify-center gap-2">
+                    <CardContent className="p-4">
+                        <h3 className="text-xl font-bold text-white">{celebrity.name}</h3>
+                        <p className="text-sm text-accent flex items-center justify-center gap-1">
                             <Star className="w-4 h-4" /> {celebrity.title}
-                        </CardDescription>
-                    </CardHeader>
+                        </p>
+                    </CardContent>
                 </Card>
             ))}
         </div>
