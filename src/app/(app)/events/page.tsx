@@ -123,10 +123,10 @@ export default function EventsPage() {
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
                 className={cn(
-                  'mx-4 py-6 text-lg uppercase tracking-widest rounded-none border-b-2 bg-transparent',
+                  'mx-4 py-6 text-lg uppercase tracking-widest bg-transparent',
                   activeCategory === category.id 
-                    ? 'border-accent text-accent' 
-                    : 'border-transparent text-muted-foreground hover:text-accent'
+                    ? 'border-b-2 border-accent text-accent' 
+                    : 'border-b-2 border-transparent text-muted-foreground hover:text-accent'
                 )}
               >
                 {category.name}
