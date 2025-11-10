@@ -1,9 +1,8 @@
-
-
 'use client';
 
 import * as React from 'react';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { events, eventCategories, eventSubCategories } from '@/lib/placeholder-data';
@@ -12,9 +11,20 @@ import { cn } from '@/lib/utils';
 import { MagicCard } from '@/components/ui/magic-card';
 
 export default function EventsPage() {
-  const [activeCategory, setActiveCategory] = React.useState<string>('entrepreneurial');
-  const [activeSubCategory, setActiveSubCategory] = React.useState<string>('fintech');
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get('category');
+  const subCategoryParam = searchParams.get('subCategory');
+
+  const [activeCategory, setActiveCategory] = React.useState<string>(categoryParam || 'entrepreneurial');
+  const [activeSubCategory, setActiveSubCategory] = React.useState<string>(subCategoryParam || 'fintech');
   const [filteredItems, setFilteredItems] = React.useState<Event[]>([]);
+
+  React.useEffect(() => {
+    if (categoryParam && subCategoryParam) {
+      setActiveCategory(categoryParam);
+      setActiveSubCategory(subCategoryParam);
+    }
+  }, [categoryParam, subCategoryParam]);
 
   React.useEffect(() => {
     const subCategory = eventSubCategories[activeCategory]?.find(sc => sc.id === activeSubCategory);

@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Card,
   CardContent,
@@ -17,6 +19,7 @@ import { Trophy, Users, IndianRupee } from 'lucide-react';
 import { events } from '@/lib/placeholder-data';
 import { formatCurrency } from '@/lib/utils';
 import type { Event } from '@/lib/types';
+import { useRouter } from 'next/navigation';
 
 // Add mock participant data to events
 const eventsWithParticipants: (Event & { participants: number })[] = events
@@ -27,6 +30,15 @@ const eventsWithParticipants: (Event & { participants: number })[] = events
   .sort((a, b) => b.participants - a.participants);
 
 export default function LeaderboardPage() {
+  const router = useRouter();
+
+  const handleRowClick = (event: Event) => {
+    // Navigate to events page and pass category/subcategory info
+    // This is a simple implementation. A more robust one might use query params
+    // to pre-select the filters on the events page.
+    router.push(`/events?category=${event.category}&subCategory=${event.subCategory}`);
+  };
+
   return (
     <div className="space-y-8">
        <div className="text-center">
@@ -42,7 +54,7 @@ export default function LeaderboardPage() {
             Top Events by Participation
           </CardTitle>
           <CardDescription>
-            Events sorted by the number of registered participants.
+            Events sorted by the number of registered participants. Click a row to view the event.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -65,7 +77,11 @@ export default function LeaderboardPage() {
             </TableHeader>
             <TableBody>
               {eventsWithParticipants.map((event, index) => (
-                <TableRow key={event.id} className={index < 3 ? 'bg-card/50' : ''}>
+                <TableRow 
+                  key={event.id} 
+                  className={`cursor-pointer ${index < 3 ? 'bg-card/50' : ''}`}
+                  onClick={() => handleRowClick(event)}
+                >
                   <TableCell className="font-bold text-lg text-accent">
                      <div className="flex items-center gap-2">
                         {index < 3 ? <Trophy className="w-5 h-5 text-yellow-400" /> : null}
