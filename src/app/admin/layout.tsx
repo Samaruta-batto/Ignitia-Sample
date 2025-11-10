@@ -14,13 +14,15 @@ export default function AdminLayout({
   const { user, isAuthenticated, isLoading } = useAuth();
   const router = useRouter();
 
+  const isAuthorized = user?.role === 'ADMIN' || user?.role === 'DEV_TEAM';
+
   useEffect(() => {
-    if (!isLoading && (!isAuthenticated || user?.role !== 'ADMIN')) {
+    if (!isLoading && (!isAuthenticated || !isAuthorized)) {
       router.push('/login');
     }
-  }, [isLoading, isAuthenticated, user, router]);
+  }, [isLoading, isAuthenticated, isAuthorized, router]);
 
-  if (isLoading || !isAuthenticated || user?.role !== 'ADMIN') {
+  if (isLoading || !isAuthenticated || !isAuthorized) {
     return <Loading />;
   }
   

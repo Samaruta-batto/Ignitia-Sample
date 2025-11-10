@@ -52,6 +52,43 @@ const initialUser: User = {
   participatedEvents: ['event-1'],
 };
 
+const mockUsers: { [email: string]: User } = {
+  'admin@ignitia.in': {
+    id: 'admin-1',
+    name: 'Admin User',
+    email: 'admin@ignitia.in',
+    phone: '+1 234 567 8900',
+    college: 'IGNITIA',
+    year: 'Admin',
+    role: 'ADMIN',
+    profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Admin',
+    walletBalance: 5000,
+    registeredEvents: ['event-1', 'event-2', 'event-3'],
+    participatedEvents: ['event-1'],
+  },
+  'dev@ignitia.in': {
+    id: 'dev-user-1',
+    name: 'Dev Team Member',
+    email: 'dev@ignitia.in',
+    phone: '+1 234 567 8901',
+    college: 'IGNITIA',
+    year: 'Developer',
+    role: 'DEV_TEAM',
+    profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=DevTeam',
+    walletBalance: 7500,
+    registeredEvents: [],
+    participatedEvents: [],
+    contributionStats: {
+      commits: 142,
+      pullRequests: 28,
+      issues: 15,
+    },
+    githubUrl: 'https://github.com/johndoe',
+    linkedinUrl: 'https://linkedin.com/in/johndoe',
+  }
+};
+
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -78,27 +115,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const login = async (email: string, password: string) => {
-    // This is a mock login. In a real app, you'd verify credentials.
-    const isAdmin = email.toLowerCase() === 'admin@ignitia.in' && password === 'password';
+    // This is a mock login.
+    const normalizedEmail = email.toLowerCase();
+    const mockUser = mockUsers[normalizedEmail];
     
-    if (!isAdmin) {
-      // For now, only the admin login is mocked for the /login page
-      throw new Error("Invalid credentials");
+    // In a real app, you'd verify credentials (e.g., password). Here we just check if the user exists.
+    if (!mockUser || (normalizedEmail !== 'admin@ignitia.in' && normalizedEmail !== 'dev@ignitia.in')) {
+      throw new Error("Invalid credentials for admin or dev role.");
     }
-    
-    const mockUser: User = {
-      id: 'admin-1',
-      name: 'Admin User',
-      email: email,
-      phone: '+1 234 567 8900',
-      college: 'IGNITIA',
-      year: 'Admin',
-      role: 'ADMIN',
-      profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Admin',
-      walletBalance: 5000,
-      registeredEvents: ['event-1', 'event-2', 'event-3'],
-      participatedEvents: ['event-1'],
-    };
 
     setUser(mockUser);
     setIsAuthenticated(true);

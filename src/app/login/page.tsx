@@ -33,7 +33,7 @@ export default function LoginPage() {
       
       toast({
         title: 'Login Successful',
-        description: 'Welcome back to IGNITIA Admin!',
+        description: 'Welcome back to IGNITIA!',
       });
       
       router.push('/admin');
@@ -52,9 +52,9 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center p-4">
       <Card className="w-full max-w-sm">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-headline uppercase">Admin Login</CardTitle>
+          <CardTitle className="text-2xl font-headline uppercase">Staff Login</CardTitle>
           <CardDescription>
-            Use <span className="font-semibold text-accent">admin@ignitia.in</span> / <span className="font-semibold text-accent">password</span> to log in.
+            Use a valid admin or dev account. E.g., <span className="font-semibold text-accent">admin@ignitia.in</span> or <span className="font-semibold text-accent">dev@ignitia.in</span> with any password.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -64,7 +64,7 @@ export default function LoginPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@ignitia.in"
+                placeholder="staff@ignitia.in"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

@@ -1,18 +1,20 @@
+
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, BarChart2, Shield, Users, LogOut, Flame, User, Wallet } from 'lucide-react';
+import { Home, BarChart2, Shield, Users, LogOut, Flame, User, Wallet, PlusCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
-import { createClient } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import { Separator } from '../ui/separator';
+import { useAuth } from '@/contexts/auth-context';
 
 const menuItems = [
-  { href: '/admin', label: 'Dashboard', icon: Home },
-  { href: '/admin/stats', label: 'Stats', icon: BarChart2 },
-  { href: '/admin/audits', label: 'Audits', icon: Shield },
-  { href: '/admin/users', label: 'Users', icon: Users },
+  { href: '/admin', label: 'Dashboard', icon: Home, roles: ['ADMIN', 'DEV_TEAM'] },
+  { href: '/admin/add-event', label: 'Add Event', icon: PlusCircle, roles: ['ADMIN', 'DEV_TEAM'] },
+  { href: '/admin/stats', label: 'Stats', icon: BarChart2, roles: ['ADMIN'] },
+  { href: '/admin/audits', label: 'Audits', icon: Shield, roles: ['ADMIN'] },
+  { href: '/admin/users', label: 'Users', icon: Users, roles: ['ADMIN'] },
 ];
 
 const userMenuItems = [
@@ -23,15 +25,16 @@ const userMenuItems = [
 export function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
-  const supabase = createClient();
+  const { user, logout } = useAuth();
+
 
   const handleSignOut = async () => {
-    if (supabase) {
-      await supabase.auth.signOut();
-    }
+    logout();
     router.push('/');
     router.refresh();
   };
+
+  const availableMenuItems = menuItems.filter(item => user && item.roles.includes(user.role));
 
   return (
     <aside className="w-64 flex-shrink-0 bg-sidebar border-r border-sidebar-border text-sidebar-foreground p-4 flex flex-col">
@@ -41,7 +44,7 @@ export function AdminSidebar() {
       </div>
       <nav className="flex-1 space-y-2">
         <div className="space-y-2">
-          {menuItems.map((item) => (
+          {availableMenuItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
