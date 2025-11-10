@@ -9,12 +9,13 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { products } from '@/lib/placeholder-data';
-import { ArrowRight, Ticket, Users, Award, Youtube, Instagram, Facebook, Linkedin, Twitter, Star } from 'lucide-react';
+import { ArrowRight, Ticket, Users, Award, Youtube, Instagram, Facebook, Linkedin, Twitter } from 'lucide-react';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { formatCurrency } from '@/lib/utils';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import NumberTicker from '@/components/ui/number-ticker';
+import { PastGuests } from '@/components/home/past-guests';
 
 
 export default function HomePage() {
@@ -23,24 +24,6 @@ export default function HomePage() {
   const aboutIgnitiaImage = PlaceHolderImages.find(p => p.id === 'about-ignitia')!;
   const aboutPsitImage = PlaceHolderImages.find(p => p.id === 'about-psit')!;
   const neetiMohanPoster = PlaceHolderImages.find(p => p.id === 'neeti-mohan-poster')!;
-
-  const pastCelebrities = [
-    {
-        name: 'Arijit Singh',
-        title: 'Playback Singer',
-        image: PlaceHolderImages.find(p => p.id === 'celebrity-1')!
-    },
-    {
-        name: 'Ankit Tiwari',
-        title: 'Music Composer',
-        image: PlaceHolderImages.find(p => p.id === 'celebrity-2')!
-    },
-    {
-        name: 'Sonu Nigam',
-        title: 'Playback Singer',
-        image: PlaceHolderImages.find(p => p.id === 'celebrity-3')!
-    }
-  ];
 
   return (
     <div className="space-y-24 -mt-8 -mx-8">
@@ -63,10 +46,10 @@ export default function HomePage() {
             April 28-29, 2026 | PSIT Kanpur
           </p>
           <div className="mt-8 flex gap-4">
-            <ShimmerButton className="px-8 py-3 h-11">
+            <ShimmerButton className="px-8 py-3">
               <Link href="/events" className="flex items-center gap-2">Register Now <ArrowRight /></Link>
             </ShimmerButton>
-            <ShimmerButton asChild className="px-8 py-3 h-11 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
+            <ShimmerButton asChild className="px-8 py-3 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
               <Link href="/events">Explore Events <Ticket className="ml-2"/></Link>
             </ShimmerButton>
           </div>
@@ -184,34 +167,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="container mx-auto">
-        <div className="text-center mb-12">
-            <h2 className="font-headline text-5xl uppercase tracking-wider">Our Past Guests</h2>
-            <p className="mt-2 text-lg text-muted-foreground">A look back at the stars who have graced the Ignitia stage.</p>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {pastCelebrities.map((celebrity) => (
-            <Card key={celebrity.name} className="overflow-hidden group text-center border-accent/20 bg-card/50">
-                <div className="relative aspect-[4/5] overflow-hidden">
-                    <Image
-                        src={celebrity.image.imageUrl}
-                        alt={celebrity.name}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        data-ai-hint={celebrity.image.imageHint}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                </div>
-                <CardContent className="p-4">
-                    <h3 className="text-xl font-bold text-white">{celebrity.name}</h3>
-                    <p className="text-sm text-accent flex items-center justify-center gap-1">
-                        <Star className="w-4 h-4" /> {celebrity.title}
-                    </p>
-                </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
+      <PastGuests />
 
 
        <section className="container mx-auto">
