@@ -12,7 +12,7 @@ export default function MainAppLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const noLayoutRoutes = ['/user-login', '/signup'];
+  const noLayoutRoutes = ['/user-login', '/signup', '/login'];
   const { user } = useUser();
 
   if (noLayoutRoutes.includes(pathname)) {

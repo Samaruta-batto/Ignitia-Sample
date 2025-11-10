@@ -2,21 +2,16 @@
 'use client';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useAuth } from '@/firebase';
 import { useRouter } from 'next/navigation';
-import { LogIn } from 'lucide-react';
+import { LogIn, UserPlus } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
+import { Logo } from '@/components/icons/logo';
 
 export default function UserLoginPage() {
   const [email, setEmail] = useState('');
@@ -56,47 +51,52 @@ export default function UserLoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4">
-      <Card className="w-full max-w-sm">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-headline uppercase">User Login</CardTitle>
-          <CardDescription>Enter your credentials to access your account.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+        <div className="w-full max-w-md space-y-8">
+            <div className="flex justify-center">
+                 <Logo />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input 
-                id="password" 
-                type="password" 
-                required 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-               />
+            <div className="bg-card/50 p-8 rounded-lg shadow-2xl">
+                <div className="text-center mb-6">
+                    <h1 className="text-3xl font-headline uppercase tracking-wider">Welcome Back</h1>
+                    <p className="text-muted-foreground">Enter your credentials to access your account.</p>
+                </div>
+                <form onSubmit={handleLogin} className="space-y-6">
+                    <div className="space-y-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                        id="email"
+                        type="email"
+                        placeholder="you@example.com"
+                        required
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="bg-background/50"
+                    />
+                    </div>
+                    <div className="space-y-2">
+                    <Label htmlFor="password">Password</Label>
+                    <Input 
+                        id="password" 
+                        type="password" 
+                        required 
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="bg-background/50"
+                    />
+                    </div>
+                    <ShimmerButton type="submit" className="w-full" disabled={isSubmitting}>
+                        {isSubmitting ? 'Logging in...' : 'Login'}
+                        <LogIn className="ml-2 h-4 w-4" />
+                    </ShimmerButton>
+                </form>
             </div>
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? 'Logging in...' : 'Login'}
-              <LogIn className="ml-2 h-4 w-4" />
-            </Button>
-          </form>
-           <div className="mt-4 text-center text-sm">
-            Don't have an account?{' '}
-            <Link href="/signup" className="underline">
-              Sign up
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
+             <div className="text-center text-sm">
+                Don't have an account?{' '}
+                <Link href="/signup" className="font-semibold text-accent hover:underline">
+                    Sign up
+                </Link>
+            </div>
+        </div>
     </div>
   );
 }
