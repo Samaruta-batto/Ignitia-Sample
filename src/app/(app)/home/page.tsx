@@ -152,26 +152,26 @@ export default function HomePage() {
             <p className="mt-2 text-lg text-muted-foreground">Meet the stars of IGNITIA 2k26!</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {celebrities.map((celebrity) => (
-                <Card key={celebrity.name} className="overflow-hidden group text-center border-accent/20">
-                     <div className="relative aspect-[4/5] overflow-hidden">
-                        <Image
-                            src={celebrity.image.imageUrl}
-                            alt={celebrity.name}
-                            fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                            data-ai-hint={celebrity.image.imageHint}
-                        />
-                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                    </div>
-                    <CardContent className="p-4">
-                        <h3 className="text-xl font-bold text-white">{celebrity.name}</h3>
-                        <p className="text-sm text-accent flex items-center justify-center gap-1">
-                            <Star className="w-4 h-4" /> {celebrity.title}
-                        </p>
-                    </CardContent>
-                </Card>
-            ))}
+          {celebrities.map((celebrity) => (
+            <Card key={celebrity.name} className="overflow-hidden group text-center border-accent/20 bg-card/50">
+                <div className="relative aspect-[4/5] overflow-hidden">
+                    <Image
+                        src={celebrity.image.imageUrl}
+                        alt={celebrity.name}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        data-ai-hint={celebrity.image.imageHint}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                </div>
+                <CardContent className="p-4">
+                    <h3 className="text-xl font-bold text-white">{celebrity.name}</h3>
+                    <p className="text-sm text-accent flex items-center justify-center gap-1">
+                        <Star className="w-4 h-4" /> {celebrity.title}
+                    </p>
+                </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
 

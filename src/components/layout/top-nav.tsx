@@ -48,7 +48,10 @@ export function TopNav() {
                 key={item.label}
                 variant={pathname.startsWith(item.href) ? 'secondary' : 'ghost'}
                 asChild
-                className="text-sm rounded-full"
+                className={cn(
+                  "text-sm rounded-full",
+                  !pathname.startsWith(item.href) && "text-muted-foreground"
+                )}
               >
                 <Link href={item.href}>{item.label}</Link>
               </ShimmerButton>
