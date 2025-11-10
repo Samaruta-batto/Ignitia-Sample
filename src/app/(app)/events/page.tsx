@@ -4,7 +4,7 @@ import * as React from 'react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { eventCategories, eventSubCategories } from '@/lib/placeholder-data';
 import type { Event as StaticEvent } from '@/lib/types';
 import { cn, formatCurrency } from '@/lib/utils';
@@ -116,7 +116,7 @@ export default function EventsPage() {
       <section className="space-y-4">
         <div className="flex justify-center border-b border-accent/20">
           {eventCategories.map(category => (
-            <Button
+            <ShimmerButton
               key={category.id}
               variant="ghost"
               onClick={() => setActiveCategory(category.id)}
@@ -126,13 +126,13 @@ export default function EventsPage() {
               )}
             >
               {category.name}
-            </Button>
+            </ShimmerButton>
           ))}
         </div>
         {eventSubCategories[activeCategory] && (
           <div className="flex justify-center border-b border-accent/20 flex-wrap">
             {eventSubCategories[activeCategory].map(sub => (
-              <Button
+              <ShimmerButton
                 key={sub.id}
                 variant="ghost"
                 onClick={() => setActiveSubCategory(sub.id)}
@@ -142,7 +142,7 @@ export default function EventsPage() {
                 )}
               >
                 {sub.name}
-              </Button>
+              </ShimmerButton>
             ))}
           </div>
         )}
@@ -172,13 +172,13 @@ export default function EventsPage() {
                     <p className="text-muted-foreground text-sm flex-grow">{item.description}</p>
                     <div className="mt-4">
                       <p className="font-bold text-lg text-accent mb-4">{formatCurrency(150)}</p>
-                        <Button
+                        <ShimmerButton
                         variant="outline"
                         onClick={() => handleRegister(item.id)}
                         className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full"
                         >
                         Register Now
-                        </Button>
+                        </ShimmerButton>
                     </div>
                   </CardContent>
                 </Card>

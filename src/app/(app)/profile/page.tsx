@@ -4,7 +4,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -71,14 +71,14 @@ export default function ProfilePage() {
           </div>
           
           <div className="flex gap-3">
-            <Button 
+            <ShimmerButton 
               onClick={handleLogout}
               variant="outline"
               className="border-[#D4AF37]/30 hover:bg-[#D4AF37]/10"
             >
               <LogOut className="w-4 h-4 mr-2" />
               Logout
-            </Button>
+            </ShimmerButton>
           </div>
         </div>
 
@@ -118,12 +118,12 @@ export default function ProfilePage() {
                       />
                     </div>
                     <div className="flex gap-2">
-                      <Button onClick={handleSaveProfile} className="flex-1 bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]">
+                      <ShimmerButton onClick={handleSaveProfile} className="flex-1 bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]">
                         Save
-                      </Button>
-                      <Button onClick={() => setIsEditing(false)} variant="outline" className="flex-1 border-[#D4AF37]/30">
+                      </ShimmerButton>
+                      <ShimmerButton onClick={() => setIsEditing(false)} variant="outline" className="flex-1 border-[#D4AF37]/30">
                         Cancel
-                      </Button>
+                      </ShimmerButton>
                     </div>
                   </div>
                 ) : (
@@ -136,13 +136,13 @@ export default function ProfilePage() {
                       <span className="text-[#D4AF37]">📞</span>
                       <span>{user.phoneNumber || 'Not provided'}</span>
                     </div>
-                      <Button 
+                      <ShimmerButton 
                         onClick={() => setIsEditing(true)}
                         className="w-full mt-4 bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]"
                       >
                         <Edit className="w-4 h-4 mr-2" />
                         Edit Profile
-                      </Button>
+                      </ShimmerButton>
                   </div>
                 )}
               </CardContent>
@@ -160,9 +160,9 @@ export default function ProfilePage() {
                   ₹{/* Placeholder balance */ '1,234'}
                 </div>
                 <p className="text-gray-400 text-sm mb-4">Available balance</p>
-                <Button className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]">
+                <ShimmerButton className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]">
                   Add Money
-                </Button>
+                </ShimmerButton>
               </CardContent>
             </Card>
           </div>

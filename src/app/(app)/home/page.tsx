@@ -72,11 +72,11 @@ export default function HomePage() {
           </div>
         </div>
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-4">
-            <Button variant="ghost" size="icon" asChild><a href="#"><Youtube className="text-white"/></a></Button>
-            <Button variant="ghost" size="icon" asChild><a href="#"><Instagram className="text-white"/></a></Button>
-            <Button variant="ghost" size="icon" asChild><a href="#"><Facebook className="text-white"/></a></Button>
-            <Button variant="ghost" size="icon" asChild><a href="#"><Linkedin className="text-white"/></a></Button>
-            <Button variant="ghost" size="icon" asChild><a href="#"><Twitter className="text-white"/></a></Button>
+            <ShimmerButton variant="ghost" size="icon" asChild><a href="#"><Youtube className="text-white"/></a></ShimmerButton>
+            <ShimmerButton variant="ghost" size="icon" asChild><a href="#"><Instagram className="text-white"/></a></ShimmerButton>
+            <ShimmerButton variant="ghost" size="icon" asChild><a href="#"><Facebook className="text-white"/></a></ShimmerButton>
+            <ShimmerButton variant="ghost" size="icon" asChild><a href="#"><Linkedin className="text-white"/></a></ShimmerButton>
+            <ShimmerButton variant="ghost" size="icon" asChild><a href="#"><Twitter className="text-white"/></a></ShimmerButton>
         </div>
       </section>
 

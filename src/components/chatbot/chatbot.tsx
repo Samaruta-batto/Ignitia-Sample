@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { Bot, User, CornerDownLeft, Loader2, AlertTriangle, X, Send } from 'lucide-react';
 import {
   answerQuestion,
@@ -132,9 +132,9 @@ export function Chatbot({ isOpen, onClose }: { isOpen: boolean, onClose: () => v
                 <p className="text-sm text-muted-foreground">Online</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon" onClick={onClose}>
+            <ShimmerButton variant="ghost" size="icon" onClick={onClose}>
                 <X className="h-5 w-5"/>
-            </Button>
+            </ShimmerButton>
           </header>
           
           <ScrollArea className="flex-1" ref={scrollAreaRef}>
@@ -194,9 +194,9 @@ export function Chatbot({ isOpen, onClose }: { isOpen: boolean, onClose: () => v
           </ScrollArea>
           
           <footer className="p-4 border-t border-border/30 bg-card/50">
-             <Button variant="outline" size="sm" onClick={handleEscalation} disabled={isLoading} className="mb-3 w-full">
+             <ShimmerButton variant="outline" size="sm" onClick={handleEscalation} disabled={isLoading} className="mb-3 w-full">
                 <AlertTriangle className="mr-2 h-4 w-4"/> Escalate to Human Support
-            </Button>
+            </ShimmerButton>
             <form onSubmit={handleSubmit} className="flex items-center gap-2">
               <Input
                 value={input}
@@ -206,10 +206,10 @@ export function Chatbot({ isOpen, onClose }: { isOpen: boolean, onClose: () => v
                 className="flex-1 bg-background/50 rounded-full px-4"
                 autoComplete="off"
               />
-              <Button type="submit" size="icon" disabled={isLoading || !input.trim()} className="rounded-full bg-accent hover:bg-accent/90">
+              <ShimmerButton type="submit" size="icon" disabled={isLoading || !input.trim()} className="rounded-full bg-accent hover:bg-accent/90">
                 <Send size={18} />
                 <span className="sr-only">Send</span>
-              </Button>
+              </ShimmerButton>
             </form>
           </footer>
         </motion.div>

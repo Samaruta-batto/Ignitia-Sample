@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, BarChart2, Shield, Users, LogOut, Flame, User, Wallet, PlusCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Button } from '../ui/button';
+import { ShimmerButton } from '../ui/shimmer-button';
 import { useRouter } from 'next/navigation';
 import { Separator } from '../ui/separator';
 import { useAuth, useUser } from '@/firebase';
@@ -89,14 +89,14 @@ export function AdminSidebar() {
         </div>
       </nav>
       <div>
-        <Button
+        <ShimmerButton
           variant="ghost"
           className="w-full justify-start gap-3"
           onClick={handleSignOut}
         >
           <LogOut className="h-4 w-4" />
           Sign Out
-        </Button>
+        </ShimmerButton>
       </div>
     </aside>
   );

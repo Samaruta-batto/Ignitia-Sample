@@ -17,7 +17,7 @@ import {
   ShoppingBag,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Button } from '../ui/button';
+import { ShimmerButton } from '../ui/shimmer-button';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { Logo } from '../icons/logo';
 import { Separator } from '../ui/separator';
@@ -44,14 +44,14 @@ export function TopNav() {
         <div className="bg-card/50 backdrop-blur-md rounded-full border border-border/20 shadow-lg px-4 py-2">
           <div className="flex items-center gap-1">
             {menuItems.map((item) => (
-              <Button
+              <ShimmerButton
                 key={item.label}
                 variant={pathname.startsWith(item.href) ? 'secondary' : 'ghost'}
                 asChild
                 className="text-sm rounded-full"
               >
                 <Link href={item.href}>{item.label}</Link>
-              </Button>
+              </ShimmerButton>
             ))}
           </div>
         </div>
@@ -59,10 +59,10 @@ export function TopNav() {
       <div className="md:hidden">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon">
+            <ShimmerButton variant="ghost" size="icon">
               <Menu />
               <span className="sr-only">Open Menu</span>
-            </Button>
+            </ShimmerButton>
           </SheetTrigger>
           <SheetContent side="left" className="flex flex-col p-0">
             <div className="p-4">
@@ -73,7 +73,7 @@ export function TopNav() {
             <Separator />
             <nav className="flex-1 flex flex-col gap-2 p-4">
               {[...menuItems, { href: '/contact', label: 'Contact', icon: Contact }].map((item) => (
-                <Button
+                <ShimmerButton
                   key={item.label}
                   variant={pathname.startsWith(item.href) ? 'secondary' : 'ghost'}
                   asChild
@@ -84,7 +84,7 @@ export function TopNav() {
                     <item.icon className="h-4 w-4 text-accent" />
                     {item.label}
                   </Link>
-                </Button>
+                </ShimmerButton>
               ))}
             </nav>
              <Separator />

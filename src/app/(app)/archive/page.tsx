@@ -6,7 +6,7 @@ import {
   Card,
   CardContent,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { archiveItems } from '@/lib/placeholder-data';
 import { Separator } from '@/components/ui/separator';
 import type { ArchiveItem } from '@/lib/types';
@@ -37,9 +37,9 @@ export default function ArchivePage() {
              <div>
                 <h2 className="font-headline text-2xl uppercase tracking-wider">Filter by Year</h2>
                 <div className="flex gap-2 mt-2 flex-wrap">
-                    <Button variant={activeYear === 'all' ? 'default' : 'secondary'} onClick={() => setActiveYear('all')}>All</Button>
+                    <ShimmerButton variant={activeYear === 'all' ? 'default' : 'secondary'} onClick={() => setActiveYear('all')}>All</ShimmerButton>
                     {years.map(year => (
-                        <Button key={year} variant={activeYear === year ? 'default' : 'secondary'} onClick={() => setActiveYear(year)}>{year}</Button>
+                        <ShimmerButton key={year} variant={activeYear === year ? 'default' : 'secondary'} onClick={() => setActiveYear(year)}>{year}</ShimmerButton>
                     ))}
                 </div>
             </div>
@@ -47,9 +47,9 @@ export default function ArchivePage() {
             <div>
                 <h2 className="font-headline text-2xl uppercase tracking-wider">Filter by Topic</h2>
                 <div className="flex gap-2 mt-2 flex-wrap">
-                    <Button variant={activeTopic === 'all' ? 'default' : 'secondary'} onClick={() => setActiveTopic('all')}>All</Button>
+                    <ShimmerButton variant={activeTopic === 'all' ? 'default' : 'secondary'} onClick={() => setActiveTopic('all')}>All</ShimmerButton>
                     {topics.map(topic => (
-                        <Button key={topic} variant={activeTopic === topic ? 'default' : 'secondary'} onClick={() => setActiveTopic(topic)}>{topic}</Button>
+                        <ShimmerButton key={topic} variant={activeTopic === topic ? 'default' : 'secondary'} onClick={() => setActiveTopic(topic)}>{topic}</ShimmerButton>
                     ))}
                 </div>
             </div>

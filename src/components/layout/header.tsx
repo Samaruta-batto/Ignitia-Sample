@@ -1,6 +1,6 @@
 
 'use client';
-import { Button } from '@/components/ui/button';
+import { ShimmerButton } from '@/components/ui/shimmer-button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -48,21 +48,21 @@ export function AppHeader({ user }: { user: User | null }) {
         </div>
         <TopNav />
         <div className="flex items-center gap-2">
-           <Button variant="ghost" size="icon" className="relative" onClick={toggleCart}>
+           <ShimmerButton variant="ghost" size="icon" className="relative" onClick={toggleCart}>
               <ShoppingCart />
               {cartItemCount > 0 && (
                 <Badge variant="destructive" className="absolute -top-1 -right-1 h-5 w-5 justify-center p-0">{cartItemCount}</Badge>
               )}
-           </Button>
+           </ShimmerButton>
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="relative h-10 w-10 rounded-full">
+                <ShimmerButton variant="ghost" className="relative h-10 w-10 rounded-full">
                   <Avatar className="h-10 w-10">
                      <AvatarImage src={user.photoURL || `https://i.pravatar.cc/150?u=${user?.uid}`} />
                     <AvatarFallback>{userInitial}</AvatarFallback>
                   </Avatar>
-                </Button>
+                </ShimmerButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
@@ -95,16 +95,16 @@ export function AppHeader({ user }: { user: User | null }) {
             </DropdownMenu>
           ) : (
             <>
-              <Button asChild variant="ghost">
+              <ShimmerButton asChild variant="ghost">
                 <Link href="/user-login">
                   <LogIn className="mr-2 h-4 w-4" /> Login
                 </Link>
-              </Button>
-              <Button asChild className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20">
+              </ShimmerButton>
+              <ShimmerButton asChild className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20">
                 <Link href="/signup">
                   <UserPlus className="mr-2 h-4 w-4" /> Sign Up
                 </Link>
-              </Button>
+              </ShimmerButton>
             </>
           )}
         </div>

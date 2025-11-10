@@ -33,7 +33,7 @@ export function CartSheet() {
             <h3 className="text-xl font-semibold">Your cart is empty</h3>
             <p className="text-muted-foreground">Looks like you haven't added anything yet.</p>
             <SheetClose asChild>
-                <Button>Continue Shopping</Button>
+                <ShimmerButton>Continue Shopping</ShimmerButton>
             </SheetClose>
           </div>
         ) : (
@@ -56,20 +56,20 @@ export function CartSheet() {
                             <p className="text-sm text-muted-foreground">{formatCurrency(item.price)}</p>
                         </div>
                         <div className="flex items-center gap-2">
-                            <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
+                            <ShimmerButton variant="outline" size="icon" className="h-6 w-6" onClick={() => updateQuantity(item.id, item.quantity - 1)}>
                                 <Minus className="h-3 w-3" />
-                            </Button>
+                            </ShimmerButton>
                             <span className="font-bold w-4 text-center">{item.quantity}</span>
-                            <Button variant="outline" size="icon" className="h-6 w-6" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
+                            <ShimmerButton variant="outline" size="icon" className="h-6 w-6" onClick={() => updateQuantity(item.id, item.quantity + 1)}>
                                 <Plus className="h-3 w-3" />
-                            </Button>
+                            </ShimmerButton>
                         </div>
                     </div>
                     <div className="flex flex-col justify-between items-end py-1">
                          <p className="font-bold">{formatCurrency(item.price * item.quantity)}</p>
-                         <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-destructive" onClick={() => removeFromCart(item.id)}>
+                         <ShimmerButton variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground hover:text-destructive" onClick={() => removeFromCart(item.id)}>
                             <Trash2 className="h-4 w-4" />
-                        </Button>
+                        </ShimmerButton>
                     </div>
                   </div>
                 ))}
