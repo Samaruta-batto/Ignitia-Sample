@@ -76,7 +76,7 @@ export default function HomePage() {
             <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Instagram className="text-white"/></a></ShimmerButton>
             <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Facebook className="text-white"/></a></ShimmerButton>
             <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Linkedin className="text-white"/></a></ShimmerButton>
-            <ShimmerButton size-icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Twitter className="text-white"/></a></ShimmerButton>
+            <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Twitter className="text-white"/></a></ShimmerButton>
         </div>
       </section>
 
