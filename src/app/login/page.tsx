@@ -54,7 +54,11 @@ export default function LoginPage() {
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-headline uppercase">Staff Login</CardTitle>
           <CardDescription>
-            Use a valid admin or dev account. E.g., <span className="font-semibold text-accent">admin@ignitia.in</span> or <span className="font-semibold text-accent">dev@ignitia.in</span> with any password.
+            Use a sample account with any password. E.g.,{' '}
+            <span className="font-semibold text-accent">admin@ignitia.in</span>,{' '}
+            <span className="font-semibold text-accent">dev@ignitia.in</span>,{' '}
+            <span className="font-semibold text-accent">organizer@ignitia.in</span>, or{' '}
+            <span className="font-semibold text-accent">user@ignitia.in</span>.
           </CardDescription>
         </CardHeader>
         <CardContent>

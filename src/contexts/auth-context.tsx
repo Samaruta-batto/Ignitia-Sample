@@ -85,6 +85,33 @@ const mockUsers: { [email: string]: User } = {
     },
     githubUrl: 'https://github.com/johndoe',
     linkedinUrl: 'https://linkedin.com/in/johndoe',
+  },
+  'user@ignitia.in': {
+    id: 'user-1',
+    name: 'Attendee User',
+    email: 'user@ignitia.in',
+    phone: '+91 11111 22222',
+    college: 'PSIT',
+    year: 'Second Year',
+    role: 'ATTENDEE',
+    profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Attendee',
+    walletBalance: 1500,
+    registeredEvents: ['event-1'],
+    participatedEvents: [],
+  },
+  'organizer@ignitia.in': {
+    id: 'organizer-1',
+    name: 'Organizer User',
+    email: 'organizer@ignitia.in',
+    phone: '+91 33333 44444',
+    college: 'IGNITIA',
+    year: 'Coordinator',
+    role: 'ORGANIZER',
+    profilePhoto: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Organizer',
+    walletBalance: 300,
+    registeredEvents: [],
+    participatedEvents: [],
+    createdEvents: ['event-2', 'event-4'],
   }
 };
 
@@ -120,8 +147,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const mockUser = mockUsers[normalizedEmail];
     
     // In a real app, you'd verify credentials (e.g., password). Here we just check if the user exists.
-    if (!mockUser || (normalizedEmail !== 'admin@ignitia.in' && normalizedEmail !== 'dev@ignitia.in')) {
-      throw new Error("Invalid credentials for admin or dev role.");
+    if (!mockUser) {
+      throw new Error("Invalid credentials. Please use one of the sample accounts.");
     }
 
     setUser(mockUser);
