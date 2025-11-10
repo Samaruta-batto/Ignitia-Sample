@@ -17,7 +17,7 @@ import {
   ShoppingBag,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { ShimmerButton } from '../ui/shimmer-button';
+import { Button } from '../ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { Logo } from '../icons/logo';
 import { Separator } from '../ui/separator';
@@ -32,6 +32,7 @@ const menuItems = [
   { href: '/archive', label: 'Gallery', icon: ImageIcon },
   { href: '/sponsors', label: 'Sponsors', icon: Award },
   { href: '/teams', label: 'Teams', icon: Users },
+  { href: '/contact', label: 'Contact', icon: Contact },
 ];
 
 export function TopNav() {
@@ -41,35 +42,25 @@ export function TopNav() {
   return (
     <>
       <nav className="hidden md:flex items-center justify-center flex-1">
-        <div className="bg-card/50 backdrop-blur-md rounded-full border border-border/20 shadow-lg px-4 py-2">
-          <div className="flex items-center gap-1">
-            {menuItems.map((item) => {
-              const isActive = pathname.startsWith(item.href);
-              return (
-                <ShimmerButton
-                  key={item.label}
-                  asChild
-                  className={cn(
-                    "text-sm rounded-full",
-                    isActive 
-                      ? "bg-secondary text-secondary-foreground" 
-                      : "bg-transparent text-muted-foreground hover:bg-accent/10 hover:text-foreground"
-                  )}
-                >
-                  <Link href={item.href}>{item.label}</Link>
-                </ShimmerButton>
-              );
-            })}
-          </div>
+        <div className="flex items-center gap-2">
+          {menuItems.map((item) => (
+            <Button
+              key={item.label}
+              variant={pathname.startsWith(item.href) ? 'secondary' : 'ghost'}
+              asChild
+            >
+              <Link href={item.href}>{item.label}</Link>
+            </Button>
+          ))}
         </div>
       </nav>
       <div className="md:hidden">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            <ShimmerButton variant="ghost" size="icon">
+            <Button variant="ghost" size="icon">
               <Menu />
               <span className="sr-only">Open Menu</span>
-            </ShimmerButton>
+            </Button>
           </SheetTrigger>
           <SheetContent side="left" className="flex flex-col p-0">
             <div className="p-4">
@@ -79,8 +70,8 @@ export function TopNav() {
             </div>
             <Separator />
             <nav className="flex-1 flex flex-col gap-2 p-4">
-              {[...menuItems, { href: '/contact', label: 'Contact', icon: Contact }].map((item) => (
-                <ShimmerButton
+              {menuItems.map((item) => (
+                <Button
                   key={item.label}
                   variant={pathname.startsWith(item.href) ? 'secondary' : 'ghost'}
                   asChild
@@ -91,7 +82,7 @@ export function TopNav() {
                     <item.icon className="h-4 w-4 text-accent" />
                     {item.label}
                   </Link>
-                </ShimmerButton>
+                </Button>
               ))}
             </nav>
              <Separator />

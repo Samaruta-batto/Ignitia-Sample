@@ -5,6 +5,7 @@ import { AppLayout } from '@/components/layout/app-layout';
 import { usePathname } from 'next/navigation';
 import { useUser } from '@/firebase';
 import type { User } from 'firebase/auth';
+import { WarpBackground } from '@/components/ui/warp-background';
 
 export default function MainAppLayout({
   children,
@@ -21,9 +22,11 @@ export default function MainAppLayout({
 
   return (
     <AppLayout user={user}>
+      <WarpBackground>
         <div className="p-4 md:p-8">
             {children}
         </div>
+      </WarpBackground>
     </AppLayout>
   );
 }
