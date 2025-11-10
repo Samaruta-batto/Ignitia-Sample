@@ -1,93 +1,14 @@
 import { NextResponse, type NextRequest } from 'next/server'
-import { createServerClient } from '@supabase/ssr'
-
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-
-// Simple check to see if the variables are placeholders
-const areCredentialsSet =
-  supabaseUrl &&
-  !supabaseUrl.includes('YOUR_SUPABASE_URL') &&
-  supabaseAnonKey &&
-  !supabaseAnonKey.includes('YOUR_SUPABASE_ANON_KEY')
 
 export async function middleware(request: NextRequest) {
-  let response = NextResponse.next({
+  // This middleware is currently a passthrough.
+  // Future authentication logic can be added here.
+  const response = NextResponse.next({
     request: {
       headers: request.headers,
     },
   })
-
-  // If credentials aren't set, bypass Supabase logic for public pages
-  if (!areCredentialsSet) {
-    if (request.nextUrl.pathname.startsWith('/admin')) {
-        // If trying to access admin without Supabase, redirect to login
-        return NextResponse.redirect(new URL('/login', request.url))
-    }
-    return response;
-  }
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get(name: string) {
-          return request.cookies.get(name)?.value
-        },
-        set(name: string, value: string, options) {
-          request.cookies.set({
-            name,
-            value,
-            ...options,
-          })
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          })
-          response.cookies.set({
-            name,
-            value,
-            ...options,
-          })
-        },
-        remove(name: string, options) {
-          request.cookies.set({
-            name,
-            value: '',
-            ...options,
-          })
-          response = NextResponse.next({
-            request: {
-              headers: request.headers,
-            },
-          })
-          response.cookies.set({
-            name,
-            value: '',
-            ...options,
-          })
-        },
-      },
-    }
-  )
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
-
-  // If the user is trying to access an admin route and is not logged in, redirect to login
-  if (request.nextUrl.pathname.startsWith('/admin') && !session) {
-    return NextResponse.redirect(new URL('/login', request.url))
-  }
-
-  // If the user is logged in and tries to access the login page, redirect to the admin dashboard
-  if (session && (request.nextUrl.pathname === '/login')) {
-      return NextResponse.redirect(new URL('/admin', request.url));
-  }
-
-
+  
   return response
 }
 

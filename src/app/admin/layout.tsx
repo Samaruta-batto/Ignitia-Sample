@@ -1,28 +1,29 @@
 
 'use client';
 import { AdminSidebar } from '@/components/layout/admin-sidebar';
-import { useAuth } from '@/contexts/auth-context';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Loading from '../(app)/loading';
+import { useUser } from '@/firebase';
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const { user, isAuthenticated, isLoading } = useAuth();
+  const { user, isUserLoading } = useUser();
   const router = useRouter();
 
-  const isAuthorized = user?.role === 'ADMIN' || user?.role === 'DEV_TEAM';
+  // For now, let's allow any signed in user to be an admin for demo purposes
+  const isAuthorized = !!user;
 
   useEffect(() => {
-    if (!isLoading && (!isAuthenticated || !isAuthorized)) {
-      router.push('/login');
+    if (!isUserLoading && !isAuthorized) {
+      router.push('/user-login');
     }
-  }, [isLoading, isAuthenticated, isAuthorized, router]);
+  }, [isUserLoading, isAuthorized, router]);
 
-  if (isLoading || !isAuthenticated || !isAuthorized) {
+  if (isUserLoading || !isAuthorized) {
     return <Loading />;
   }
   

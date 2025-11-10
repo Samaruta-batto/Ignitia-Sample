@@ -14,24 +14,24 @@ import { LogIn, UserPlus, LogOut, Wallet, User as UserIcon } from 'lucide-react'
 import { TopNav } from './top-nav';
 import { Logo } from '../icons/logo';
 import Link from 'next/link';
-import type { User } from '@supabase/supabase-js';
-import { createClient } from '@/lib/supabase/client';
-import { useAuth } from '@/contexts/auth-context';
+import type { User } from 'firebase/auth';
+import { useAuth } from '@/firebase';
 import { useRouter } from 'next/navigation';
+import { signOut } from 'firebase/auth';
 
 export function AppHeader({ user }: { user: User | null }) {
   const router = useRouter();
-  const supabase = createClient();
-  const { user: authUser, isAuthenticated, logout } = useAuth();
+  const auth = useAuth();
 
   const handleSignOut = async () => {
-    if (supabase) {
-      await supabase.auth.signOut();
+    if (auth) {
+      await signOut(auth);
     }
-    logout();
     router.push('/home');
     router.refresh();
   };
+  
+  const userInitial = (user?.displayName || user?.email)?.charAt(0).toUpperCase();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-black/10 bg-background/30 backdrop-blur-lg">
@@ -43,22 +43,22 @@ export function AppHeader({ user }: { user: User | null }) {
         </div>
         <TopNav />
         <div className="flex items-center gap-2">
-          {user || isAuthenticated ? (
+          {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                   <Avatar className="h-10 w-10">
-                     <AvatarImage src={authUser?.profilePhoto || `https://i.pravatar.cc/150?u=${user?.id}`} />
-                    <AvatarFallback>{authUser?.name?.charAt(0).toUpperCase() || user?.email?.charAt(0).toUpperCase()}</AvatarFallback>
+                     <AvatarImage src={user.photoURL || `https://i.pravatar.cc/150?u=${user?.uid}`} />
+                    <AvatarFallback>{userInitial}</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">{authUser?.name || 'Signed In'}</p>
+                    <p className="text-sm font-medium leading-none">{user.displayName || 'Signed In'}</p>
                     <p className="text-xs leading-none text-muted-foreground">
-                      {authUser?.email || user?.email}
+                      {user.email}
                     </p>
                   </div>
                 </DropdownMenuLabel>

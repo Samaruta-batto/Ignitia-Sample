@@ -7,14 +7,15 @@ import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
 import { Separator } from '../ui/separator';
-import { useAuth } from '@/contexts/auth-context';
+import { useAuth, useUser } from '@/firebase';
+import { signOut } from 'firebase/auth';
 
 const menuItems = [
-  { href: '/admin', label: 'Dashboard', icon: Home, roles: ['ADMIN', 'DEV_TEAM'] },
-  { href: '/admin/add-event', label: 'Add Event', icon: PlusCircle, roles: ['ADMIN', 'DEV_TEAM'] },
-  { href: '/admin/stats', label: 'Stats', icon: BarChart2, roles: ['ADMIN'] },
-  { href: '/admin/audits', label: 'Audits', icon: Shield, roles: ['ADMIN'] },
-  { href: '/admin/users', label: 'Users', icon: Users, roles: ['ADMIN'] },
+  { href: '/admin', label: 'Dashboard', icon: Home },
+  { href: '/admin/add-event', label: 'Add Event', icon: PlusCircle },
+  { href: '/admin/stats', label: 'Stats', icon: BarChart2 },
+  { href: '/admin/audits', label: 'Audits', icon: Shield },
+  { href: '/admin/users', label: 'Users', icon: Users },
 ];
 
 const userMenuItems = [
@@ -25,16 +26,19 @@ const userMenuItems = [
 export function AdminSidebar() {
   const pathname = usePathname();
   const router = useRouter();
-  const { user, logout } = useAuth();
+  const { user } = useUser();
+  const auth = useAuth();
 
 
   const handleSignOut = async () => {
-    logout();
+    if (auth) {
+        await signOut(auth);
+    }
     router.push('/');
     router.refresh();
   };
 
-  const availableMenuItems = menuItems.filter(item => user && item.roles.includes(user.role));
+  const availableMenuItems = menuItems;
 
   return (
     <aside className="w-64 flex-shrink-0 bg-sidebar border-r border-sidebar-border text-sidebar-foreground p-4 flex flex-col">

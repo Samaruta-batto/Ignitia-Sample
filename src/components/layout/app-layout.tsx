@@ -6,7 +6,7 @@ import { AppHeader } from './header';
 import { ChatbotTrigger } from '@/components/chatbot/chatbot-trigger';
 import { Chatbot } from '@/components/chatbot/chatbot';
 import { ConsoleWarning } from '@/components/layout/console-warning';
-import type { User } from '@supabase/supabase-js';
+import type { User } from 'firebase/auth';
 import { WarpBackground } from '../ui/warp-background';
 
 export function AppLayout({

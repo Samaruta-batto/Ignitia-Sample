@@ -11,50 +11,47 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { createClient } from '@/lib/supabase/client';
+import { useAuth } from '@/firebase';
 import { useRouter } from 'next/navigation';
 import { LogIn } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function UserLoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const supabase = createClient();
+  const auth = useAuth();
   const { toast } = useToast();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    if (!supabase) {
+    if (!auth) {
       toast({
         variant: 'destructive',
-        title: 'Supabase not configured',
-        description: 'Please set up your Supabase credentials in the .env file.',
+        title: 'Firebase not configured',
+        description: 'Authentication service is not available.',
       });
       setIsSubmitting(false);
       return;
     }
 
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      router.push('/home');
+    } catch (error: any) {
         toast({
             variant: "destructive",
             title: "Login Failed",
             description: error.message,
         });
-    } else {
-      router.push('/home');
-      router.refresh();
+    } finally {
+        setIsSubmitting(false);
     }
-    setIsSubmitting(false);
   };
 
   return (
