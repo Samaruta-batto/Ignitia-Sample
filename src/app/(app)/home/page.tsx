@@ -31,11 +31,11 @@ export default function HomePage() {
     <div className="space-y-24 -mt-8 -mx-8">
        <BackgroundGradientAnimation>
         <div className="absolute z-50 inset-0 flex flex-col items-center justify-center text-center text-white font-bold px-4 pointer-events-none">
-          <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
+          <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg drop-shadow-2xl">
             IGNITIA 2k26
           </h1>
-          <p className="font-semibold text-accent text-xl md:text-2xl mt-2 bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">Where Technology Meets Culture</p>
-          <p className="mt-4 max-w-2xl text-lg md:text-xl text-foreground/80 bg-clip-text text-transparent drop-shadow-2xl bg-gradient-to-b from-white/80 to-white/20">
+          <p className="font-semibold text-accent text-xl md:text-2xl mt-2 drop-shadow-2xl">Where Technology Meets Culture</p>
+          <p className="mt-4 max-w-2xl text-lg md:text-xl text-foreground/80 drop-shadow-2xl">
             April 28-29, 2026 | PSIT Kanpur
           </p>
           <div className="mt-8 flex gap-4 pointer-events-auto">
