@@ -63,19 +63,19 @@
     {
       "id": "merch-5",
       "description": "A set of enamel pins.",
-      "imageUrl": "https://images.unsplash.com/photo-1754677701203-23b7eb7497d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxlbmFtZWwlMjBwaW5zfGVufDB8fHx8MTc2MjQxNDAyOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1754677701203-23b7eb7497d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxlbmFtZWwlMjBwaW5zfGVufDB8fHx8MTc2MjQxNDAyOXww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "enamel pins"
     },
     {
       "id": "merch-6",
       "description": "A tote bag with a unique design.",
-      "imageUrl": "https://images.unsplash.com/photo-1621466550398-ac8062907657?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx0b3RlJTIwYmFnfGVufDB8fHx8MTc2MjUwNDcyNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1621466550398-ac8062907657?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx0b3RlJTIwYmFnfGVufDB8fHx8MTc2MjUwNDcyNnww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "tote bag"
     },
     {
       "id": "merch-jacket",
       "description": "A stylish bomber jacket with event branding.",
-      "imageUrl": "https://images.unsplash.com/photo-1591047139829-d919b5ca4031?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxib21iZXIlMjBqYWNrZXR8ZW58MHx8fHwxNzYyODU4MzQwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1591047139829-d919b5ca4031?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxib21iZXIlMjBqYWNrZXR8ZW58MHx8fHwxNzYyODU4MzQwfDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "bomber jacket"
     },
     {
@@ -93,19 +93,19 @@
     {
       "id": "sponsor-2",
       "description": "Logo for a beverage company.",
-      "imageUrl": "https://images.unsplash.com/photo-1535365752810-1bc1ebcc98c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxiZXZlcmFnZSUyMGxvZ298ZW58MHx8fHwxNzYyNTA0NzI2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1535365752810-1bc1ebcc98c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxiZXZlcmFnZSUyMGxvZ298ZW58MHx8fHwxNzYyNTA0NzI2fDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "beverage logo"
     },
     {
       "id": "sponsor-3",
       "description": "Logo for a media partner.",
-      "imageUrl": "https://images.unsplash.com/photo-1678483789123-e8a73f82addb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtZWRpYSUyMGxvZ298ZW58MHx8fHwxNzYyNTA0NzI2fDA&ixlibrb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1678483789123-e8a73f82addb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtZWRpYSUyMGxvZ298ZW58MHx8fHwxNzYyNTA0NzI2fDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "media logo"
     },
     {
       "id": "sponsor-4",
       "description": "Logo for a financial services company.",
-      "imageUrl": "https://images.unsplash.com/photo-1639603683079-7398c604497a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmaW5hbmNlJTIwbG9nb3xlbnwwfHx8fDE3NjI0NjgzNTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1639603683079-7398c604497a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmaW5hbmNlJTIwbG9nb3xlbnwwfHx8fDE3NjI0NjgzNTh8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "finance logo"
     },
     {
@@ -123,37 +123,37 @@
     {
       "id": "sponsor-bytebuilders",
       "description": "ByteBuilders company logo.",
-      "imageUrl": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2RpbmclMjBsb2dvfGVufDB8fHx8MTc2MjU5MjkxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2RpbmclMjBsb2dvfGVufDB8fHx8MTc2MjU5MjkxNnww&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "coding logo"
     },
     {
       "id": "sponsor-innovateinc",
       "description": "Innovate Inc. company logo.",
-      "imageUrl": "https://images.unsplash.com/photo-1600880292210-859b91487857?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbm5vdmF0aW9uJTIwbG9nb3xlbnwwfHx8fDE3NjI1OTI5MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1600880292210-859b91487857?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbm5vdmF0aW9uJTIwbG9nb3xlbnwwfHx8fDE3NjI1OTI5MTZ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "innovation logo"
     },
     {
       "id": "archive-1",
       "description": "Photo from a past music festival.",
-      "imageUrl": "https://images.unsplash.com/photo-1501238295340-c810d3c156d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZmVzdGl2YWwlMjBjcm93ZHxlbnwwfHx8fDE3NjI0MTU2NjB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1501238295340-c810d3c156d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZmVzdGl2YWwlMjBjcm93ZHxlbnwwfHx8fDE3NjI0MTU2NjB8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "festival crowd"
     },
     {
       "id": "archive-2",
       "description": "Keynote speaker at a conference.",
-      "imageUrl": "https://images.unsplash.com/photo-1602137933752-921eab594fd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxrZXlub3RlJTIwc3BlYWtlcnxlbnwwfHx8fDE3NjI1MDMxMjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1602137933752-921eab594fd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxrZXlub3RlJTIwc3BlYWtlcnxlbnwwfHx8fDE3NjI1MDMxMjR8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "keynote speaker"
     },
     {
       "id": "archive-3",
       "description": "People networking at an event.",
-      "imageUrl": "https://images.unsplash.com/photo-1531058020387-3be344556be6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxldmVudCUyMG5ldHdvcmtpbmd8ZW58MHx8fHwxNzYyNTA0NzI2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1531058020387-3be344556be6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxldmVudCUyMG5ldHdvcmtpbmd8ZW58MHx8fHwxNzYyNTA0NzI2fDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "event networking"
     },
     {
       "id": "archive-4",
       "description": "Live band performing on stage.",
-      "imageUrl": "https://images.unsplash.com/photo-1565035010268-a3816f98589a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsaXZlJTIwYmFuZHxlbnwwfHx8fDE3NjIzODgyOTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1565035010268-a3816f98589a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsaXZlJTIwYmFuZHxlbnwwfHx8fDE3NjIzODgyOTV8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "live band"
     },
     {
@@ -194,21 +194,27 @@
     },
     {
       "id": "celebrity-1",
-      "description": "Portrait of a famous musician.",
-      "imageUrl": "https://images.unsplash.com/photo-1758225709244-532b6f7a765b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZmFtb3VzJTIwbXVzaWNpYW58ZW58MHx8fHwxNzYyNjA1MzgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Portrait of a famous musician, Arijit Singh.",
+      "imageUrl": "https://images.unsplash.com/photo-1758225709244-532b6f7a765b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxmYW1vdXMlMjBtdXNpY2lhbnxlbnwwfHx8fDE3NjI4MDA5Njh8MA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "famous musician"
     },
     {
       "id": "celebrity-2",
-      "description": "Portrait of a well-known tech influencer.",
-      "imageUrl": "https://images.unsplash.com/photo-1618667177435-3ded25f48b8a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHx0ZWNoJTIwaW5mbHVlbmNlcnxlbnwwfHx8fDE3NjI2MDUzODN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "tech influencer"
+      "description": "Portrait of a well-known music composer, Ankit Tiwari.",
+      "imageUrl": "https://images.unsplash.com/photo-1716521218389-483e60cb79cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bXVzaWMlMjBjb21wb3NlcnxlbnwwfHx8fDE3NjI4MDA5Njh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "music composer"
     },
     {
       "id": "celebrity-3",
-      "description": "Portrait of a popular entertainer.",
-      "imageUrl": "https://images.unsplash.com/photo-1580188928585-0ef5c1a5c4dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3B1bGFyJTIwZW50ZXJ0YWluZXJ8ZW58MHx8fHwxNzYyNjA1MzgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "description": "Portrait of a popular entertainer, Sonu Nigam.",
+      "imageUrl": "https://images.unsplash.com/photo-1580188928585-0ef5c1a5c4dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3B1bGFyJTIwZW50ZXJ0YWluZXJ8ZW58MHx8fHwxNzYyODAwOTY4fDA&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "popular entertainer"
+    },
+    {
+      "id": "neeti-mohan-poster",
+      "description": "Promotional poster for Neeti Mohan at Ignitia 2025.",
+      "imageUrl": "https://storage.googleapis.com/stabl-media/6945533d-c182-411a-a114-1e0500a89d2b_neeti_mohan_poster.png",
+      "imageHint": "singer poster"
     }
   ]
 }

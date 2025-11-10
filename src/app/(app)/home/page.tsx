@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { products } from '@/lib/placeholder-data';
 import { ArrowRight, Ticket, Users, Award, Youtube, Instagram, Facebook, Linkedin, Twitter, Star } from 'lucide-react';
 import Link from 'next/link';
@@ -23,8 +22,9 @@ export default function HomePage() {
   const featuredProducts = products.slice(0, 3);
   const aboutIgnitiaImage = PlaceHolderImages.find(p => p.id === 'about-ignitia')!;
   const aboutPsitImage = PlaceHolderImages.find(p => p.id === 'about-psit')!;
+  const neetiMohanPoster = PlaceHolderImages.find(p => p.id === 'neeti-mohan-poster')!;
 
-  const celebrities = [
+  const pastCelebrities = [
     {
         name: 'Arijit Singh',
         title: 'Playback Singer',
@@ -76,7 +76,7 @@ export default function HomePage() {
             <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Instagram className="text-white"/></a></ShimmerButton>
             <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Facebook className="text-white"/></a></ShimmerButton>
             <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Linkedin className="text-white"/></a></ShimmerButton>
-            <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Twitter className="text-white"/></a></ShimmerButton>
+            <ShimmerButton size-icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Twitter className="text-white"/></a></ShimmerButton>
         </div>
       </section>
 
@@ -148,11 +148,49 @@ export default function HomePage() {
 
       <section className="container mx-auto">
         <div className="text-center mb-12">
-            <h2 className="font-headline text-5xl uppercase tracking-wider">Celebrity Guests</h2>
-            <p className="mt-2 text-lg text-muted-foreground">Meet the stars of IGNITIA 2k26!</p>
+            <h2 className="font-headline text-5xl uppercase tracking-wider text-accent">Celebrity Revealed!</h2>
+            <p className="mt-2 text-lg text-muted-foreground">Get ready for an electrifying performance by the sensational Neeti Mohan</p>
+        </div>
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="rounded-lg overflow-hidden shadow-2xl">
+                 <Image
+                    src={neetiMohanPoster.imageUrl}
+                    alt="Neeti Mohan Ignitia Poster"
+                    width={600}
+                    height={750}
+                    className="object-cover"
+                    data-ai-hint={neetiMohanPoster.imageHint}
+                />
+            </div>
+            <div className="space-y-6">
+                 <h3 className="font-headline text-6xl tracking-wider uppercase" style={{fontFamily: "'Times New Roman', Times, serif"}}>Neeti Mohan</h3>
+                <p className="text-lg text-muted-foreground">
+                    We are thrilled to announce a spectacular performance by Neeti Mohan that will light up the stage at IGNITIA 2K25. Get ready for an unforgettable experience with one of India's most celebrated artists.
+                </p>
+                <div className="flex gap-8">
+                    <div className="text-center">
+                        <p className="text-4xl font-bold text-accent"><NumberTicker value={100} />+</p>
+                        <p className="text-muted-foreground">Shows</p>
+                    </div>
+                    <div className="text-center">
+                        <p className="text-4xl font-bold text-accent"><NumberTicker value={10} />M+</p>
+                        <p className="text-muted-foreground">Followers</p>
+                    </div>
+                </div>
+                <ShimmerButton asChild className="px-6 py-2">
+                    <Link href="#">See More</Link>
+                </ShimmerButton>
+            </div>
+        </div>
+      </section>
+
+      <section className="container mx-auto">
+        <div className="text-center mb-12">
+            <h2 className="font-headline text-5xl uppercase tracking-wider">Our Past Guests</h2>
+            <p className="mt-2 text-lg text-muted-foreground">A look back at the stars who have graced the Ignitia stage.</p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {celebrities.map((celebrity) => (
+          {pastCelebrities.map((celebrity) => (
             <Card key={celebrity.name} className="overflow-hidden group text-center border-accent/20 bg-card/50">
                 <div className="relative aspect-[4/5] overflow-hidden">
                     <Image
