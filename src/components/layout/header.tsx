@@ -100,7 +100,7 @@ export function AppHeader({ user }: { user: User | null }) {
                   <LogIn className="mr-2 h-4 w-4" /> Login
                 </Link>
               </ShimmerButton>
-              <ShimmerButton asChild className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20">
+              <ShimmerButton asChild className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20 px-6 py-3">
                 <Link href="/signup">
                   <UserPlus className="mr-2 h-4 w-4" /> Sign Up
                 </Link>
