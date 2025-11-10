@@ -1,4 +1,5 @@
 
+
 import type { ImagePlaceholder } from './placeholder-images';
 
 export interface Event {
@@ -65,4 +66,9 @@ export interface EventRegistration {
   registrationDate: string;
   status: 'registered' | 'participated' | 'cancelled';
   paymentAmount?: number;
+}
+
+export interface CartItem {
+    productId: string;
+    quantity: number;
 }

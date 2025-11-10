@@ -4,19 +4,63 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { products } from '@/lib/placeholder-data';
+import type { Product } from '@/lib/types';
 import { formatCurrency } from '@/lib/utils';
 import { ShoppingCart } from 'lucide-react';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { useToast } from '@/hooks/use-toast';
+import { useCartStore } from '@/hooks/use-cart-store';
+import { useUser, useFirestore } from '@/firebase';
+import { collection, addDoc, query, where, getDocs, updateDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function MerchandisePage() {
   const { toast } = useToast();
+  const { user } = useUser();
+  const firestore = useFirestore();
+  const { addToCart } = useCartStore();
 
-  const handleAddToCart = (productName: string) => {
-    toast({
-      title: "Added to Cart!",
-      description: `${productName} has been added to your cart.`,
-    });
+  const handleAddToCart = async (product: Product) => {
+    if (!user || !firestore) {
+      toast({
+        variant: 'destructive',
+        title: 'Please log in',
+        description: 'You need to be logged in to add items to your cart.',
+      });
+      return;
+    }
+
+    try {
+      const cartRef = collection(firestore, 'users', user.uid, 'cart');
+      const q = query(cartRef, where('productId', '==', product.id));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        // Item exists, update quantity
+        const docRef = querySnapshot.docs[0].ref;
+        const currentQuantity = querySnapshot.docs[0].data().quantity;
+        await updateDoc(docRef, { quantity: currentQuantity + 1 });
+      } else {
+        // Item does not exist, add new document
+        await addDoc(cartRef, {
+          productId: product.id,
+          quantity: 1,
+          addedAt: serverTimestamp(),
+        });
+      }
+      
+      addToCart({ ...product, quantity: 1 });
+      toast({
+        title: 'Added to Cart!',
+        description: `${product.name} has been added to your cart.`,
+      });
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      toast({
+        variant: 'destructive',
+        title: 'Something went wrong',
+        description: 'Could not add item to cart. Please try again.',
+      });
+    }
   };
 
   return (
@@ -48,7 +92,7 @@ export default function MerchandisePage() {
               <p className="text-2xl font-bold text-accent">{formatCurrency(product.price)}</p>
             </CardContent>
             <CardFooter className="p-4 pt-0">
-              <ShimmerButton onClick={() => handleAddToCart(product.name)} className="w-full">
+              <ShimmerButton onClick={() => handleAddToCart(product)} className="w-full">
                 <ShoppingCart className="mr-2 h-4 w-4" /> Add to Cart
               </ShimmerButton>
             </CardFooter>

@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { LogIn, UserPlus, LogOut, Wallet, User as UserIcon } from 'lucide-react';
+import { LogIn, UserPlus, LogOut, Wallet, User as UserIcon, ShoppingCart } from 'lucide-react';
 import { TopNav } from './top-nav';
 import { Logo } from '../icons/logo';
 import Link from 'next/link';
@@ -18,10 +18,13 @@ import type { User } from 'firebase/auth';
 import { useAuth } from '@/firebase';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
+import { useCartStore } from '@/hooks/use-cart-store';
+import { Badge } from '../ui/badge';
 
 export function AppHeader({ user }: { user: User | null }) {
   const router = useRouter();
   const auth = useAuth();
+  const { cart, toggleCart } = useCartStore();
 
   const handleSignOut = async () => {
     if (auth) {
@@ -33,6 +36,8 @@ export function AppHeader({ user }: { user: User | null }) {
   
   const userInitial = (user?.displayName || user?.email)?.charAt(0).toUpperCase();
 
+  const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-black/10 bg-background/30 backdrop-blur-lg">
       <div className="container mx-auto flex h-20 items-center justify-between gap-4 px-4 md:px-8">
@@ -43,6 +48,12 @@ export function AppHeader({ user }: { user: User | null }) {
         </div>
         <TopNav />
         <div className="flex items-center gap-2">
+           <Button variant="ghost" size="icon" className="relative" onClick={toggleCart}>
+              <ShoppingCart />
+              {cartItemCount > 0 && (
+                <Badge variant="destructive" className="absolute -top-1 -right-1 h-5 w-5 justify-center p-0">{cartItemCount}</Badge>
+              )}
+           </Button>
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

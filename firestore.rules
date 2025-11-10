@@ -33,5 +33,14 @@ service cloud.firestore {
         allow update, delete: if false;
       }
     }
+
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if isSignedIn() && request.auth.uid == userId;
+
+      match /cart/{cartItemId} {
+        allow read, write, delete: if isSignedIn() && request.auth.uid == userId;
+      }
+    }
   }
 }
