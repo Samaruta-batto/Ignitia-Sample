@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -13,6 +14,7 @@ import {
   Award,
   Contact,
   Menu,
+  ShoppingBag,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '../ui/button';
@@ -25,6 +27,7 @@ const menuItems = [
   { href: '/home', label: 'Home', icon: Home },
   { href: '/about', label: 'About', icon: Info },
   { href: '/events', label: 'Events', icon: Ticket },
+  { href: '/merchandise', label: 'Merch', icon: ShoppingBag },
   { href: '/dashboard', label: 'Leaderboard', icon: LayoutDashboard },
   { href: '/archive', label: 'Gallery', icon: ImageIcon },
   { href: '/sponsors', label: 'Sponsors', icon: Award },

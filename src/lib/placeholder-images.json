@@ -73,6 +73,12 @@
       "imageHint": "tote bag"
     },
     {
+      "id": "merch-jacket",
+      "description": "A stylish bomber jacket with event branding.",
+      "imageUrl": "https://images.unsplash.com/photo-1591047139829-d919b5ca4031?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxib21iZXIlMjBqYWNrZXR8ZW58MHx8fHwxNzYyODU4MzQwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "bomber jacket"
+    },
+    {
       "id": "merch-tshirt-showcase",
       "description": "Front and back of a white polo t-shirt mockup.",
       "imageUrl": "https://storage.googleapis.com/stabl-media/6945533d-c182-411a-a114-1e0500a89d2b_t-shirt-mockup.png",
@@ -117,7 +123,7 @@
     {
       "id": "sponsor-bytebuilders",
       "description": "ByteBuilders company logo.",
-      "imageUrl": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2RpbmclMjBsb2dvfGVufDB8fHx8MTc2MjU5MjkxNnww&ixlib-rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2RpbmclMjBsb2dvfGVufDB8fHx8MTc2MjU5MjkxNnww&ixlib=rb-4.1.0&q=80&w=1080",
       "imageHint": "coding logo"
     },
     {
@@ -159,7 +165,7 @@
     {
       "id": "archive-6",
       "description": "Happy attendees at a food festival.",
-      "imageUrl": "https://images.unsplash.com/photo-1660796115883-5e2ba15b34ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxoYXBweSUyMGF0dGVuZGVlc3xlbnwwfHx8fDE3NjI1MDQ3MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1660796115883-5e2ba15b34ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxoYXBweSUyMGF0dGVuZGVlc3xlbnwwfHx8fDE3NjI1MDQ3MjZ8MA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "happy attendees"
     },
     {
@@ -195,7 +201,7 @@
     {
       "id": "celebrity-3",
       "description": "Portrait of a popular entertainer.",
-      "imageUrl": "https://images.unsplash.com/photo-1580188928585-0ef5c1a5c4dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3B1bGFyJTIwZW50ZXJ0YWluZXJ8ZW58MHx8fHwxNzYyNjA1MzgzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageUrl": "https://images.unsplash.com/photo-1580188928585-0ef5c1a5c4dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwb3B1bGFyJTIwZW50ZXJ0YWluZXJ8ZW58MHx8fHwxNzYyNjA1MzgzfDA&ixlib-rb-4.1.0&q=80&w=1080",
       "imageHint": "popular entertainer"
     }
   ]

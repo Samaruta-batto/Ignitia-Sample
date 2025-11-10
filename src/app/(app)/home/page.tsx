@@ -20,8 +20,7 @@ import NumberTicker from '@/components/ui/number-ticker';
 
 export default function HomePage() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'techno-background')!;
-  const featuredProduct = products[0];
-  const featuredProductImage = PlaceHolderImages.find(p => p.id === 'merch-tshirt-showcase')!;
+  const featuredProducts = products.slice(0, 3);
   const aboutIgnitiaImage = PlaceHolderImages.find(p => p.id === 'about-ignitia')!;
   const aboutPsitImage = PlaceHolderImages.find(p => p.id === 'about-psit')!;
 
@@ -108,7 +107,7 @@ export default function HomePage() {
                 <p className="text-lg text-muted-foreground">
                 IGNITIA is the annual techno-cultural fest of PSIT, a vibrant convergence of innovation, creativity, and culture. It's a platform for students to showcase their talents, compete in exciting events, and connect with peers and industry leaders. From coding marathons to electrifying concerts, Ignitia is an experience you won't forget.
                 </p>
-                <ShimmerButton asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
+                <ShimmerButton asChild className="px-8 py-3 h-11 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
                     <Link href="/about">Learn More <ArrowRight className="ml-2" /></Link>
                 </ShimmerButton>
             </div>
@@ -140,7 +139,7 @@ export default function HomePage() {
                 <p className="text-lg text-muted-foreground">
                 Pranveer Singh Institute of Technology (PSIT) is a leading institution in Kanpur, renowned for its commitment to academic excellence and holistic development. With state-of-the-art infrastructure and a world-class faculty, PSIT provides an environment where students can thrive and achieve their full potential.
                 </p>
-                 <ShimmerButton asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
+                 <ShimmerButton asChild className="px-8 py-3 h-11 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
                     <a href="https://psit.ac.in/" target="_blank" rel="noopener noreferrer">Visit PSIT <ArrowRight className="ml-2" /></a>
                 </ShimmerButton>
             </div>
@@ -182,30 +181,36 @@ export default function HomePage() {
             <h2 className="font-headline text-5xl uppercase tracking-wider">Official Merchandise</h2>
             <p className="mt-2 text-lg text-muted-foreground">Get your hands on exclusive IGNITIA merchandise</p>
         </div>
-        <div className="flex justify-center">
-            <Card className="w-full max-w-sm overflow-hidden group">
-                <CardHeader className="p-0">
-                     <div className="relative aspect-square">
-                        <Image
-                            src={featuredProductImage.imageUrl}
-                            alt={featuredProduct.name}
-                            fill
-                            className="object-contain transition-transform duration-300 group-hover:scale-105"
-                            data-ai-hint={featuredProductImage.imageHint}
-                        />
-                    </div>
-                </CardHeader>
-                <CardContent className="p-6 text-center space-y-2">
-                     <h3 className="font-headline text-2xl text-accent">LIMITED EDITION T-SHIRT</h3>
-                     <p className="text-muted-foreground text-sm">Be a part of IGNITIA 2K26 with our exclusive merchandise.</p>
-                </CardContent>
-                <CardFooter className="flex-col gap-4 px-6 pb-6">
-                    <p className="text-4xl font-bold text-accent">₹350</p>
-                    <ShimmerButton asChild className="w-full">
-                        <Link href="#" className='flex items-center gap-2'>Buy Now <ArrowRight /></Link>
-                    </ShimmerButton>
-                </CardFooter>
-            </Card>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredProducts.map((product) => (
+                <Card key={product.id} className="w-full overflow-hidden group">
+                    <CardHeader className="p-0">
+                        <div className="relative aspect-square">
+                            <Image
+                                src={product.image.imageUrl}
+                                alt={product.name}
+                                fill
+                                className="object-contain transition-transform duration-300 group-hover:scale-105"
+                                data-ai-hint={product.image.imageHint}
+                            />
+                        </div>
+                    </CardHeader>
+                    <CardContent className="p-6 text-center space-y-2">
+                        <h3 className="font-headline text-2xl text-accent">{product.name}</h3>
+                        <p className="text-4xl font-bold text-white">{formatCurrency(product.price)}</p>
+                    </CardContent>
+                    <CardFooter className="px-6 pb-6">
+                        <ShimmerButton asChild className="w-full">
+                            <Link href="/merchandise" className='flex items-center gap-2'>View Product</Link>
+                        </ShimmerButton>
+                    </CardFooter>
+                </Card>
+            ))}
+          </div>
+          <div className="text-center mt-12">
+              <ShimmerButton asChild size="lg">
+                  <Link href="/merchandise">Shop All Merch <ArrowRight/></Link>
+              </ShimmerButton>
           </div>
        </section>
 
