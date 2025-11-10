@@ -1,4 +1,5 @@
 
+
 import Image from 'next/image';
 import {
   Card,
@@ -10,39 +11,25 @@ import {
 } from '@/components/ui/card';
 import { products } from '@/lib/placeholder-data';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Ticket, Users, Award, Youtube, Instagram, Facebook, Linkedin, Twitter } from 'lucide-react';
+import { ArrowRight, Ticket, Users, Award, Youtube, Instagram, Facebook, Linkedin, Twitter, MonitorPlay, Radio } from 'lucide-react';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { formatCurrency } from '@/lib/utils';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
-
-const celebrityGuests = [
-    {
-        name: 'Anupam Kher',
-        title: 'Actor & Author',
-        image: PlaceHolderImages.find(p => p.id === 'celebrity-anupam')!
-    },
-    {
-        name: 'Kailash Kher',
-        title: 'Playback Singer',
-        image: PlaceHolderImages.find(p => p.id === 'celebrity-kailash')!
-    },
-    {
-        name: 'Bhumi Pednekar',
-        title: 'Actress',
-        image: PlaceHolderImages.find(p => p.id === 'celebrity-bhumi')!
-    }
-]
+import { PastGuests } from '@/components/home/past-guests';
+import NumberTicker from '@/components/ui/number-ticker';
+import { LightRays } from '@/components/ui/light-rays';
 
 export default function HomePage() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'techno-background')!;
   const featuredProducts = products.slice(0, 3);
   const aboutIgnitiaImage = PlaceHolderImages.find(p => p.id === 'about-ignitia')!;
   const aboutPsitImage = PlaceHolderImages.find(p => p.id === 'about-psit')!;
+  const neetiMohanImage = PlaceHolderImages.find(p => p.id === 'celebrity-neeti-mohan-reveal')!;
 
   return (
-    <div className="space-y-24">
-      <section className="relative h-[70vh] -mt-16 -mx-16">
+    <LightRays className="space-y-24 -mt-8 -mx-8">
+       <section className="relative h-[70vh]">
         <Image
           src={heroImage.imageUrl}
           alt="Hero background"
@@ -104,6 +91,49 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="w-full py-12">
+        <div className="container mx-auto">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden shadow-2xl shadow-accent/20 border-2 border-accent/30">
+                    <Image
+                        src={neetiMohanImage.imageUrl}
+                        alt="Neeti Mohan"
+                        fill
+                        className="object-cover"
+                        data-ai-hint={neetiMohanImage.imageHint}
+                    />
+                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent"></div>
+                </div>
+                <div className="space-y-6">
+                    <p className="text-accent font-semibold uppercase tracking-widest">Star of the Show</p>
+                    <h2 className="font-headline text-6xl md:text-7xl uppercase tracking-wider">Neeti Mohan</h2>
+                    <p className="text-lg text-muted-foreground max-w-lg">
+                        Get ready to be mesmerized by the enchanting voice of Neeti Mohan! A powerhouse of talent and charisma, this Bollywood sensation is all set to light up the Ignitia stage with her chart-topping hits and electrifying performance.
+                    </p>
+                     <div className="flex gap-8 pt-4">
+                        <div>
+                            <p className="text-4xl font-bold text-accent"><NumberTicker value={100} />+</p>
+                            <p className="text-muted-foreground">Live Shows</p>
+                        </div>
+                         <div>
+                            <p className="text-4xl font-bold text-accent"><NumberTicker value={10} />M+</p>
+                            <p className="text-muted-foreground">Followers</p>
+                        </div>
+                    </div>
+                    <div className="pt-6">
+                        <ShimmerButton variant="outline" className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground" asChild>
+                            <Link href="#">See More</Link>
+                        </ShimmerButton>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </section>
+
+
+      <PastGuests />
+
+
       <section className="container mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-4">
@@ -150,35 +180,6 @@ export default function HomePage() {
         </div>
       </section>
 
-       <section className="w-full py-12">
-        <div className="container mx-auto">
-            <div className="text-center mb-12">
-                <h2 className="font-headline text-5xl uppercase tracking-wider">Celebrity Guests</h2>
-                <p className="mt-2 text-lg text-muted-foreground">Stars who have graced the Ignitia stage.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {celebrityGuests.map((celebrity) => (
-                    <Card key={celebrity.name} className="overflow-hidden group text-center">
-                        <div className="relative aspect-[4/5] overflow-hidden">
-                             <Image
-                                src={celebrity.image.imageUrl}
-                                alt={celebrity.name}
-                                fill
-                                className="object-cover transition-transform duration-300 group-hover:scale-105"
-                                data-ai-hint={celebrity.image.imageHint}
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                            <div className="absolute bottom-0 left-0 p-6">
-                                <h3 className="text-3xl font-bold text-white">{celebrity.name}</h3>
-                                <p className="text-lg text-accent font-semibold">{celebrity.title}</p>
-                            </div>
-                        </div>
-                    </Card>
-                ))}
-            </div>
-        </div>
-       </section>
-
        <section className="container mx-auto">
         <div className="text-center mb-12">
             <h2 className="font-headline text-5xl uppercase tracking-wider">Official Merchandise</h2>
@@ -216,7 +217,6 @@ export default function HomePage() {
               </ShimmerButton>
           </div>
        </section>
-
-    </div>
+    </LightRays>
   );
 }

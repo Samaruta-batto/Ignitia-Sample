@@ -209,6 +209,12 @@
       "description": "Portrait of Bhumi Pednekar.",
       "imageUrl": "https://storage.googleapis.com/stabl-media/6945533d-c182-411a-a114-1e0500a89d2b_bhumi.png",
       "imageHint": "actress portrait"
+    },
+    {
+      "id": "celebrity-neeti-mohan-reveal",
+      "description": "Promotional poster for Neeti Mohan's performance.",
+      "imageUrl": "https://storage.googleapis.com/stabl-media/6945533d-c182-411a-a114-1e0500a89d2b_neeti-mohan-ignitia-poster.png",
+      "imageHint": "singer poster"
     }
   ]
 }
