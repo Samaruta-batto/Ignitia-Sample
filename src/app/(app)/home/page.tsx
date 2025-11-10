@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import {
   Card,
@@ -181,33 +182,33 @@ export default function HomePage() {
             <h2 className="font-headline text-5xl uppercase tracking-wider">Official Merchandise</h2>
             <p className="mt-2 text-lg text-muted-foreground">Get your hands on exclusive IGNITIA merchandise</p>
         </div>
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div className="space-y-4">
-            <h3 className="font-headline text-4xl text-accent" style={{letterSpacing: '0.1em', textShadow: '0 0 5px hsl(var(--accent) / 0.5)'}}>LIMITED EDITION T-SHIRT</h3>
-            <p className="text-muted-foreground text-lg">Be a part of IGNITIA 2K26 with our exclusive merchandise. Each piece is crafted with premium quality materials and features unique designs inspired by our theme.</p>
-            <p className="text-4xl font-bold text-accent">₹350</p>
-            <ShimmerButton asChild>
-              <Link href="#" className='flex items-center gap-2'>Buy Now <ArrowRight /></Link>
-            </ShimmerButton>
+        <div className="flex justify-center">
+            <Card className="w-full max-w-sm overflow-hidden group">
+                <CardHeader className="p-0">
+                     <div className="relative aspect-square">
+                        <Image
+                            src={featuredProductImage.imageUrl}
+                            alt={featuredProduct.name}
+                            fill
+                            className="object-contain transition-transform duration-300 group-hover:scale-105"
+                            data-ai-hint={featuredProductImage.imageHint}
+                        />
+                    </div>
+                </CardHeader>
+                <CardContent className="p-6 text-center space-y-2">
+                     <h3 className="font-headline text-2xl text-accent">LIMITED EDITION T-SHIRT</h3>
+                     <p className="text-muted-foreground text-sm">Be a part of IGNITIA 2K26 with our exclusive merchandise.</p>
+                </CardContent>
+                <CardFooter className="flex-col gap-4 px-6 pb-6">
+                    <p className="text-4xl font-bold text-accent">₹350</p>
+                    <ShimmerButton asChild className="w-full">
+                        <Link href="#" className='flex items-center gap-2'>Buy Now <ArrowRight /></Link>
+                    </ShimmerButton>
+                </CardFooter>
+            </Card>
           </div>
-          <div className="flex items-center justify-center">
-             <Card className="border-2 border-accent/50 p-2 bg-transparent overflow-hidden">
-                <div className="relative aspect-square w-[400px] h-[400px]">
-                    <Image
-                        src={featuredProductImage.imageUrl}
-                        alt={featuredProduct.name}
-                        fill
-                        className="object-contain"
-                        data-ai-hint={featuredProductImage.imageHint}
-                    />
-                </div>
-             </Card>
-          </div>
-        </div>
        </section>
 
     </div>
   );
 }
-
-    
