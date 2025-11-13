@@ -158,7 +158,7 @@ export const coreTeam: TeamMember[] = [
   {
     name: 'Aryan Bajpai',
     role: 'Fest Coordinator',
-    avatar: getImage('avatar-alex'),
+    avatar: getImage('avatar-aryan'),
     bio: 'The mastermind behind Ignitia, ensuring every detail is perfect.',
     social: {
       linkedin: '#',
@@ -168,7 +168,7 @@ export const coreTeam: TeamMember[] = [
   {
     name: 'Sanskar Soni',
     role: 'Head of Events',
-    avatar: getImage('avatar-maria'),
+    avatar: getImage('avatar-sanskar'),
     bio: 'Curating an unforgettable lineup of tech and cultural events.',
      social: {
       linkedin: '#',
@@ -178,7 +178,7 @@ export const coreTeam: TeamMember[] = [
   {
     name: 'Shivam Singh',
     role: 'Sponsorship Lead',
-    avatar: getImage('avatar-sam'),
+    avatar: getImage('avatar-shivam'),
     bio: 'Building bridges with our amazing partners and sponsors.',
      social: {
       linkedin: '#',
@@ -188,7 +188,7 @@ export const coreTeam: TeamMember[] = [
    {
     name: 'Parth Aggrawal',
     role: 'Marketing Head',
-    avatar: getImage('avatar-priya'),
+    avatar: getImage('avatar-parth'),
     bio: 'Spreading the word and creating the buzz for Ignitia.',
      social: {
       linkedin: '#',
@@ -198,7 +198,7 @@ export const coreTeam: TeamMember[] = [
    {
     name: 'Anshika Bharadwaj',
     role: 'Core Team Member',
-    avatar: getImage('avatar-alex'),
+    avatar: getImage('avatar-anshika'),
     bio: 'A key player in the Ignitia organizing team.',
      social: {
       linkedin: '#',
@@ -208,7 +208,7 @@ export const coreTeam: TeamMember[] = [
    {
     name: 'Samartha Bhatt',
     role: 'Core Team Member',
-    avatar: getImage('avatar-maria'),
+    avatar: getImage('avatar-samartha'),
     bio: 'A key player in the Ignitia organizing team.',
      social: {
       linkedin: '#',
@@ -221,7 +221,7 @@ export const devTeam: TeamMember[] = [
   {
     name: 'Ritik Gupta',
     role: 'Lead Developer',
-    avatar: getImage('avatar-chris'),
+    avatar: getImage('avatar-ritik'),
     bio: 'Architecting the digital backbone of the Ignitia platform.',
     social: {
       github: '#',
@@ -231,7 +231,7 @@ export const devTeam: TeamMember[] = [
   {
     name: 'Siddhant Narula',
     role: 'Frontend Developer',
-    avatar: getImage('avatar-jordan'),
+    avatar: getImage('avatar-siddhant'),
     bio: 'Crafting the user experience with React and Tailwind CSS.',
     social: {
       github: '#',
@@ -241,7 +241,7 @@ export const devTeam: TeamMember[] = [
   {
     name: 'Suryansh Sharan',
     role: 'UI/UX Designer',
-    avatar: getImage('avatar-chris'),
+    avatar: getImage('avatar-suryansh'),
     bio: 'Designing the look and feel of the Ignitia experience.',
     social: {
       github: '#',
@@ -251,7 +251,7 @@ export const devTeam: TeamMember[] = [
   {
     name: 'Divyansh Vijay',
     role: 'Backend Developer',
-    avatar: getImage('avatar-jordan'),
+    avatar: getImage('avatar-divyansh'),
     bio: 'Developing the robust server-side logic for our platform.',
     social: {
       github: '#',

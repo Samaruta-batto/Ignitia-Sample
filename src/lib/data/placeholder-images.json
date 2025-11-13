@@ -224,39 +224,63 @@
       "imageHint": "user avatar"
     },
     {
-      "id": "avatar-alex",
-      "description": "Avatar for Alex Johnson",
+      "id": "avatar-aryan",
+      "description": "Avatar for Aryan Bajpai",
       "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=A",
       "imageHint": "person portrait"
     },
     {
-      "id": "avatar-maria",
-      "description": "Avatar for Maria Garcia",
-      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=M",
-      "imageHint": "person portrait"
-    },
-    {
-      "id": "avatar-sam",
-      "description": "Avatar for Sam Lee",
+      "id": "avatar-sanskar",
+      "description": "Avatar for Sanskar Soni",
       "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=S",
       "imageHint": "person portrait"
     },
     {
-      "id": "avatar-priya",
-      "description": "Avatar for Priya Singh",
+      "id": "avatar-shivam",
+      "description": "Avatar for Shivam Singh",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=S",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-parth",
+      "description": "Avatar for Parth Aggrawal",
       "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=P",
       "imageHint": "person portrait"
     },
     {
-      "id": "avatar-chris",
-      "description": "Avatar for Chris Patel",
-      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=C",
+      "id": "avatar-ritik",
+      "description": "Avatar for Ritik Gupta",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=R",
       "imageHint": "person portrait"
     },
     {
-      "id": "avatar-jordan",
-      "description": "Avatar for Jordan Davis",
-      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=J",
+      "id": "avatar-siddhant",
+      "description": "Avatar for Siddhant Narula",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=S",
+      "imageHint": "person portrait"
+    },
+     {
+      "id": "avatar-anshika",
+      "description": "Avatar for Anshika Bharadwaj",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=A",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-samartha",
+      "description": "Avatar for Samartha Bhatt",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=S",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-suryansh",
+      "description": "Avatar for Suryansh Sharan",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=S",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-divyansh",
+      "description": "Avatar for Divyansh Vijay",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=D",
       "imageHint": "person portrait"
     },
     {
@@ -267,5 +291,3 @@
     }
   ]
 }
-
-    
