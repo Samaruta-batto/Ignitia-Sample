@@ -16,6 +16,7 @@ import { useMemoFirebase } from '@/firebase/provider';
 import type { WithId } from '@/firebase/firestore/use-collection';
 import type { CartItem, Product } from '@/lib/data/types';
 import { products } from '@/lib/data/placeholder-data';
+import { motion } from 'framer-motion';
 
 export function AppLayout({
   children,
@@ -55,15 +56,20 @@ export function AppLayout({
   }, [cartItems, setCart, setTotal, authUser, clearCart]);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <motion.div 
+        className="min-h-screen flex flex-col"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+    >
       <ConsoleWarning />
       <AppHeader user={user} />
-      <main className="flex-1 animate-fade-in container mx-auto">
+      <main className="flex-1 container mx-auto">
         {children}
       </main>
       <CartSheet />
       <Chatbot isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
       <ChatbotTrigger onClick={() => setIsChatOpen(true)} />
-    </div>
+    </motion.div>
   );
 }

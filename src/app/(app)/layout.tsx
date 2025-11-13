@@ -5,6 +5,7 @@ import { AppLayout } from '@/components/layout/app-layout';
 import { usePathname } from 'next/navigation';
 import { useUser } from '@/firebase';
 import type { User } from 'firebase/auth';
+import { motion } from 'framer-motion';
 
 export default function MainAppLayout({
   children,
@@ -19,11 +20,23 @@ export default function MainAppLayout({
     return <>{children}</>;
   }
 
+  const variants = {
+    hidden: { opacity: 0, y: 15 },
+    enter: { opacity: 1, y: 0 },
+  };
+
   return (
     <AppLayout user={user}>
-        <div className="p-4 md:p-8 animate-fade-in">
+        <motion.div 
+            key={pathname}
+            variants={variants}
+            initial="hidden"
+            animate="enter"
+            transition={{ type: 'linear', duration: 0.5 }}
+            className="p-4 md:p-8"
+        >
             {children}
-        </div>
+        </motion.div>
     </AppLayout>
   );
 }

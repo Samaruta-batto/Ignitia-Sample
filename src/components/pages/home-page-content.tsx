@@ -17,6 +17,7 @@ import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { PastGuests } from '@/components/home/past-guests';
 import NumberTicker from '@/components/ui/number-ticker';
 import { siteConfig } from '@/lib/data/site-config';
+import { motion } from 'framer-motion';
 
 export function HomePageContent() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'techno-background')!;
@@ -24,13 +25,45 @@ export function HomePageContent() {
   const aboutIgnitiaImage = PlaceHolderImages.find(p => p.id === 'about-ignitia')!;
   const aboutPsitImage = PlaceHolderImages.find(p => p.id === 'about-psit')!;
   const neetiMohanPoster = PlaceHolderImages.find(p => p.id === 'celebrity-neeti-mohan-reveal')!;
+  
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 },
+  };
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
 
   return (
     <div className="space-y-24 -mt-8 -mx-8">
       <section className="relative h-[70vh] w-full flex flex-col items-center justify-center text-center text-white -mt-8 -mx-8">
         {/* You can replace this div with an Image component for your background */}
         <div className="absolute inset-0 bg-primary -z-10" />
-        <div className="z-10 px-4">
+        <motion.div 
+            className="z-10 px-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+        >
             <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg drop-shadow-2xl">
                 IGNITIA 2k26
             </h1>
@@ -46,46 +79,81 @@ export function HomePageContent() {
                 <Link href="/events">Explore Events <Ticket className="ml-2"/></Link>
                 </ShimmerButton>
             </div>
-        </div>
+        </motion.div>
       </section>
 
-      <section className="container mx-auto">
+      <motion.section 
+        className="container mx-auto"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+      >
         <div className="text-center mb-12">
             <h2 className="font-headline text-5xl uppercase tracking-wider">Socials</h2>
             <p className="mt-2 text-lg text-muted-foreground">Stay connected with us</p>
         </div>
-        <div className="flex justify-center gap-4">
+        <motion.div 
+            className="flex justify-center gap-4"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.5 }}
+        >
             {siteConfig.socials.map((social) => (
-              <ShimmerButton key={social.href} size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
-                  <a href={social.href} aria-label={social['aria-label']}><social.icon className="text-white"/></a>
-              </ShimmerButton>
+              <motion.div key={social.href} variants={itemVariants}>
+                <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
+                    <a href={social.href} aria-label={social['aria-label']}><social.icon className="text-white"/></a>
+                </ShimmerButton>
+              </motion.div>
             ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section className="container mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="border-r border-border last:border-r-0">
+      <motion.section 
+        className="container mx-auto"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
+            variants={staggerContainer}
+        >
+            <motion.div variants={itemVariants} className="border-r border-border last:border-r-0">
                 <Ticket className="h-12 w-12 text-accent mx-auto mb-4"/>
                 <p className="text-4xl font-bold"><NumberTicker value={50} />+</p>
                 <p className="text-muted-foreground">Events</p>
-            </div>
-            <div className="border-r border-border last:border-r-0">
+            </motion.div>
+            <motion.div variants={itemVariants} className="border-r border-border last:border-r-0">
                 <Users className="h-12 w-12 text-accent mx-auto mb-4"/>
                 <p className="text-4xl font-bold"><NumberTicker value={100} />+</p>
                 <p className="text-muted-foreground">Teams</p>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div variants={itemVariants}>
                 <Award className="h-12 w-12 text-accent mx-auto mb-4"/>
                 <p className="text-4xl font-bold"><NumberTicker value={20} />+</p>
                 <p className="text-muted-foreground">Sponsors</p>
-            </div>
-        </div>
-      </section>
+            </motion.div>
+        </motion.div>
+      </motion.section>
 
-      <section className="container mx-auto">
+      <motion.section 
+        className="container mx-auto"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+      >
         <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-4">
+            <motion.div 
+                className="space-y-4"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+            >
                 <h2 className="font-headline text-5xl uppercase tracking-wider text-accent">About Ignitia</h2>
                 <p className="text-lg text-muted-foreground">
                 IGNITIA is the annual techno-cultural fest of PSIT, a vibrant convergence of innovation, creativity, and culture. It's a platform for students to showcase their talents, compete in exciting events, and connect with peers and industry leaders. From coding marathons to electrifying concerts, Ignitia is an experience you won't forget.
@@ -95,8 +163,14 @@ export function HomePageContent() {
                         <Link href="/about">Learn More <ArrowRight className="ml-2" /></Link>
                     </ShimmerButton>
                 </div>
-            </div>
-            <div className="relative h-80 rounded-lg overflow-hidden shadow-2xl">
+            </motion.div>
+            <motion.div 
+                className="relative h-80 rounded-lg overflow-hidden shadow-2xl"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+            >
                  <Image
                     src={aboutIgnitiaImage.imageUrl}
                     alt="About Ignitia"
@@ -104,13 +178,25 @@ export function HomePageContent() {
                     className="object-cover"
                     data-ai-hint={aboutIgnitiaImage.imageHint}
                 />
-            </div>
+            </motion.div>
         </div>
-      </section>
+      </motion.section>
       
-      <section className="container mx-auto">
+      <motion.section 
+        className="container mx-auto"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+      >
         <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="relative h-80 rounded-lg overflow-hidden shadow-2xl md:order-2">
+            <motion.div 
+                className="relative h-80 rounded-lg overflow-hidden shadow-2xl md:order-2"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+            >
                  <Image
                     src={aboutPsitImage.imageUrl}
                     alt="About PSIT"
@@ -118,8 +204,14 @@ export function HomePageContent() {
                     className="object-cover"
                     data-ai-hint={aboutPsitImage.imageHint}
                 />
-            </div>
-            <div className="space-y-4 md:order-1">
+            </motion.div>
+            <motion.div 
+                className="space-y-4 md:order-1"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+            >
                 <h2 className="font-headline text-5xl uppercase tracking-wider text-accent">About PSIT</h2>
                 <p className="text-lg text-muted-foreground">
                 Pranveer Singh Institute of Technology (PSIT) is a leading institution in Kanpur, renowned for its commitment to academic excellence and holistic development. With state-of-the-art infrastructure and a world-class faculty, PSIT provides an environment where students can thrive and achieve their full potential.
@@ -129,17 +221,29 @@ export function HomePageContent() {
                         <a href="https://psit.ac.in/" target="_blank" rel="noopener noreferrer">Visit PSIT <ArrowRight className="ml-2" /></a>
                     </ShimmerButton>
                 </div>
-            </div>
+            </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      <section className="container mx-auto">
+      <motion.section 
+        className="container mx-auto"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+      >
         <div className="text-center mb-12">
             <h2 className="font-headline text-5xl uppercase tracking-wider text-accent">Celebrity Revealed!</h2>
             <p className="mt-2 text-lg text-muted-foreground">Get ready for an electrifying performance by the sensational Neeti Mohan</p>
         </div>
         <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="rounded-lg overflow-hidden shadow-2xl">
+            <motion.div 
+                className="rounded-lg overflow-hidden shadow-2xl"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+            >
                  <Image
                     src={neetiMohanPoster.imageUrl}
                     alt="Neeti Mohan Ignitia Poster"
@@ -148,65 +252,82 @@ export function HomePageContent() {
                     className="object-cover"
                     data-ai-hint={neetiMohanPoster.imageHint}
                 />
-            </div>
-            <div className="space-y-6">
-                 <h3 className="font-headline text-6xl tracking-wider uppercase" style={{fontFamily: "'Times New Roman', Times, serif"}}>Neeti Mohan</h3>
-                <p className="text-lg text-muted-foreground">
+            </motion.div>
+            <motion.div 
+                className="space-y-6"
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+            >
+                 <motion.h3 variants={itemVariants} className="font-headline text-6xl tracking-wider uppercase" style={{fontFamily: "'Times New Roman', Times, serif"}}>Neeti Mohan</motion.h3>
+                <motion.p variants={itemVariants} className="text-lg text-muted-foreground">
                     We are thrilled to announce a spectacular performance by Neeti Mohan that will light up the stage at IGNITIA 2K25. Get ready for an unforgettable experience with one of India's most celebrated artists.
-                </p>
-                <div className="flex gap-8">
-                    <div className="text-center">
+                </motion.p>
+                <motion.div variants={staggerContainer} className="flex gap-8">
+                    <motion.div variants={itemVariants} className="text-center">
                         <p className="text-4xl font-bold text-accent"><NumberTicker value={100} />+</p>
                         <p className="text-muted-foreground">Shows</p>
-                    </div>
-                    <div className="text-center">
+                    </motion.div>
+                    <motion.div variants={itemVariants} className="text-center">
                         <p className="text-4xl font-bold text-accent"><NumberTicker value={10} />M+</p>
                         <p className="text-muted-foreground">Followers</p>
-                    </div>
-                </div>
-                <div className="inline-flex">
+                    </motion.div>
+                </motion.div>
+                <motion.div variants={itemVariants} className="inline-flex">
                     <ShimmerButton asChild className="px-6 py-2">
                         <Link href="#">See More</Link>
                     </ShimmerButton>
-                </div>
-            </div>
+                </motion.div>
+            </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       <PastGuests />
 
 
-       <section className="container mx-auto">
+       <motion.section 
+        className="container mx-auto"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+       >
         <div className="text-center mb-12">
             <h2 className="font-headline text-5xl uppercase tracking-wider">Official Merchandise</h2>
             <p className="mt-2 text-lg text-muted-foreground">Get your hands on exclusive IGNITIA merchandise</p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={staggerContainer}
+        >
             {featuredProducts.map((product) => (
-                <Card key={product.id} className="w-full overflow-hidden group">
-                    <CardHeader className="p-0">
-                        <div className="relative aspect-square">
-                            <Image
-                                src={product.image.imageUrl}
-                                alt={product.name}
-                                fill
-                                className="object-contain transition-transform duration-300 group-hover:scale-105"
-                                data-ai-hint={product.image.imageHint}
-                            />
-                        </div>
-                    </CardHeader>
-                    <CardContent className="p-6 text-center space-y-2">
-                        <h3 className="font-headline text-2xl text-accent">{product.name}</h3>
-                        <p className="text-4xl font-bold text-white">{formatCurrency(product.price)}</p>
-                    </CardContent>
-                    <CardFooter className="px-6 pb-6">
-                        <ShimmerButton asChild className="w-full">
-                            <Link href="/merchandise" className='flex items-center gap-2'>View Product</Link>
-                        </ShimmerButton>
-                    </CardFooter>
-                </Card>
+                <motion.div key={product.id} variants={itemVariants}>
+                  <Card className="w-full overflow-hidden group">
+                      <CardHeader className="p-0">
+                          <div className="relative aspect-square">
+                              <Image
+                                  src={product.image.imageUrl}
+                                  alt={product.name}
+                                  fill
+                                  className="object-contain transition-transform duration-300 group-hover:scale-105"
+                                  data-ai-hint={product.image.imageHint}
+                              />
+                          </div>
+                      </CardHeader>
+                      <CardContent className="p-6 text-center space-y-2">
+                          <h3 className="font-headline text-2xl text-accent">{product.name}</h3>
+                          <p className="text-4xl font-bold text-white">{formatCurrency(product.price)}</p>
+                      </CardContent>
+                      <CardFooter className="px-6 pb-6">
+                          <ShimmerButton asChild className="w-full">
+                              <Link href="/merchandise" className='flex items-center gap-2'>View Product</Link>
+                          </ShimmerButton>
+                      </CardFooter>
+                  </Card>
+                </motion.div>
             ))}
-          </div>
+          </motion.div>
           <div className="text-center mt-12">
               <div className="inline-flex">
                 <ShimmerButton asChild className="px-8 py-3">
@@ -214,7 +335,7 @@ export function HomePageContent() {
                 </ShimmerButton>
               </div>
           </div>
-       </section>
+       </motion.section>
 
     </div>
   );
