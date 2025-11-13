@@ -217,13 +217,55 @@
       "imageUrl": "https://storage.googleapis.com/stabl-media/6945533d-c182-411a-a114-1e0500a89d2b_neeti-mohan-ignitia-poster.png",
       "imageHint": "singer poster"
     },
-    { "id": "avatar-user", "description": "Generic user avatar placeholder", "imageUrl": "https://picsum.photos/seed/user/40/40", "imageHint": "user avatar" },
-    { "id": "avatar-alex", "description": "Avatar for Alex Johnson", "imageUrl": "https://picsum.photos/seed/core1/200/200", "imageHint": "person portrait" },
-    { "id": "avatar-maria", "description": "Avatar for Maria Garcia", "imageUrl": "https://picsum.photos/seed/core2/200/200", "imageHint": "person portrait" },
-    { "id": "avatar-sam", "description": "Avatar for Sam Lee", "imageUrl": "https://picsum.photos/seed/core3/200/200", "imageHint": "person portrait" },
-    { "id": "avatar-priya", "description": "Avatar for Priya Singh", "imageUrl": "https://picsum.photos/seed/core4/200/200", "imageHint": "person portrait" },
-    { "id": "avatar-chris", "description": "Avatar for Chris Patel", "imageUrl": "https://picsum.photos/seed/dev1/200/200", "imageHint": "person portrait" },
-    { "id": "avatar-jordan", "description": "Avatar for Jordan Davis", "imageUrl": "https://picsum.photos/seed/dev2/200/200", "imageHint": "person portrait" },
-    { "id": "pravatar-placeholder", "description": "Generic user avatar from pravatar", "imageUrl": "https://i.pravatar.cc/150?u=", "imageHint": "user avatar" }
+    {
+      "id": "avatar-user",
+      "description": "Generic user avatar placeholder",
+      "imageUrl": "https://placehold.co/40x40/D4AF37/1A1625?text=U",
+      "imageHint": "user avatar"
+    },
+    {
+      "id": "avatar-alex",
+      "description": "Avatar for Alex Johnson",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=A",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-maria",
+      "description": "Avatar for Maria Garcia",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=M",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-sam",
+      "description": "Avatar for Sam Lee",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=S",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-priya",
+      "description": "Avatar for Priya Singh",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=P",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-chris",
+      "description": "Avatar for Chris Patel",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=C",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "avatar-jordan",
+      "description": "Avatar for Jordan Davis",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=J",
+      "imageHint": "person portrait"
+    },
+    {
+      "id": "pravatar-placeholder",
+      "description": "Generic user avatar placeholder",
+      "imageUrl": "https://placehold.co/150x150/D4AF37/1A1625?text=",
+      "imageHint": "user avatar"
+    }
   ]
 }
+
+    
