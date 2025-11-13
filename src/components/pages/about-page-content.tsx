@@ -7,6 +7,7 @@ import { Calendar, Users, Music, Award } from 'lucide-react';
 import Link from 'next/link';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { InteractiveGridPattern } from '@/components/ui/interactive-grid-pattern';
+import NumberTicker from '../ui/number-ticker';
 
 const aboutImage =
   PlaceHolderImages.find((img) => img.id === 'ignitia-logo-mandala') || PlaceHolderImages[0];
@@ -14,22 +15,27 @@ const aboutImage =
 const stats = [
     {
         icon: Calendar,
-        value: '50+',
+        value: 50,
+        suffix: '+',
         label: 'Events'
     },
     {
         icon: Music,
-        value: '100+',
+        value: 100,
+        suffix: '+',
         label: 'Artists'
     },
     {
         icon: Users,
-        value: '10K+',
-        label: 'Attendees'
+        value: 10000,
+        suffix: 'K+',
+        label: 'Attendees',
+        displayValue: '10' // Special case for 10K
     },
     {
         icon: Award,
-        value: '2',
+        value: 2,
+        suffix: '',
         label: 'Days'
     },
 ];
@@ -59,7 +65,10 @@ export function AboutPageContent() {
                         {stats.map(stat => (
                             <Card key={stat.label} className="bg-card/50 text-center p-4">
                                 <CardContent className="p-0">
-                                    <h3 className="font-bold text-4xl text-accent">{stat.value}</h3>
+                                    <h3 className="font-bold text-4xl text-accent">
+                                        <NumberTicker value={stat.displayValue ? Number(stat.displayValue) : stat.value} />
+                                        {stat.suffix}
+                                    </h3>
                                     <p className="text-muted-foreground">{stat.label}</p>
                                 </CardContent>
                             </Card>
