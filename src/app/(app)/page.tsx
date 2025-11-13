@@ -1,5 +1,4 @@
 
-
 import Image from 'next/image';
 import {
   Card,
@@ -18,7 +17,6 @@ import { formatCurrency } from '@/lib/utils';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { PastGuests } from '@/components/home/past-guests';
 import NumberTicker from '@/components/ui/number-ticker';
-import { BackgroundGradientAnimation } from '@/components/ui/background-gradient-animation';
 
 export default function HomePage() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'techno-background')!;
@@ -29,25 +27,27 @@ export default function HomePage() {
 
   return (
     <div className="space-y-24 -mt-8 -mx-8">
-       <BackgroundGradientAnimation>
-        <div className="absolute z-50 inset-0 flex flex-col items-center justify-center text-center text-white font-bold px-4 pointer-events-none">
-          <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg drop-shadow-2xl">
-            IGNITIA 2k26
-          </h1>
-          <p className="font-semibold text-accent text-xl md:text-2xl mt-2 drop-shadow-2xl">Where Technology Meets Culture</p>
-          <p className="mt-4 max-w-2xl text-lg md:text-xl text-foreground/80 drop-shadow-2xl">
-            April 28-29, 2026 | PSIT Kanpur
-          </p>
-          <div className="mt-8 flex gap-4 pointer-events-auto">
-            <ShimmerButton className="px-8 py-3">
-              <Link href="/events" className="flex items-center gap-2">Register Now <ArrowRight /></Link>
-            </ShimmerButton>
-            <ShimmerButton asChild className="px-8 py-3 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
-              <Link href="/events">Explore Events <Ticket className="ml-2"/></Link>
-            </ShimmerButton>
-          </div>
+      <section className="relative h-[70vh] w-full flex flex-col items-center justify-center text-center text-white -mt-8 -mx-8">
+        {/* You can replace this div with an Image component for your background */}
+        <div className="absolute inset-0 bg-primary -z-10" />
+        <div className="z-10 px-4">
+            <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg drop-shadow-2xl">
+                IGNITIA 2k26
+            </h1>
+            <p className="font-semibold text-accent text-xl md:text-2xl mt-2 drop-shadow-2xl">Where Technology Meets Culture</p>
+            <p className="mt-4 max-w-2xl text-lg md:text-xl text-foreground/80 drop-shadow-2xl">
+                April 28-29, 2026 | PSIT Kanpur
+            </p>
+            <div className="mt-8 flex gap-4 pointer-events-auto">
+                <ShimmerButton className="px-8 py-3">
+                <Link href="/events" className="flex items-center gap-2">Register Now <ArrowRight /></Link>
+                </ShimmerButton>
+                <ShimmerButton asChild className="px-8 py-3 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
+                <Link href="/events">Explore Events <Ticket className="ml-2"/></Link>
+                </ShimmerButton>
+            </div>
         </div>
-      </BackgroundGradientAnimation>
+      </section>
 
       <section className="container mx-auto">
         <div className="text-center mb-12">
@@ -211,3 +211,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
