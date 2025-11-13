@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { ArrowRight, Ticket } from 'lucide-react';
 import Link from 'next/link';
+import { Logo } from '@/components/icons/logo';
 
 const navItems = [
   { href: '/home', label: 'Home' },
@@ -19,8 +20,8 @@ export default function LandingPage() {
         <section className="relative h-screen w-full flex flex-col items-center justify-center text-center text-white p-4">
           <div className="absolute top-0 left-0 right-0 z-20">
             <header className="container mx-auto flex h-20 items-center justify-between">
-              <Link href="/" className="font-headline text-3xl font-bold">
-                IGNITIA
+              <Link href="/">
+                <Logo />
               </Link>
               <div className="flex items-center gap-4">
                 <nav className="hidden md:flex items-center gap-2">
