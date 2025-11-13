@@ -55,6 +55,7 @@ export function HomePageContent() {
 
 
   return (
+<<<<<<< HEAD
     <div className="space-y-24 -mt-8 -mx-8">
       <section className="relative w-screen h-[70vh] flex items-center justify-center text-center text-white overflow-hidden">
   {/* Background image — ensure parent is relative and has height */}
@@ -78,6 +79,24 @@ export function HomePageContent() {
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.7, ease: "easeOut" }}
   >
+=======
+    <div className="space-y-24">
+      <section className="relative h-[70vh] w-full flex flex-col items-center justify-center text-center text-white -mx-8 overflow-hidden">
+        <div className="absolute inset-0 bg-primary -z-10" />
+         <Image
+            src={heroImage.imageUrl}
+            alt={heroImage.imageHint}
+            fill
+            className="object-cover"
+            data-ai-hint={heroImage.imageHint}
+        />
+        <motion.div 
+            className="z-10 px-4"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+>>>>>>> 684a094 (well i want those images as the bg of my landing page and homepage check)
             <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg drop-shadow-2xl">
                 IGNITIA 2k26
             </h1>

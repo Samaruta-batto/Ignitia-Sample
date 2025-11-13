@@ -19,7 +19,7 @@ export function LandingPageContent() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <main className="flex-1">
-        <section className="relative h-screen w-full flex flex-col items-center justify-center text-center text-white p-4">
+        <section className="relative h-screen w-full flex flex-col items-center justify-center text-center text-white p-4 overflow-hidden">
           <div className="absolute top-0 left-0 right-0 z-20">
             <header className="container mx-auto flex h-20 items-center justify-between">
               <Link href="/">
@@ -51,6 +51,7 @@ export function LandingPageContent() {
               fill
               priority
               className="object-cover"
+              data-ai-hint={landingImage.imageHint}
             />
           </div>
 
