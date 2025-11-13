@@ -17,6 +17,7 @@ import type { WithId } from '@/firebase/firestore/use-collection';
 import type { CartItem, Product } from '@/lib/data/types';
 import { products } from '@/lib/data/placeholder-data';
 import { motion } from 'framer-motion';
+import { usePathname } from 'next/navigation';
 
 export function AppLayout({
   children,
@@ -29,6 +30,7 @@ export function AppLayout({
   const { user: authUser } = useUser();
   const firestore = useFirestore();
   const { setCart, setTotal, clearCart } = useCartStore();
+  const pathname = usePathname();
 
   const cartQuery = useMemoFirebase(() => {
     if (!firestore || !authUser?.uid) return null;
@@ -55,6 +57,8 @@ export function AppLayout({
     }
   }, [cartItems, setCart, setTotal, authUser, clearCart]);
 
+  const isHomePage = pathname === '/home';
+
   return (
     <motion.div 
         className="min-h-screen flex flex-col"
@@ -64,7 +68,7 @@ export function AppLayout({
     >
       <ConsoleWarning />
       <AppHeader user={user} />
-      <main className="flex-1 container mx-auto">
+      <main className={`flex-1 ${isHomePage ? '' : 'container mx-auto'}`}>
         {children}
       </main>
       <CartSheet />

@@ -19,7 +19,7 @@ export function LandingPageContent() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <main className="flex-1">
-        <section className="relative h-screen w-full flex flex-col items-center justify-center text-center text-white p-4">
+        <section className="relative h-screen w-full flex flex-col items-center justify-center text-center text-white p-4 overflow-hidden">
           <div className="absolute inset-0 -z-10">
             <Image
               src={landingImage.imageUrl}
@@ -97,4 +97,3 @@ export function LandingPageContent() {
     </div>
   );
 }
- 
