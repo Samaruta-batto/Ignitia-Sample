@@ -49,6 +49,7 @@ export function LandingPageContent() {
               src={landingImage.imageUrl}
               alt={landingImage.imageHint}
               fill
+              priority
               className="object-cover"
             />
           </div>
