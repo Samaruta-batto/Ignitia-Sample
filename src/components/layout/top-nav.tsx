@@ -22,6 +22,7 @@ import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import { Logo } from '../icons/logo';
 import { Separator } from '../ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import { ShimmerButton } from '../ui/shimmer-button';
 
 const menuItems = [
   { href: '/home', label: 'Home', icon: Home },
@@ -49,17 +50,18 @@ export function TopNav() {
       <nav className="hidden md:flex items-center justify-center flex-1">
         <div className="flex items-center gap-2">
           {menuItems.map((item) => (
-            <Button
+            <ShimmerButton
               key={item.label}
               asChild
-              variant="ghost"
               className={cn(
-                'text-sm font-semibold text-foreground/80 hover:text-accent',
-                (pathname === item.href || (item.href !== '/home' && pathname.startsWith(item.href))) && 'text-accent'
+                'px-4 py-2 text-sm bg-transparent',
+                (pathname === item.href || (item.href !== '/home' && pathname.startsWith(item.href))) 
+                ? 'text-accent' 
+                : 'text-white'
               )}
             >
               <Link href={item.href}>{item.label}</Link>
-            </Button>
+            </ShimmerButton>
           ))}
         </div>
       </nav>
@@ -74,7 +76,7 @@ export function TopNav() {
           <SheetContent side="left" className="flex flex-col p-0">
             <div className="p-4">
               <Link href="/" onClick={() => setIsOpen(false)}>
-                <Logo className="w-36" />
+                <Logo />
               </Link>
             </div>
             <Separator />

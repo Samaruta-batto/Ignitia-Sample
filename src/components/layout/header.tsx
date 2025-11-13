@@ -44,7 +44,7 @@ export function AppHeader({ user }: { user: User | null }) {
       <div className="container mx-auto flex h-20 items-center justify-between gap-4 px-4 md:px-8">
         <div className="flex items-center gap-4">
           <Link href="/">
-            <Logo className="w-36 hidden sm:block" />
+            <Logo />
           </Link>
         </div>
         <TopNav />
@@ -96,12 +96,12 @@ export function AppHeader({ user }: { user: User | null }) {
             </DropdownMenu>
           ) : (
             <>
-              <Button asChild variant="ghost">
+              <ShimmerButton asChild className="px-4 py-2 bg-transparent text-white">
                 <Link href="/user-login">
                   <LogIn className="mr-2 h-4 w-4" /> Login
                 </Link>
-              </Button>
-              <ShimmerButton asChild className="px-6 py-3">
+              </ShimmerButton>
+              <ShimmerButton asChild className="px-5 py-2.5">
                 <Link href="/signup">
                   <UserPlus className="mr-2 h-4 w-4" /> Sign Up
                 </Link>
