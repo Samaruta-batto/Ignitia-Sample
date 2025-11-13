@@ -31,7 +31,7 @@ export function AppHeader({ user }: { user: User | null }) {
     if (auth) {
       await signOut(auth);
     }
-    router.push('/home');
+    router.push('/');
     router.refresh();
   };
   

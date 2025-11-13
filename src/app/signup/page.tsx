@@ -111,7 +111,7 @@ export default function SignupPage() {
         title: 'Sign-up Successful!',
         description: 'Welcome to Ignitia!',
       });
-      router.push('/home');
+      router.push('/');
     } catch (error: any) {
       toast({
         variant: 'destructive',

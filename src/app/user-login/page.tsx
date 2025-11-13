@@ -37,7 +37,7 @@ export default function UserLoginPage() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      router.push('/home');
+      router.push('/');
     } catch (error: any) {
         toast({
             variant: "destructive",

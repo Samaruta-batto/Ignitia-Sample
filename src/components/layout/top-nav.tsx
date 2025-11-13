@@ -24,7 +24,7 @@ import { Separator } from '../ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
 const menuItems = [
-  { href: '/home', label: 'Home', icon: Home },
+  { href: '/', label: 'Home', icon: Home },
   { href: '/about', label: 'About', icon: Info },
   { href: '/events', label: 'Events', icon: Ticket },
   { href: '/merchandise', label: 'Merch', icon: ShoppingBag },
@@ -48,7 +48,7 @@ export function TopNav() {
               key={item.label}
               className={cn(
                 'bg-transparent text-sm font-semibold h-auto py-2 px-3',
-                pathname.startsWith(item.href)
+                pathname === item.href
                   ? 'text-accent'
                   : 'text-foreground/80 hover:text-accent'
               )}
