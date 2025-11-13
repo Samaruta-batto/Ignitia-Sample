@@ -48,7 +48,7 @@ export function TopNav() {
             <ShimmerButton
               key={item.label}
               className={cn(
-                'bg-transparent',
+                'bg-transparent text-sm h-auto py-2 px-4',
                 pathname.startsWith(item.href)
                   ? 'text-accent'
                   : 'text-foreground/80 hover:text-accent'
