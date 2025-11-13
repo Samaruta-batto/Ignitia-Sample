@@ -13,11 +13,11 @@ const footerNav = [
 ];
 
 const socialLinks = [
-  { href: '#', icon: Youtube },
-  { href: '#', icon: Instagram },
-  { href: '#', icon: Facebook },
-  { href: '#', icon: Linkedin },
-  { href: '#', icon: Twitter },
+  { href: '#', icon: Youtube, 'aria-label': 'Youtube' },
+  { href: '#', icon: Instagram, 'aria-label': 'Instagram' },
+  { href: '#', icon: Facebook, 'aria-label': 'Facebook' },
+  { href: '#', icon: Linkedin, 'aria-label': 'LinkedIn' },
+  { href: '#', icon: Twitter, 'aria-label': 'Twitter' },
 ];
 
 export function AppFooter() {
@@ -48,11 +48,11 @@ export function AppFooter() {
               <h3 className="font-headline text-lg uppercase tracking-wider mb-4">Follow Us</h3>
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => (
-                  <ShimmerButton key={index} size="icon" variant="outline" className="bg-card/50 rounded-full">
-                    <a href={social.href} target="_blank" rel="noopener noreferrer">
-                      <social.icon />
-                    </a>
-                  </ShimmerButton>
+                  <a href={social.href} key={index} target="_blank" rel="noopener noreferrer" aria-label={social['aria-label']}>
+                    <ShimmerButton size="icon" className="bg-card/50 rounded-full">
+                        <social.icon />
+                    </ShimmerButton>
+                  </a>
                 ))}
               </div>
             </div>
