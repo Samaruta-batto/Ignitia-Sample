@@ -48,11 +48,11 @@ export function AppFooter() {
               <h3 className="font-headline text-lg uppercase tracking-wider mb-4">Follow Us</h3>
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => (
-                  <a href={social.href} key={index} target="_blank" rel="noopener noreferrer" aria-label={social['aria-label']}>
-                    <ShimmerButton size="icon" className="bg-card/50 rounded-full">
+                  <ShimmerButton key={index} size="icon" className="bg-card/50 rounded-full" asChild>
+                    <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social['aria-label']}>
                         <social.icon />
-                    </ShimmerButton>
-                  </a>
+                    </a>
+                  </ShimmerButton>
                 ))}
               </div>
             </div>
