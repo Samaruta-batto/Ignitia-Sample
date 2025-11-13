@@ -155,108 +155,107 @@ export const archiveItems: ArchiveItem[] = [
 ];
 
 export const coreTeam: TeamMember[] = [
-    {
-      name: 'Aryan Bajpai',
-      role: 'Fest Coordinator',
-      avatar: getImage('avatar-alex'),
-      bio: 'The mastermind behind Ignitia, ensuring every detail is perfect.',
-      social: {
-        linkedin: '#',
-        twitter: '#',
-      },
+  {
+    name: 'Aryan Bajpai',
+    role: 'Fest Coordinator',
+    avatar: getImage('avatar-alex'),
+    bio: 'The mastermind behind Ignitia, ensuring every detail is perfect.',
+    social: {
+      linkedin: '#',
+      twitter: '#',
     },
-    {
-      name: 'Sanskar Soni',
-      role: 'Head of Events',
-      avatar: getImage('avatar-maria'),
-      bio: 'Curating an unforgettable lineup of tech and cultural events.',
-       social: {
-        linkedin: '#',
-        twitter: '#',
-      },
+  },
+  {
+    name: 'Sanskar Soni',
+    role: 'Head of Events',
+    avatar: getImage('avatar-maria'),
+    bio: 'Curating an unforgettable lineup of tech and cultural events.',
+     social: {
+      linkedin: '#',
+      twitter: '#',
     },
-    {
-      name: 'Shivam Singh',
-      role: 'Sponsorship Lead',
-      avatar: getImage('avatar-sam'),
-      bio: 'Building bridges with our amazing partners and sponsors.',
-       social: {
-        linkedin: '#',
-        twitter: '#',
-      },
+  },
+  {
+    name: 'Shivam Singh',
+    role: 'Sponsorship Lead',
+    avatar: getImage('avatar-sam'),
+    bio: 'Building bridges with our amazing partners and sponsors.',
+     social: {
+      linkedin: '#',
+      twitter: '#',
     },
-     {
-      name: 'Parth Aggrawal',
-      role: 'Marketing Head',
-      avatar: getImage('avatar-priya'),
-      bio: 'Spreading the word and creating the buzz for Ignitia.',
-       social: {
-        linkedin: '#',
-        twitter: '#',
-      },
+  },
+   {
+    name: 'Parth Aggrawal',
+    role: 'Marketing Head',
+    avatar: getImage('avatar-priya'),
+    bio: 'Spreading the word and creating the buzz for Ignitia.',
+     social: {
+      linkedin: '#',
+      twitter: '#',
     },
-     {
-      name: 'Anshika Bharadwaj',
-      role: 'Core Team Member',
-      avatar: getImage('avatar-alex'),
-      bio: 'A key player in the Ignitia organizing team.',
-       social: {
-        linkedin: '#',
-        twitter: '#',
-      },
+  },
+   {
+    name: 'Anshika Bharadwaj',
+    role: 'Core Team Member',
+    avatar: getImage('avatar-alex'),
+    bio: 'A key player in the Ignitia organizing team.',
+     social: {
+      linkedin: '#',
+      twitter: '#',
     },
-     {
-      name: 'Samartha Bhatt',
-      role: 'Core Team Member',
-      avatar: getImage('avatar-maria'),
-      bio: 'A key player in the Ignitia organizing team.',
-       social: {
-        linkedin: '#',
-        twitter: '#',
-      },
+  },
+   {
+    name: 'Samartha Bhatt',
+    role: 'Core Team Member',
+    avatar: getImage('avatar-maria'),
+    bio: 'A key player in the Ignitia organizing team.',
+     social: {
+      linkedin: '#',
+      twitter: '#',
     },
-  ];
-  
-  export const devTeam: TeamMember[] = [
-    {
-      name: 'Ritik Gupta',
-      role: 'Lead Developer',
-      avatar: getImage('avatar-chris'),
-      bio: 'Architecting the digital backbone of the Ignitia platform.',
-      social: {
-        github: '#',
-        linkedin: '#',
-      },
-    },
-    {
-      name: 'Siddhant Narula',
-      role: 'Frontend Developer',
-      avatar: getImage('avatar-jordan'),
-      bio: 'Crafting the user experience with React and Tailwind CSS.',
-      social: {
-        github: '#',
-        linkedin: '#',
-      },
-    },
-    {
-      name: 'Suryansh Sharan',
-      role: 'Backend Developer',
-      avatar: getImage('avatar-chris'),
-      bio: 'Developing the robust server-side logic for our platform.',
-      social: {
-        github: '#',
-        linkedin: '#',
-      },
-    },
-    {
-      name: 'Divyansh Vijay',
-      role: 'UI/UX Designer',
-      avatar: getImage('avatar-jordan'),
-      bio: 'Designing the look and feel of the Ignitia experience.',
-      social: {
-        github: '#',
-        linkedin: '#',
-      },
-    },
-  ];
+  },
+];
 
+export const devTeam: TeamMember[] = [
+  {
+    name: 'Ritik Gupta',
+    role: 'Lead Developer',
+    avatar: getImage('avatar-chris'),
+    bio: 'Architecting the digital backbone of the Ignitia platform.',
+    social: {
+      github: '#',
+      linkedin: '#',
+    },
+  },
+  {
+    name: 'Siddhant Narula',
+    role: 'Frontend Developer',
+    avatar: getImage('avatar-jordan'),
+    bio: 'Crafting the user experience with React and Tailwind CSS.',
+    social: {
+      github: '#',
+      linkedin: '#',
+    },
+  },
+  {
+    name: 'Suryansh Sharan',
+    role: 'UI/UX Designer',
+    avatar: getImage('avatar-chris'),
+    bio: 'Designing the look and feel of the Ignitia experience.',
+    social: {
+      github: '#',
+      linkedin: '#',
+    },
+  },
+  {
+    name: 'Divyansh Vijay',
+    role: 'Backend Developer',
+    avatar: getImage('avatar-jordan'),
+    bio: 'Developing the robust server-side logic for our platform.',
+    social: {
+      github: '#',
+      linkedin: '#',
+    },
+  },
+];
