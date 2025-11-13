@@ -20,27 +20,29 @@ import {
 } from '@/components/ui/table';
 import { Trophy, Users, IndianRupee } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
-import { useCollection, type WithId } from '@/firebase/firestore/use-collection';
-import { collection, query, orderBy } from 'firebase/firestore';
 import type { Event } from '@/lib/data/types';
-import { useMemoFirebase, useFirestore } from '@/firebase/provider';
+import { events as staticEvents } from '@/lib/data/placeholder-data';
 import { WarpBackground } from '@/components/ui/warp-background';
 
-type EventWithRegistrations = WithId<Event & { registeredAttendees: number }>;
+type EventWithRegistrations = Event & { registeredAttendees: number };
 
 export function LeaderboardPageContent() {
   const router = useRouter();
-  const firestore = useFirestore();
 
-  const eventsQuery = useMemoFirebase(() => {
-    if (!firestore) return null;
-    return query(collection(firestore, 'events'), orderBy('registeredAttendees', 'desc'));
-  }, [firestore]);
-  
-  const { data: events, isLoading } = useCollection<EventWithRegistrations>(eventsQuery);
+  const [events, setEvents] = React.useState<EventWithRegistrations[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    const sortedEvents = [...staticEvents]
+      .sort((a, b) => (b.registeredAttendees || 0) - (a.registeredAttendees || 0))
+      .map(e => ({...e, registeredAttendees: e.registeredAttendees || 0}));
+    
+    setEvents(sortedEvents);
+    setIsLoading(false);
+  }, []);
 
   const handleRowClick = (event: Event) => {
-    router.push(`/events`);
+    router.push(`/events?category=${event.category}&subCategory=${event.subCategory}`);
   };
 
   return (
@@ -111,3 +113,5 @@ export function LeaderboardPageContent() {
     </WarpBackground>
   );
 }
+
+    

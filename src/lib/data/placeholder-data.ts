@@ -44,7 +44,8 @@ export const events: Event[] = [
     image: getImage('fintech-1'),
     price: 150,
     category: 'entrepreneurial',
-    subCategory: 'fintech'
+    subCategory: 'fintech',
+    registeredAttendees: 0,
   },
   {
     id: 'trade-quest',
@@ -55,37 +56,47 @@ export const events: Event[] = [
     image: getImage('fintech-2'),
     price: 150,
     category: 'entrepreneurial',
-    subCategory: 'fintech'
+    subCategory: 'fintech',
+    registeredAttendees: 0,
   },
   {
     id: '3',
     title: 'Innovate & Create Tech Summit',
+    name: 'Innovate & Create Tech Summit',
     date: 'September 5, 2024',
     location: 'Silicon Valley, CA',
     description: 'A summit for the brightest minds in technology and design to share ideas that shape the future.',
     image: getImage('event-2'),
     category: 'entrepreneurial',
-    subCategory: 'business-events'
+    subCategory: 'business-events',
+    registeredAttendees: 0,
+    price: 200,
   },
   {
     id: '4',
     title: 'Gourmet Bites Food & Wine Festival',
+    name: 'Gourmet Bites Food & Wine Festival',
     date: 'November 1-3, 2024',
     location: 'Napa Valley, CA',
     description: 'Experience world-class cuisine and wines in the beautiful Napa Valley.',
     image: getImage('event-4'),
     category: 'miscellaneous',
-    subCategory: 'gaming'
+    subCategory: 'gaming',
+    registeredAttendees: 0,
+    price: 100,
   },
   {
     id: '5',
     title: 'Synthwave Summer Fest',
+    name: 'Synthwave Summer Fest',
     date: 'August 15-17, 2024',
     location: 'Miami Beach, FL',
     description: 'The biggest electronic music festival of the year, featuring artists from around the globe.',
     image: getImage('event-1'),
     category: 'technical',
-    subCategory: 'coding'
+    subCategory: 'coding',
+    registeredAttendees: 0,
+    price: 250,
   },
 ];
 
@@ -260,3 +271,4 @@ export const devTeam: TeamMember[] = [
   },
 ];
 
+    

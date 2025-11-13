@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
-import { eventCategories, eventSubCategories } from '@/lib/data/placeholder-data';
+import { eventCategories, eventSubCategories, events as allEvents } from '@/lib/data/placeholder-data';
 import type { Event as StaticEvent } from '@/lib/data/types';
 import { cn, formatCurrency } from '@/lib/utils';
 import { MagicCard } from '@/components/ui/magic-card';
@@ -18,12 +18,10 @@ import {
   serverTimestamp,
 } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
-import { useCollection, type WithId } from '@/firebase/firestore/use-collection';
-import { query, where } from 'firebase/firestore';
-import { useMemoFirebase, useUser } from '@/firebase/provider';
+import { useUser } from '@/firebase/provider';
 import { WarpBackground } from '@/components/ui/warp-background';
 
-type Event = WithId<StaticEvent>;
+type Event = StaticEvent;
 
 export function EventsPageContent() {
   const searchParams = useSearchParams();
@@ -37,12 +35,7 @@ export function EventsPageContent() {
   const [activeCategory, setActiveCategory] = React.useState<string>(categoryParam || 'entrepreneurial');
   const [activeSubCategory, setActiveSubCategory] = React.useState<string>(subCategoryParam || 'fintech');
   
-  const eventsQuery = useMemoFirebase(() => {
-    if (!firestore) return null;
-    return collection(firestore, 'events');
-  }, [firestore]);
-  
-  const { data: allEvents, isLoading: isLoadingAllEvents } = useCollection<Event>(eventsQuery);
+  const isLoading = false; // Using static data
 
   const filteredItems = React.useMemo(() => {
     if (!allEvents) return [];
@@ -67,12 +60,15 @@ export function EventsPageContent() {
       await runTransaction(firestore, async (transaction) => {
         const eventDoc = await transaction.get(eventRef);
         if (!eventDoc.exists()) {
-          throw new Error("Event does not exist!");
+          // If the event doesn't exist in Firestore, we can't update it.
+          // For now, we will just create the registration.
+          // In a real app, you might want to fetch event data from a static source if not in DB.
+          console.log("Event not in Firestore, creating registration only.")
+        } else {
+            // Increment the registered attendees count
+            const newAttendeeCount = (eventDoc.data().registeredAttendees || 0) + 1;
+            transaction.update(eventRef, { registeredAttendees: newAttendeeCount });
         }
-
-        // Increment the registered attendees count
-        const newAttendeeCount = (eventDoc.data().registeredAttendees || 0) + 1;
-        transaction.update(eventRef, { registeredAttendees: newAttendeeCount });
 
         // Create a new registration document
         transaction.set(registrationRef, {
@@ -111,8 +107,6 @@ export function EventsPageContent() {
       }
     }
   }, [activeCategory, activeSubCategory]);
-
-  const isLoading = isLoadingAllEvents;
 
   return (
     <WarpBackground>
@@ -203,3 +197,5 @@ export function EventsPageContent() {
     </WarpBackground>
   );
 }
+
+    
