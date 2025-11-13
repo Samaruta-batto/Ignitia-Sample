@@ -39,17 +39,16 @@ export function EventsPageContent() {
   
   const eventsQuery = useMemoFirebase(() => {
     if (!firestore) return null;
-    const subCategory = eventSubCategories[activeCategory]?.find(sc => sc.id === activeSubCategory);
-    if (!subCategory || subCategory.eventIds.length === 0) {
-      return null;
-    }
-    return query(
-      collection(firestore, 'events'), 
-      where('__name__', 'in', subCategory.eventIds)
-    );
-  }, [firestore, activeCategory, activeSubCategory]);
+    return collection(firestore, 'events');
+  }, [firestore]);
+  
+  const { data: allEvents, isLoading: isLoadingAllEvents } = useCollection<Event>(eventsQuery);
 
-  const { data: filteredItems, isLoading } = useCollection<Event>(eventsQuery);
+  const filteredItems = React.useMemo(() => {
+    if (!allEvents) return [];
+    return allEvents.filter(event => event.category === activeCategory && event.subCategory === activeSubCategory);
+  }, [allEvents, activeCategory, activeSubCategory]);
+
 
   const handleRegister = async (eventId: string) => {
     if (!firestore || !user) {
@@ -113,6 +112,8 @@ export function EventsPageContent() {
     }
   }, [activeCategory, activeSubCategory]);
 
+  const isLoading = isLoadingAllEvents;
+
   return (
     <WarpBackground>
       <div className="space-y-8">
@@ -166,7 +167,7 @@ export function EventsPageContent() {
                     <div className="relative aspect-video overflow-hidden">
                       <Image
                         src={item.image.imageUrl}
-                        alt={item.title}
+                        alt={item.title || item.name || ''}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-110"
                         data-ai-hint={item.image.imageHint}
@@ -176,7 +177,7 @@ export function EventsPageContent() {
                       <h3 className="font-headline text-2xl text-white mb-2">{item.name}</h3>
                       <p className="text-muted-foreground text-sm flex-grow">{item.description}</p>
                       <div className="mt-4">
-                        <p className="font-bold text-lg text-accent mb-4">{formatCurrency(150)}</p>
+                        <p className="font-bold text-lg text-accent mb-4">{formatCurrency(item.price || 150)}</p>
                           <ShimmerButton
                           variant="outline"
                           onClick={() => handleRegister(item.id)}

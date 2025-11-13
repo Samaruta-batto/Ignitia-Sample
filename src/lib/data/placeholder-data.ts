@@ -24,7 +24,7 @@ export const eventSubCategories: { [key: string]: EventSubCategory[] } = {
         { id: 'robotics', name: 'Robotics', eventIds: [] },
     ],
     'entrepreneurial': [
-        { id: 'fintech', name: 'FinTech', eventIds: ['1', '2'] },
+        { id: 'fintech', name: 'FinTech', eventIds: ['beat-the-market', 'trade-quest'] },
         { id: 'business-events', name: 'Business Events', eventIds: ['3'] },
         { id: 'startup', name: 'Startup', eventIds: [] },
     ],
@@ -36,24 +36,24 @@ export const eventSubCategories: { [key: string]: EventSubCategory[] } = {
 
 export const events: Event[] = [
   {
-    id: '1',
-    title: 'Beat the Market',
-    date: 'August 15, 2024',
+    id: 'beat-the-market',
+    name: 'Beat the Market',
+    date: '2026-04-28T10:00',
     location: 'Trading Arena',
     description: 'A high-stakes stock trading simulation challenge. Show off your market knowledge and risk management skills to build the winning portfolio.',
     image: getImage('fintech-1'),
-    prize: '75,000',
+    price: 150,
     category: 'entrepreneurial',
     subCategory: 'fintech'
   },
   {
-    id: '2',
-    title: 'Trade Quest',
-    date: 'August 16, 2024',
+    id: 'trade-quest',
+    name: 'Trade Quest',
+    date: '2026-04-29T14:00',
     location: 'Trading Arena',
     description: 'An algorithmic trading competition where your bot battles others in a fast-paced virtual market.',
     image: getImage('fintech-2'),
-     prize: '75,000',
+    price: 150,
     category: 'entrepreneurial',
     subCategory: 'fintech'
   },
@@ -259,3 +259,4 @@ export const devTeam: TeamMember[] = [
     },
   },
 ];
+
