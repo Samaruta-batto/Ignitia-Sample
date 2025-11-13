@@ -20,6 +20,7 @@ import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { useCartStore } from '@/hooks/use-cart-store';
 import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
 
 export function AppHeader({ user }: { user: User | null }) {
   const router = useRouter();
@@ -48,21 +49,21 @@ export function AppHeader({ user }: { user: User | null }) {
         </div>
         <TopNav />
         <div className="flex items-center gap-2">
-           <ShimmerButton variant="ghost" size="icon" className="relative" onClick={toggleCart}>
+           <Button variant="ghost" size="icon" className="relative" onClick={toggleCart}>
               <ShoppingCart />
               {cartItemCount > 0 && (
                 <Badge variant="destructive" className="absolute -top-1 -right-1 h-5 w-5 justify-center p-0">{cartItemCount}</Badge>
               )}
-           </ShimmerButton>
+           </Button>
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <ShimmerButton variant="ghost" className="relative h-10 w-10 rounded-full">
+                <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                   <Avatar className="h-10 w-10">
                      <AvatarImage src={user.photoURL || `https://i.pravatar.cc/150?u=${user?.uid}`} />
                     <AvatarFallback>{userInitial}</AvatarFallback>
                   </Avatar>
-                </ShimmerButton>
+                </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
@@ -95,12 +96,12 @@ export function AppHeader({ user }: { user: User | null }) {
             </DropdownMenu>
           ) : (
             <>
-              <ShimmerButton asChild variant="ghost">
+              <Button asChild variant="ghost">
                 <Link href="/user-login">
                   <LogIn className="mr-2 h-4 w-4" /> Login
                 </Link>
-              </ShimmerButton>
-              <ShimmerButton asChild className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 shadow-lg shadow-accent/20 px-6 py-3">
+              </Button>
+              <ShimmerButton asChild>
                 <Link href="/signup">
                   <UserPlus className="mr-2 h-4 w-4" /> Sign Up
                 </Link>
