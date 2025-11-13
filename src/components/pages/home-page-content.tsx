@@ -201,7 +201,7 @@ export function HomePageContent() {
             ))}
           </div>
           <div className="text-center mt-12">
-              <ShimmerButton asChild size="lg" className="px-6 py-2">
+              <ShimmerButton asChild className="px-8 py-3">
                   <Link href="/merchandise">Shop All Merch <ArrowRight/></Link>
               </ShimmerButton>
           </div>
