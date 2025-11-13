@@ -170,7 +170,7 @@ export function EventsPageContent() {
                     <CardContent className="p-6 text-center flex flex-col flex-grow">
                       <h3 className="font-headline text-2xl text-white mb-2">{item.name}</h3>
                       <p className="text-muted-foreground text-sm flex-grow">{item.description}</p>
-                      <div className="mt-4">
+                      <div className="mt-auto pt-4">
                         <p className="font-bold text-lg text-accent mb-4">{formatCurrency(item.price || 150)}</p>
                           <ShimmerButton
                           variant="outline"
@@ -197,5 +197,3 @@ export function EventsPageContent() {
     </WarpBackground>
   );
 }
-
-    
