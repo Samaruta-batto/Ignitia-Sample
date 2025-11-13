@@ -89,9 +89,11 @@ export function HomePageContent() {
                 <p className="text-lg text-muted-foreground">
                 IGNITIA is the annual techno-cultural fest of PSIT, a vibrant convergence of innovation, creativity, and culture. It's a platform for students to showcase their talents, compete in exciting events, and connect with peers and industry leaders. From coding marathons to electrifying concerts, Ignitia is an experience you won't forget.
                 </p>
-                <ShimmerButton asChild className="px-6 py-2 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
-                    <Link href="/about">Learn More <ArrowRight className="ml-2" /></Link>
-                </ShimmerButton>
+                <div className="inline-flex">
+                    <ShimmerButton asChild className="px-6 py-2 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
+                        <Link href="/about">Learn More <ArrowRight className="ml-2" /></Link>
+                    </ShimmerButton>
+                </div>
             </div>
             <div className="relative h-80 rounded-lg overflow-hidden shadow-2xl">
                  <Image
@@ -121,9 +123,11 @@ export function HomePageContent() {
                 <p className="text-lg text-muted-foreground">
                 Pranveer Singh Institute of Technology (PSIT) is a leading institution in Kanpur, renowned for its commitment to academic excellence and holistic development. With state-of-the-art infrastructure and a world-class faculty, PSIT provides an environment where students can thrive and achieve their full potential.
                 </p>
-                 <ShimmerButton asChild className="px-6 py-2 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
-                    <a href="https://psit.ac.in/" target="_blank" rel="noopener noreferrer">Visit PSIT <ArrowRight className="ml-2" /></a>
-                </ShimmerButton>
+                <div className="inline-flex">
+                    <ShimmerButton asChild className="px-6 py-2 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
+                        <a href="https://psit.ac.in/" target="_blank" rel="noopener noreferrer">Visit PSIT <ArrowRight className="ml-2" /></a>
+                    </ShimmerButton>
+                </div>
             </div>
         </div>
       </section>
@@ -159,9 +163,11 @@ export function HomePageContent() {
                         <p className="text-muted-foreground">Followers</p>
                     </div>
                 </div>
-                <ShimmerButton asChild className="px-6 py-2">
-                    <Link href="#">See More</Link>
-                </ShimmerButton>
+                <div className="inline-flex">
+                    <ShimmerButton asChild className="px-6 py-2">
+                        <Link href="#">See More</Link>
+                    </ShimmerButton>
+                </div>
             </div>
         </div>
       </section>
@@ -201,9 +207,11 @@ export function HomePageContent() {
             ))}
           </div>
           <div className="text-center mt-12">
-              <ShimmerButton asChild className="px-8 py-3">
-                  <Link href="/merchandise">Shop All Merch <ArrowRight/></Link>
-              </ShimmerButton>
+              <div className="inline-flex">
+                <ShimmerButton asChild className="px-8 py-3">
+                    <Link href="/merchandise">Shop All Merch <ArrowRight/></Link>
+                </ShimmerButton>
+              </div>
           </div>
        </section>
 
