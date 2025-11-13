@@ -23,24 +23,22 @@ export default function LandingPage() {
               <Link href="/">
                 <Logo />
               </Link>
-              <div className="flex items-center gap-4">
-                <nav className="hidden md:flex items-center gap-2">
-                    {navItems.map((item) => (
-                    <ShimmerButton
-                        key={item.label}
-                        asChild
-                        className="px-4 py-2 text-sm bg-transparent hover:bg-accent/10"
-                    >
-                        <Link href={item.href}>{item.label}</Link>
-                    </ShimmerButton>
-                    ))}
-                </nav>
-                <ShimmerButton asChild className="px-5 py-2.5">
-                    <Link href="/signup">
-                        Register
-                    </Link>
-                </ShimmerButton>
-              </div>
+              <nav className="hidden md:flex items-center gap-2">
+                  {navItems.map((item) => (
+                  <ShimmerButton
+                      key={item.label}
+                      asChild
+                      className="px-4 py-2 text-sm bg-transparent text-white"
+                  >
+                      <Link href={item.href}>{item.label}</Link>
+                  </ShimmerButton>
+                  ))}
+              </nav>
+              <ShimmerButton asChild className="px-5 py-2.5">
+                  <Link href="/signup">
+                      Register
+                  </Link>
+              </ShimmerButton>
             </header>
           </div>
 
