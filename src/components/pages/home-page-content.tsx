@@ -81,15 +81,17 @@ export function HomePageContent() {
   >
 =======
     <div className="space-y-24">
-      <section className="relative h-[70vh] w-full flex flex-col items-center justify-center text-center text-white -mx-8 overflow-hidden">
-        <div className="absolute inset-0 bg-primary -z-10" />
-         <Image
-            src={heroImage.imageUrl}
-            alt={heroImage.imageHint}
-            fill
-            className="object-cover"
-            data-ai-hint={heroImage.imageHint}
-        />
+      <section className="relative h-[70vh] w-full flex flex-col items-center justify-center text-center text-white overflow-hidden">
+        <div className="absolute inset-0 bg-primary -z-10">
+             <Image
+                src={heroImage.imageUrl}
+                alt={heroImage.imageHint}
+                fill
+                priority
+                className="object-cover"
+                data-ai-hint={heroImage.imageHint}
+            />
+        </div>
         <motion.div 
             className="z-10 px-4"
             initial={{ opacity: 0, y: -20 }}
@@ -98,7 +100,7 @@ export function HomePageContent() {
         >
 >>>>>>> 684a094 (well i want those images as the bg of my landing page and homepage check)
             <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg drop-shadow-2xl">
-                IGNITIA 2k26
+                IGNITIA 2K26
             </h1>
             <p className="font-semibold text-accent text-xl md:text-2xl mt-2 drop-shadow-2xl">Where Technology Meets Culture</p>
             <p className="mt-4 max-w-2xl text-lg md:text-xl text-foreground/80 drop-shadow-2xl">

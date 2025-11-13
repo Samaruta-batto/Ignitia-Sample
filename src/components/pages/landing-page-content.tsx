@@ -19,7 +19,18 @@ export function LandingPageContent() {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <main className="flex-1">
-        <section className="relative h-screen w-full flex flex-col items-center justify-center text-center text-white p-4 overflow-hidden">
+        <section className="relative h-screen w-full flex flex-col items-center justify-center text-center text-white p-4">
+          <div className="absolute inset-0 -z-10">
+            <Image
+              src={landingImage.imageUrl}
+              alt={landingImage.imageHint}
+              fill
+              priority
+              className="object-cover"
+              data-ai-hint={landingImage.imageHint}
+            />
+          </div>
+
           <div className="absolute top-0 left-0 right-0 z-20">
             <header className="container mx-auto flex h-20 items-center justify-between">
               <Link href="/">
@@ -44,7 +55,7 @@ export function LandingPageContent() {
             </header>
           </div>
 
-          <div className="absolute inset-0 z-10">
+          <div className="absolute inset-0 -z-10">
             <Image
               src={landingImage.imageUrl}
               alt={landingImage.imageHint}
@@ -57,7 +68,7 @@ export function LandingPageContent() {
 
           <div className="z-10 mt-[-4rem]">
             <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg drop-shadow-2xl">
-              IGNITIA 2k26
+              IGNITIA 2K26
             </h1>
             <p className="font-semibold text-accent text-xl md:text-2xl mt-2 drop-shadow-2xl">
               Where Technology Meets Culture
