@@ -1,8 +1,8 @@
 
 import Link from 'next/link';
 import { Logo } from '../icons/logo';
-import { ShimmerButton } from '../ui/shimmer-button';
 import { Youtube, Instagram, Facebook, Linkedin, Twitter } from 'lucide-react';
+import { Button } from '../ui/button';
 
 const footerNav = [
   { href: '/about', label: 'About' },
@@ -48,16 +48,17 @@ export function AppFooter() {
               <h3 className="font-headline text-lg uppercase tracking-wider mb-4">Follow Us</h3>
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => (
-                    <ShimmerButton 
+                    <Button 
                         key={index}
                         size="icon" 
+                        variant="outline"
                         asChild 
-                        className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"
+                        className="bg-transparent border-input hover:bg-accent hover:text-accent-foreground text-foreground rounded-full"
                     >
                         <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social['aria-label']}>
-                            <social.icon className="text-white"/>
+                            <social.icon className="h-5 w-5"/>
                         </a>
-                    </ShimmerButton>
+                    </Button>
                 ))}
               </div>
             </div>
