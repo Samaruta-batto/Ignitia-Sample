@@ -4,9 +4,7 @@ import { ClientProviders } from '@/components/providers/client-providers';
 import './globals.css';
 import { SmoothCursor } from '@/components/ui/smooth-cursor';
 import { FirebaseClientProvider } from '@/firebase';
-import { AppHeader } from '@/components/layout/header';
-import { useUser } from '@/firebase/provider';
-import { AppLayout } from '@/components/layout/app-layout';
+import { AppFooter } from '@/components/layout/footer';
 
 export const metadata: Metadata = {
   title: 'Ignitia',
@@ -31,7 +29,10 @@ export default function RootLayout({
         <FirebaseClientProvider>
           <ClientProviders>
             <SmoothCursor />
-            {children}
+            <div className="flex flex-col min-h-screen">
+              <main className="flex-1 flex flex-col">{children}</main>
+              <AppFooter />
+            </div>
             <Toaster />
           </ClientProviders>
         </FirebaseClientProvider>

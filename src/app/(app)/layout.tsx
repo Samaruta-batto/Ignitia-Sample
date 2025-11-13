@@ -21,7 +21,7 @@ export default function MainAppLayout({
 
   return (
     <AppLayout user={user}>
-        <div className="p-4 md:p-8">
+        <div className="p-4 md:p-8 animate-fade-in">
             {children}
         </div>
     </AppLayout>

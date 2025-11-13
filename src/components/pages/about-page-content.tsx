@@ -51,7 +51,7 @@ export function AboutPageContent() {
                 </div>
                 <div className="space-y-6">
                     <h1 className="font-headline text-5xl md:text-6xl tracking-wider uppercase text-accent">About IGNITIA</h1>
-                    <h2 className="text-lg font-semibold text-muted-foreground">Managed by SAHYOG JANKALYAN SAMITI</h2>
+                    <h2 className="text-lg font-semibold text-muted-foreground">By PSIT Kanpur</h2>
                     <p className="text-lg text-foreground/80 leading-relaxed">
                         Ignitia 2025, PSIT's highly anticipated annual techno-cultural fest, stands as a true reflection of our commitment to fostering holistic student development. This two-day extravaganza features an exciting mix of events, performances, and competitions, offering students unique opportunities to showcase their talents, leadership skills, and creativity.
                     </p>
