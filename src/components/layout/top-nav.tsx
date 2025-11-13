@@ -24,7 +24,7 @@ import { Separator } from '../ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 
 const menuItems = [
-  { href: '/', label: 'Home', icon: Home },
+  { href: '/home', label: 'Home', icon: Home },
   { href: '/about', label: 'About', icon: Info },
   { href: '/events', label: 'Events', icon: Ticket },
   { href: '/merchandise', label: 'Merch', icon: ShoppingBag },
@@ -39,6 +39,11 @@ export function TopNav() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = React.useState(false);
 
+  // Do not render the main navigation on the static landing page
+  if (pathname === '/') {
+    return null;
+  }
+
   return (
     <>
       <nav className="hidden md:flex items-center justify-center flex-1">
@@ -46,14 +51,12 @@ export function TopNav() {
           {menuItems.map((item) => (
             <Button
               key={item.label}
-              className={cn(
-                'bg-transparent text-sm font-semibold h-auto py-2 px-3',
-                pathname === item.href
-                  ? 'text-accent'
-                  : 'text-foreground/80 hover:text-accent'
-              )}
-              variant="ghost"
               asChild
+              variant="ghost"
+              className={cn(
+                'text-sm font-semibold text-foreground/80 hover:text-accent',
+                (pathname === item.href || (item.href !== '/home' && pathname.startsWith(item.href))) && 'text-accent'
+              )}
             >
               <Link href={item.href}>{item.label}</Link>
             </Button>

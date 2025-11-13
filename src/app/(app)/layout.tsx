@@ -12,9 +12,12 @@ export default function MainAppLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const noLayoutRoutes = ['/user-login', '/signup', '/login'];
   const { user } = useUser();
+  
+  // The root of the app group should not have the layout, it just redirects
+  if (pathname === '/') return <>{children}</>;
 
+  const noLayoutRoutes = ['/user-login', '/signup', '/login'];
   if (noLayoutRoutes.includes(pathname)) {
     return <>{children}</>;
   }
