@@ -9,13 +9,14 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { products, events } from '@/lib/data/placeholder-data';
-import { ArrowRight, Ticket, Users, Award, Youtube, Instagram, Facebook, Linkedin, Twitter, MonitorPlay, Radio } from 'lucide-react';
+import { ArrowRight, Ticket, Users, Award } from 'lucide-react';
 import Link from 'next/link';
 import { PlaceHolderImages } from '@/lib/data/placeholder-images';
 import { formatCurrency } from '@/lib/utils';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { PastGuests } from '@/components/home/past-guests';
 import NumberTicker from '@/components/ui/number-ticker';
+import { siteConfig } from '@/lib/data/site-config';
 
 export function HomePageContent() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'techno-background')!;
@@ -54,11 +55,11 @@ export function HomePageContent() {
             <p className="mt-2 text-lg text-muted-foreground">Stay connected with us</p>
         </div>
         <div className="flex justify-center gap-4">
-            <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Youtube className="text-white"/></a></ShimmerButton>
-            <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Instagram className="text-white"/></a></ShimmerButton>
-            <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Facebook className="text-white"/></a></ShimmerButton>
-            <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Linkedin className="text-white"/></a></ShimmerButton>
-            <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground"><a href="#"><Twitter className="text-white"/></a></ShimmerButton>
+            {siteConfig.socials.map((social) => (
+              <ShimmerButton key={social.href} size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
+                  <a href={social.href} aria-label={social['aria-label']}><social.icon className="text-white"/></a>
+              </ShimmerButton>
+            ))}
         </div>
       </section>
 

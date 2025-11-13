@@ -1,8 +1,8 @@
 
 import Link from 'next/link';
 import { Logo } from '../icons/logo';
-import { Youtube, Instagram, Facebook, Linkedin, Twitter } from 'lucide-react';
 import { Button } from '../ui/button';
+import { siteConfig } from '@/lib/data/site-config';
 
 const footerNav = [
   { href: '/about', label: 'About' },
@@ -10,14 +10,6 @@ const footerNav = [
   { href: '/merchandise', label: 'Merch' },
   { href: '/sponsors', label: 'Sponsors' },
   { href: '/contact', label: 'Contact' },
-];
-
-const socialLinks = [
-  { href: '#', icon: Youtube, 'aria-label': 'Youtube' },
-  { href: '#', icon: Instagram, 'aria-label': 'Instagram' },
-  { href: '#', icon: Facebook, 'aria-label': 'Facebook' },
-  { href: '#', icon: Linkedin, 'aria-label': 'LinkedIn' },
-  { href: '#', icon: Twitter, 'aria-label': 'Twitter' },
 ];
 
 export function AppFooter() {
@@ -47,7 +39,7 @@ export function AppFooter() {
             <div>
               <h3 className="font-headline text-lg uppercase tracking-wider mb-4">Follow Us</h3>
               <div className="flex gap-4">
-                {socialLinks.map((social, index) => (
+                {siteConfig.socials.map((social, index) => (
                     <Button 
                         key={index}
                         size="icon" 
