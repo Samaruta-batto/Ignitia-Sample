@@ -14,9 +14,6 @@ export default function MainAppLayout({
   const pathname = usePathname();
   const { user } = useUser();
   
-  // The root of the app group should not have the layout, it just redirects
-  if (pathname === '/') return <>{children}</>;
-
   const noLayoutRoutes = ['/user-login', '/signup', '/login'];
   if (noLayoutRoutes.includes(pathname)) {
     return <>{children}</>;
