@@ -38,7 +38,7 @@ export default function HomePage() {
             <p className="mt-4 max-w-2xl text-lg md:text-xl text-foreground/80 drop-shadow-2xl">
                 April 28-29, 2026 | PSIT Kanpur
             </p>
-            <div className="mt-8 flex gap-4 pointer-events-auto">
+            <div className="mt-8 flex justify-center gap-4 pointer-events-auto">
                 <ShimmerButton className="px-8 py-3">
                 <Link href="/events" className="flex items-center gap-2">Register Now <ArrowRight /></Link>
                 </ShimmerButton>
