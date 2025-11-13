@@ -9,13 +9,13 @@ import { ConsoleWarning } from '@/components/layout/console-warning';
 import type { User } from 'firebase/auth';
 import { CartSheet } from '../cart/cart-sheet';
 import { useCartStore } from '@/hooks/use-cart-store';
-import { useUser } from '@/firebase';
+import { useUser, useFirestore } from '@/firebase/provider';
 import { useCollection } from '@/firebase/firestore/use-collection';
 import { collection } from 'firebase/firestore';
-import { useFirestore, useMemoFirebase } from '@/firebase/provider';
+import { useMemoFirebase } from '@/firebase/provider';
 import type { WithId } from '@/firebase/firestore/use-collection';
-import type { CartItem, Product } from '@/lib/types';
-import { products } from '@/lib/placeholder-data';
+import type { CartItem, Product } from '@/lib/data/types';
+import { products } from '@/lib/data/placeholder-data';
 
 export function AppLayout({
   children,

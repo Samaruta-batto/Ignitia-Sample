@@ -15,9 +15,9 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { useFirestore } from '@/firebase';
+import { useFirestore } from '@/firebase/provider';
 import { useToast } from '@/hooks/use-toast';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { PlaceHolderImages } from '@/lib/data/placeholder-images';
 import {
     Select,
     SelectContent,
@@ -25,7 +25,7 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-import { eventCategories, eventSubCategories } from '@/lib/placeholder-data';
+import { eventCategories, eventSubCategories } from '@/lib/data/placeholder-data';
 import { useState } from 'react';
 
 const formSchema = z.object({

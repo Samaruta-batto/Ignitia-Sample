@@ -1,5 +1,6 @@
+
 import Image from 'next/image';
-import { sponsors } from '@/lib/placeholder-data';
+import { sponsors } from '@/lib/data/placeholder-data';
 
 export function Sponsors() {
   return (

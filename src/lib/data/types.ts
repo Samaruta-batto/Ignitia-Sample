@@ -5,7 +5,7 @@ import type { ImagePlaceholder } from './placeholder-images';
 export interface Event {
   id: string;
   title: string;
-  name: string;
+  name?: string;
   date: string;
   location: string;
   description: string;

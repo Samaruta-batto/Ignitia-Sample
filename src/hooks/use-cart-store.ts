@@ -1,8 +1,8 @@
 
 'use client';
 import { create } from 'zustand';
-import type { Product } from '@/lib/types';
-import { useUser, useFirestore } from '@/firebase';
+import type { Product } from '@/lib/data/types';
+import { useUser, useFirestore } from '@/firebase/provider';
 import { collection, doc, updateDoc, deleteDoc, addDoc, serverTimestamp, getDocs, query, where } from 'firebase/firestore';
 
 export type CartItem = Product & { quantity: number };

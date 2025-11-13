@@ -1,0 +1,221 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "event-1",
+      "description": "Music festival at night with large crowds and vibrant stage lights.",
+      "imageUrl": "https://images.unsplash.com/photo-1619229725920-ac8b63b0631a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtdXNpYyUyMGZlc3RpdmFsfGVufDB8fHx8MTc2MjQ4MjE2OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "music festival"
+    },
+    {
+      "id": "event-2",
+      "description": "Tech conference with speaker on stage and audience.",
+      "imageUrl": "https://images.unsplash.com/photo-1600320844678-43cebba1cdfe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0ZWNoJTIwY29uZmVyZW5jZXxlbnwwfHx8fDE3NjI0MTk3MjF8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tech conference"
+    },
+    {
+      "id": "event-3",
+      "description": "Art exhibition in a modern gallery.",
+      "imageUrl": "https://images.unsplash.com/photo-1605429523419-d828acb941d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxhcnQlMjBnYWxsZXJ5fGVufDB8fHx8MTc2MjM5MTkxNXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "art gallery"
+    },
+    {
+      "id": "event-4",
+      "description": "Food festival with various food stalls.",
+      "imageUrl": "https://images.unsplash.com/photo-1705359573945-bcf2d0b70b0b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxmb29kJTIwZmVzdGl2YWx8ZW58MHx8fHwxNzYyNDUzNzIwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "food festival"
+    },
+    {
+      "id": "fintech-1",
+      "description": "A trading desk with multiple monitors showing stock charts.",
+      "imageUrl": "https://images.unsplash.com/photo-1643223652822-8d5334a1b9a2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "trading desk"
+    },
+    {
+      "id": "fintech-2",
+      "description": "A finger pointing at a rising stock chart on a digital screen.",
+      "imageUrl": "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "stock chart"
+    },
+    {
+      "id": "merch-1",
+      "description": "Black t-shirt with a cool graphic design.",
+      "imageUrl": "https://images.unsplash.com/photo-1600944632391-609f547666f4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Z3JhcGhpYyUyMHRzaGlydHxlbnwwfHx8fDE3NjIzODczMjd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "graphic tshirt"
+    },
+    {
+      "id": "merch-2",
+      "description": "A stylish branded cap.",
+      "imageUrl": "https://images.unsplash.com/photo-1713918927331-6c85fe904cda?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzdHlsaXNoJTIwY2FwfGVufDB8fHx8MTc2MjUwNDcyNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "stylish cap"
+    },
+    {
+      "id": "merch-3",
+      "description": "A reusable water bottle with a logo.",
+      "imageUrl": "https://images.unsplash.com/photo-1544003484-3cd181d17917?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx3YXRlciUyMGJvdHRsZXxlbnwwfHx8fDE3NjI0NDQxOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "water bottle"
+    },
+    {
+      "id": "merch-4",
+      "description": "A cozy hoodie with event branding.",
+      "imageUrl": "https://images.unsplash.com/photo-1588932250351-36235af5c0f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxicmFuZGVkJTIwaG9vZGllfGVufDB8fHx8MTc2MjUwNDcyNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "branded hoodie"
+    },
+    {
+      "id": "merch-5",
+      "description": "A set of enamel pins.",
+      "imageUrl": "https://images.unsplash.com/photo-1754677701203-23b7eb7497d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxlbmFtZWwlMjBwaW5zfGVufDB8fHx8MTc2MjQxNDAyOXww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "enamel pins"
+    },
+    {
+      "id": "merch-6",
+      "description": "A tote bag with a unique design.",
+      "imageUrl": "https://images.unsplash.com/photo-1621466550398-ac8062907657?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx0b3RlJTIwYmFnfGVufDB8fHx8MTc2MjUwNDcyNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tote bag"
+    },
+    {
+      "id": "merch-jacket",
+      "description": "A stylish bomber jacket with event branding.",
+      "imageUrl": "https://images.unsplash.com/photo-1591047139829-d919b5ca4031?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxib21iZXIlMjBqYWNrZXR8ZW58MHx8fHwxNzYyODU4MzQwfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "bomber jacket"
+    },
+    {
+      "id": "merch-tshirt-showcase",
+      "description": "Front and back of a white polo t-shirt mockup.",
+      "imageUrl": "https://storage.googleapis.com/stabl-media/6945533d-c182-411a-a114-1e0500a89d2b_t-shirt-mockup.png",
+      "imageHint": "tshirt mockup"
+    },
+    {
+      "id": "sponsor-1",
+      "description": "Logo for a tech company.",
+      "imageUrl": "https://images.unsplash.com/photo-1762330917439-78d1a00e3fe5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHx0ZWNoJTIwbG9nb3xlbnwwfHx8fDE3NjI0NTIwNzJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "tech logo"
+    },
+    {
+      "id": "sponsor-2",
+      "description": "Logo for a beverage company.",
+      "imageUrl": "https://images.unsplash.com/photo-1535365752810-1bc1ebcc98c7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxiZXZlcmFnZSUyMGxvZ298ZW58MHx8fHwxNzYyNTA0NzI2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "beverage logo"
+    },
+    {
+      "id": "sponsor-3",
+      "description": "Logo for a media partner.",
+      "imageUrl": "https://images.unsplash.com/photo-1678483789123-e8a73f82addb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtZWRpYSUyMGxvZ298ZW58MHx8fHwxNzYyNTA0NzI2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "media logo"
+    },
+    {
+      "id": "sponsor-4",
+      "description": "Logo for a financial services company.",
+      "imageUrl": "https://images.unsplash.com/photo-1639603683079-7398c604497a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmaW5hbmNlJTIwbG9nb3xlbnwwfHx8fDE3NjI0NjgzNTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "finance logo"
+    },
+    {
+      "id": "sponsor-quantumleap",
+      "description": "QuantumLeap company logo.",
+      "imageUrl": "https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsb2dvfGVufDB8fHx8MTc2MjU5MjY4Mnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "company logo"
+    },
+    {
+      "id": "sponsor-starlight",
+      "description": "Starlight Studios company logo.",
+      "imageUrl": "https://images.unsplash.com/photo-1611162616805-467335790d95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxtZWRpYSUyMGxvZ298ZW58MHx8fHwxNzYyNTkyNzM5fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "media logo"
+    },
+    {
+      "id": "sponsor-bytebuilders",
+      "description": "ByteBuilders company logo.",
+      "imageUrl": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb2RpbmclMjBsb2dvfGVufDB8fHx8MTc2MjU5MjkxNnww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "coding logo"
+    },
+    {
+      "id": "sponsor-innovateinc",
+      "description": "Innovate Inc. company logo.",
+      "imageUrl": "https://images.unsplash.com/photo-1600880292210-859b91487857?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbm5vdmF0aW9uJTIwbG9nb3xlbnwwfHx8fDE3NjI1OTI5MTZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "innovation logo"
+    },
+    {
+      "id": "archive-1",
+      "description": "Photo from a past music festival.",
+      "imageUrl": "https://images.unsplash.com/photo-1501238295340-c810d3c156d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8ZmVzdGl2YWwlMjBjcm93ZHxlbnwwfHx8fDE3NjI0MTU2NjB8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "festival crowd"
+    },
+    {
+      "id": "archive-2",
+      "description": "Keynote speaker at a conference.",
+      "imageUrl": "https://images.unsplash.com/photo-1602137933752-921eab594fd5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxrZXlub3RlJTIwc3BlYWtlcnxlbnwwfHx8fDE3NjI1MDMxMjR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "keynote speaker"
+    },
+    {
+      "id": "archive-3",
+      "description": "People networking at an event.",
+      "imageUrl": "https://images.unsplash.com/photo-1531058020387-3be344556be6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxldmVudCUyMG5ldHdvcmtpbmd8ZW58MHx8fHwxNzYyNTA0NzI2fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "event networking"
+    },
+    {
+      "id": "archive-4",
+      "description": "Live band performing on stage.",
+      "imageUrl": "https://images.unsplash.com/photo-1565035010268-a3816f98589a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxsaXZlJTIwYmFuZHxlbnwwfHx8fDE3NjIzODgyOTV8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "live band"
+    },
+    {
+      "id": "archive-5",
+      "description": "Close up of an art installation.",
+      "imageUrl": "https://images.unsplash.com/photo-1527698952067-61fc35796fcd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxhcnQlMjBpbnN0YWxsYXRpb258ZW58MHx8fHwxNzYyNDYxMTM4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "art installation"
+    },
+    {
+      "id": "archive-6",
+      "description": "Happy attendees at a food festival.",
+      "imageUrl": "https://images.unsplash.com/photo-1660796115883-5e2ba15b34ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxoYXBweSUyMGF0dGVuZGVlc3xlbnwwfHx8fDE3NjI1MDQ3MjZ8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "happy attendees"
+    },
+    {
+      "id": "ignitia-logo-mandala",
+      "description": "Golden Ignitia flame logo with a mandala background.",
+      "imageUrl": "https://storage.googleapis.com/stabl-media/6945533d-c182-411a-a114-1e0500a89d2b_ignitia_logo_mandala.png",
+      "imageHint": "golden logo"
+    },
+    {
+      "id": "techno-background",
+      "description": "Abstract background with glowing blue techno grid.",
+      "imageUrl": "https://images.unsplash.com/photo-1533652810334-219b8df05aa7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "techno grid"
+    },
+    {
+      "id": "about-ignitia",
+      "description": "A vibrant, colorful abstract image representing innovation and energy.",
+      "imageUrl": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "abstract vibrant"
+    },
+    {
+      "id": "about-psit",
+      "description": "A modern college campus building with a clear blue sky.",
+      "imageUrl": "https://images.unsplash.com/photo-1580582932707-520aed937b7b?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "imageHint": "college campus"
+    },
+    {
+      "id": "celebrity-kailash",
+      "description": "Portrait of Kailash Kher singing.",
+      "imageUrl": "https://storage.googleapis.com/stabl-media/6945533d-c182-411a-a114-1e0500a89d2b_kailash.png",
+      "imageHint": "singer portrait"
+    },
+    {
+      "id": "celebrity-anupam",
+      "description": "Portrait of Anupam Kher.",
+      "imageUrl": "https://storage.googleapis.com/stabl-media/6945533d-c182-411a-a114-1e0500a89d2b_anupam.png",
+      "imageHint": "actor portrait"
+    },
+    {
+      "id": "celebrity-bhumi",
+      "description": "Portrait of Bhumi Pednekar.",
+      "imageUrl": "https://storage.googleapis.com/stabl-media/6945533d-c182-411a-a114-1e0500a89d2b_bhumi.png",
+      "imageHint": "actress portrait"
+    },
+    {
+      "id": "celebrity-neeti-mohan-reveal",
+      "description": "Promotional poster for Neeti Mohan's performance.",
+      "imageUrl": "https://storage.googleapis.com/stabl-media/6945533d-c182-411a-a114-1e0500a89d2b_neeti-mohan-ignitia-poster.png",
+      "imageHint": "singer poster"
+    }
+  ]
+}

@@ -2,9 +2,9 @@
 'use client';
 import * as React from 'react';
 import Image from 'next/image';
-import { Card, CardContent } from '@/components/ui/card';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Star, ArrowLeft, ArrowRight, Video } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { PlaceHolderImages } from '@/lib/data/placeholder-images';
+import { ArrowLeft, ArrowRight, Video } from 'lucide-react';
 import {
   Carousel,
   CarouselContent,
@@ -12,7 +12,6 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 import { ShimmerButton } from '../ui/shimmer-button';
-import { cn } from '@/lib/utils';
 
 const pastCelebrities = [
   {
