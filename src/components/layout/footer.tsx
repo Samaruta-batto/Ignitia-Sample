@@ -48,7 +48,7 @@ export function AppFooter() {
               <h3 className="font-headline text-lg uppercase tracking-wider mb-4">Follow Us</h3>
               <div className="flex gap-4">
                 {socialLinks.map((social, index) => (
-                  <ShimmerButton key={index} asChild size="icon" variant="outline" className="bg-card/50">
+                  <ShimmerButton key={index} size="icon" variant="outline" className="bg-card/50 rounded-full">
                     <a href={social.href} target="_blank" rel="noopener noreferrer">
                       <social.icon />
                     </a>
