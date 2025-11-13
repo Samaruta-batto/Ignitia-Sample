@@ -2,7 +2,9 @@
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { ArrowRight, Ticket } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Logo } from '@/components/icons/logo';
+import { PlaceHolderImages } from '@/lib/data/placeholder-images';
 
 const navItems = [
   { href: '/home', label: 'Home' },
@@ -13,6 +15,7 @@ const navItems = [
 ];
 
 export function LandingPageContent() {
+  const landingImage = PlaceHolderImages.find(p => p.id === 'landing-background')!;
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <main className="flex-1">
@@ -41,7 +44,14 @@ export function LandingPageContent() {
             </header>
           </div>
 
-          <div className="absolute inset-0 bg-primary -z-10" />
+          <div className="absolute inset-0 -z-10">
+            <Image
+              src={landingImage.imageUrl}
+              alt={landingImage.imageHint}
+              fill
+              className="object-cover"
+            />
+          </div>
 
           <div className="z-10 mt-[-4rem]">
             <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg drop-shadow-2xl">
@@ -74,3 +84,4 @@ export function LandingPageContent() {
     </div>
   );
 }
+ 

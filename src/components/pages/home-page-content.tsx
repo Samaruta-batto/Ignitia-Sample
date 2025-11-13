@@ -21,7 +21,7 @@ import { siteConfig } from '@/lib/data/site-config';
 import { motion } from 'framer-motion';
 
 export function HomePageContent() {
-  const heroImage = PlaceHolderImages.find(p => p.id === 'techno-background')!;
+  const heroImage = PlaceHolderImages.find(p => p.id === 'home-background')!;
   const featuredProducts = products.slice(0, 3);
   const aboutIgnitiaImage = PlaceHolderImages.find(p => p.id === 'about-ignitia')!;
   const aboutPsitImage = PlaceHolderImages.find(p => p.id === 'about-psit')!;

@@ -182,6 +182,18 @@
       "imageHint": "techno grid"
     },
     {
+      "id": "landing-background",
+      "description": "Local landing page background image (replace with your image at public/images/landingbg.jpg)",
+      "imageUrl": "/images/landingbg.jpg",
+      "imageHint": "landing background"
+    },
+    {
+      "id": "home-background",
+      "description": "Local home page background image (replace with your image at public/images/homebg.jpg)",
+      "imageUrl": "/images/homebg.jpg",
+      "imageHint": "home background"
+    },
+    {
       "id": "about-ignitia",
       "description": "A vibrant, colorful abstract image representing innovation and energy.",
       "imageUrl": "https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
