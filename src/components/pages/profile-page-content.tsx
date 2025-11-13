@@ -23,6 +23,7 @@ import { mockWalletTransactions, mockEventRegistrations, mockMerchOrders } from 
 import Loading from '@/app/(app)/loading';
 import { useAuth, useUser } from '@/firebase/provider';
 import { signOut, type User as AuthUser } from 'firebase/auth';
+import { PlaceHolderImages } from '@/lib/data/placeholder-images';
 
 
 export function ProfilePageContent() {
@@ -31,6 +32,8 @@ export function ProfilePageContent() {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState<AuthUser | null>(user);
+  const pravatarPlaceholder = PlaceHolderImages.find(p => p.id === 'pravatar-placeholder');
+
 
   useEffect(() => {
     if (!isUserLoading && !user) {
@@ -60,6 +63,14 @@ export function ProfilePageContent() {
   };
   
   const userInitial = (user.displayName || user.email)?.charAt(0).toUpperCase();
+
+  const getAvatarUrl = () => {
+    if (user?.photoURL) return user.photoURL;
+    if (pravatarPlaceholder && user?.uid) {
+      return `${pravatarPlaceholder.imageUrl}${user.uid}`;
+    }
+    return '';
+  }
 
   return (
     <div className="min-h-screen py-12 px-4">
@@ -91,7 +102,7 @@ export function ProfilePageContent() {
               <CardContent>
                 <div className="flex flex-col items-center mb-6">
                   <Avatar className="w-32 h-32 mb-4 border-4 border-[#D4AF37]">
-                    <AvatarImage src={user.photoURL || ''} alt={user.displayName || ''} />
+                    <AvatarImage src={getAvatarUrl()} alt={user.displayName || ''} />
                     <AvatarFallback className="text-3xl bg-[#D4AF37] text-[#1A1625]">
                       {userInitial}
                     </AvatarFallback>

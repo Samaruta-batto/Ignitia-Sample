@@ -1,5 +1,5 @@
 
-import type { Event, Product, Sponsor, ArchiveItem, EventCategory, EventSubCategory } from './types';
+import type { Event, Product, Sponsor, ArchiveItem, EventCategory, EventSubCategory, TeamMember } from './types';
 import { PlaceHolderImages } from './placeholder-images';
 
 const getImage = (id: string) => {
@@ -153,3 +153,69 @@ export const archiveItems: ArchiveItem[] = [
     { id: '5', title: 'Interactive Light Sculpture', year: 2021, topic: 'Art', image: getImage('archive-5') },
     { id: '6', title: 'Crowd Enjoying the Show', year: 2021, topic: 'Community', image: getImage('archive-6') },
 ];
+
+export const coreTeam: TeamMember[] = [
+    {
+      name: 'Alex Johnson',
+      role: 'Fest Coordinator',
+      avatar: getImage('avatar-alex'),
+      bio: 'The mastermind behind Ignitia, ensuring every detail is perfect.',
+      social: {
+        linkedin: '#',
+        twitter: '#',
+      },
+    },
+    {
+      name: 'Maria Garcia',
+      role: 'Head of Events',
+      avatar: getImage('avatar-maria'),
+      bio: 'Curating an unforgettable lineup of tech and cultural events.',
+       social: {
+        linkedin: '#',
+        twitter: '#',
+      },
+    },
+    {
+      name: 'Sam Lee',
+      role: 'Sponsorship Lead',
+      avatar: getImage('avatar-sam'),
+      bio: 'Building bridges with our amazing partners and sponsors.',
+       social: {
+        linkedin: '#',
+        twitter: '#',
+      },
+    },
+     {
+      name: 'Priya Singh',
+      role: 'Marketing Head',
+      avatar: getImage('avatar-priya'),
+      bio: 'Spreading the word and creating the buzz for Ignitia.',
+       social: {
+        linkedin: '#',
+        twitter: '#',
+      },
+    },
+  ];
+  
+  export const devTeam: TeamMember[] = [
+    {
+      name: 'Chris Patel',
+      role: 'Lead Developer',
+      avatar: getImage('avatar-chris'),
+      bio: 'Architecting the digital backbone of the Ignitia platform.',
+      social: {
+        github: '#',
+        linkedin: '#',
+      },
+    },
+    {
+      name: 'Jordan Davis',
+      role: 'Frontend Developer',
+      avatar: getImage('avatar-jordan'),
+      bio: 'Crafting the user experience with React and Tailwind CSS.',
+      social: {
+        github: '#',
+        linkedin: '#',
+      },
+    },
+  ];

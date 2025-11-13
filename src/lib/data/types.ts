@@ -72,3 +72,15 @@ export interface CartItem {
     productId: string;
     quantity: number;
 }
+
+export interface TeamMember {
+    name: string;
+    role: string;
+    avatar: ImagePlaceholder;
+    bio: string;
+    social: {
+        github?: string;
+        linkedin?: string;
+        twitter?: string;
+    }
+}

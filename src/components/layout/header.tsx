@@ -21,11 +21,13 @@ import { signOut } from 'firebase/auth';
 import { useCartStore } from '@/hooks/use-cart-store';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
+import { PlaceHolderImages } from '@/lib/data/placeholder-images';
 
 export function AppHeader({ user }: { user: User | null }) {
   const router = useRouter();
   const auth = useAuth();
   const { cart, toggleCart } = useCartStore();
+  const pravatarPlaceholder = PlaceHolderImages.find(p => p.id === 'pravatar-placeholder');
 
   const handleSignOut = async () => {
     if (auth) {
@@ -38,6 +40,14 @@ export function AppHeader({ user }: { user: User | null }) {
   const userInitial = (user?.displayName || user?.email)?.charAt(0).toUpperCase();
 
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  const getAvatarUrl = () => {
+    if (user?.photoURL) return user.photoURL;
+    if (pravatarPlaceholder && user?.uid) {
+      return `${pravatarPlaceholder.imageUrl}${user.uid}`;
+    }
+    return '';
+  }
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-black/10 bg-background/30 backdrop-blur-lg">
@@ -60,7 +70,7 @@ export function AppHeader({ user }: { user: User | null }) {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                   <Avatar className="h-10 w-10">
-                     <AvatarImage src={user.photoURL || `https://i.pravatar.cc/150?u=${user?.uid}`} />
+                     <AvatarImage src={getAvatarUrl()} />
                     <AvatarFallback>{userInitial}</AvatarFallback>
                   </Avatar>
                 </Button>

@@ -23,6 +23,7 @@ import { Logo } from '../icons/logo';
 import { Separator } from '../ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { ShimmerButton } from '../ui/shimmer-button';
+import { PlaceHolderImages } from '@/lib/data/placeholder-images';
 
 const menuItems = [
   { href: '/home', label: 'Home', icon: Home },
@@ -39,6 +40,7 @@ const menuItems = [
 export function TopNav() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = React.useState(false);
+  const userAvatar = PlaceHolderImages.find(p => p.id === 'avatar-user');
 
   // Do not render the main navigation on the static landing page
   if (pathname === '/') {
@@ -99,7 +101,7 @@ export function TopNav() {
              <Separator />
              <div className="p-4 flex items-center gap-3">
                 <Avatar>
-                    <AvatarImage src="https://picsum.photos/seed/user/40/40" data-ai-hint="user avatar"/>
+                    {userAvatar && <AvatarImage src={userAvatar.imageUrl} data-ai-hint={userAvatar.imageHint}/>}
                     <AvatarFallback>U</AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col">
