@@ -155,7 +155,7 @@ export function EventsPageContent() {
               {filteredItems && filteredItems.map(item => (
                 <MagicCard
                   key={item.id}
-                  className="w-[350px] flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105"
+                  className="w-[350px] flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105 h-full"
                 >
                   <Card className="bg-card/50 backdrop-blur-sm border-0 shadow-none overflow-hidden group w-full h-full flex flex-col">
                     <div className="relative aspect-video overflow-hidden">
@@ -167,7 +167,7 @@ export function EventsPageContent() {
                         data-ai-hint={item.image.imageHint}
                       />
                     </div>
-                    <CardContent className="p-6 text-center flex flex-col flex-grow">
+                    <CardContent className="p-6 text-center flex flex-col flex-1">
                       <h3 className="font-headline text-2xl text-white mb-2">{item.name}</h3>
                       <p className="text-muted-foreground text-sm flex-grow">{item.description}</p>
                       <div className="mt-auto pt-4">
