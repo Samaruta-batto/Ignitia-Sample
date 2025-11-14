@@ -44,7 +44,7 @@ export function LandingPageContent() {
             </header>
           </div>
 
-          <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 z-10">
             <Image
               src={landingImage.imageUrl}
               alt={landingImage.imageHint}

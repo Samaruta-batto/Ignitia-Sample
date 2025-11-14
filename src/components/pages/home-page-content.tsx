@@ -56,15 +56,28 @@ export function HomePageContent() {
 
   return (
     <div className="space-y-24 -mt-8 -mx-8">
-      <section className="relative h-[70vh] w-full flex flex-col items-center justify-center text-center text-white -mt-8 -mx-8">
-        {/* You can replace this div with an Image component for your background */}
-        <div className="absolute inset-0 bg-primary -z-10" />
-        <motion.div 
-            className="z-10 px-4"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-        >
+      <section className="relative w-screen h-[70vh] flex items-center justify-center text-center text-white overflow-hidden">
+  {/* Background image — ensure parent is relative and has height */}
+  <div className="absolute inset-0 z-0">
+    <Image
+      src={heroImage.imageUrl}
+      alt={heroImage.imageHint ?? 'Hero background'}
+      fill
+      priority
+      // inline style to force object-fit if global styles override Tailwind
+      style={{ objectFit: 'cover' }}
+      className="w-full h-full"
+      unoptimized={false}
+    />
+  </div>
+
+  {/* Foreground content — higher z */}
+  <motion.div 
+    className="z-10 px-4 max-w-5xl"
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7, ease: "easeOut" }}
+  >
             <h1 className="font-headline text-6xl md:text-8xl uppercase tracking-wider text-shadow-lg drop-shadow-2xl">
                 IGNITIA 2k26
             </h1>
@@ -311,7 +324,7 @@ export function HomePageContent() {
                                   src={product.image.imageUrl}
                                   alt={product.name}
                                   fill
-                                  className="object-contain transition-transform duration-300 group-hover:scale-105"
+                                  className="object-cover transition-transform duration-300 group-hover:scale-105"
                                   data-ai-hint={product.image.imageHint}
                               />
                           </div>
