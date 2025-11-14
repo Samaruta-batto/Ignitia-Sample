@@ -17,9 +17,9 @@ import { PastGuests } from '@/components/home/past-guests';
 import NumberTicker from '@/components/ui/number-ticker';
 import { siteConfig } from '@/lib/data/site-config';
 import { motion } from 'framer-motion';
+import AnimatedGrid from '@/components/AnimatedGrid';
 
 export function HomePageContent() {
-  const heroImage = PlaceHolderImages.find(p => p.id === 'home-background')!;
   const featuredProducts = products.slice(0, 3);
   const aboutIgnitiaImage = PlaceHolderImages.find(p => p.id === 'about-ignitia')!;
   const aboutPsitImage = PlaceHolderImages.find(p => p.id === 'about-psit')!;
@@ -51,21 +51,11 @@ export function HomePageContent() {
     },
   };
 
-
   return (
     <div className="space-y-24">
-      {/* Hero Section - Full Width */}
+      {/* Hero Section */}
       <section className="relative h-[70vh] w-full flex flex-col items-center justify-center text-center text-white overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-             <Image
-                src={heroImage.imageUrl}
-                alt={heroImage.imageHint}
-                fill
-                priority
-                className="object-cover"
-                data-ai-hint={heroImage.imageHint}
-            />
-        </div>
+        <AnimatedGrid />
         <motion.div 
             className="z-10 px-4"
             initial={{ opacity: 0, y: -20 }}
@@ -344,5 +334,3 @@ export function HomePageContent() {
     </div>
   );
 }
-
-    

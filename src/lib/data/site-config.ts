@@ -11,4 +11,13 @@ export const siteConfig = {
   ],
 };
 
+export const navItems = [
+  { href: '/home', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/events', label: 'Events' },
+  { href: '/merchandise', label: 'Merch' },
+  { href: '/contact', label: 'Contact' },
+];
+
+
 export type SiteConfig = typeof siteConfig;
