@@ -3,102 +3,121 @@
 
 import * as React from 'react';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { eventCategories, eventSubCategories, events as allEvents } from '@/lib/data/placeholder-data';
 import type { Event as StaticEvent } from '@/lib/data/types';
 import { cn, formatCurrency } from '@/lib/utils';
 import { MagicCard } from '@/components/ui/magic-card';
-import { useFirebase } from '@/firebase/provider';
-import {
-  runTransaction,
-  doc,
-  collection,
-  serverTimestamp,
-} from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
-import { useUser } from '@/firebase/provider';
 import { WarpBackground } from '@/components/ui/warp-background';
 
-type Event = StaticEvent;
+type Event = StaticEvent & { registeredAttendees?: number };
 
 export function EventsPageContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const categoryParam = searchParams.get('category');
   const subCategoryParam = searchParams.get('subCategory');
 
-  const { firestore } = useFirebase();
-  const { user } = useUser();
   const { toast } = useToast();
 
+  const [events, setEvents] = React.useState<Event[]>(allEvents);
   const [activeCategory, setActiveCategory] = React.useState<string>(categoryParam || 'entrepreneurial');
   const [activeSubCategory, setActiveSubCategory] = React.useState<string>(subCategoryParam || 'fintech');
-  
-  const isLoading = false; // Using static data
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [token, setToken] = React.useState<string | null>(null);
+
+  // Load token from localStorage
+  React.useEffect(() => {
+    const saved = localStorage.getItem('auth_token');
+    setToken(saved);
+  }, []);
+
+  // Fetch events from backend
+  React.useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch('/api/events/leaderboard');
+        const data = await res.json();
+        if (!cancelled) {
+          // Merge backend registration counts with placeholder data
+          const merged = allEvents.map(e => {
+            const backendEvent = data.find((be: any) => be.id === e.id);
+            return { ...e, registeredAttendees: backendEvent?.registeredAttendees || 0 };
+          });
+          setEvents(merged);
+        }
+      } catch (err) {
+        console.warn('Failed to fetch events from backend, using placeholder data:', err);
+        setEvents(allEvents);
+      } finally {
+        if (!cancelled) setIsLoading(false);
+      }
+    })();
+    return () => { cancelled = true };
+  }, []);
 
   const filteredItems = React.useMemo(() => {
-    if (!allEvents) return [];
-    return allEvents.filter(event => event.category === activeCategory && event.subCategory === activeSubCategory);
-  }, [allEvents, activeCategory, activeSubCategory]);
-
+    if (!events) return [];
+    return events.filter(event => event.category === activeCategory && event.subCategory === activeSubCategory);
+  }, [events, activeCategory, activeSubCategory]);
 
   const handleRegister = async (eventId: string) => {
-    if (!firestore || !user) {
-      toast({
-        variant: 'destructive',
-        title: 'Authentication Required',
-        description: 'You must be logged in to register for an event.',
-      });
+    if (!token) {
+      router.push('/user-login');
       return;
     }
 
-    const eventRef = doc(firestore, 'events', eventId);
-    const registrationRef = doc(collection(firestore, 'events', eventId, 'registrations'));
-
     try {
-      await runTransaction(firestore, async (transaction) => {
-        const eventDoc = await transaction.get(eventRef);
-        if (!eventDoc.exists()) {
-          // If the event doesn't exist in Firestore, we can't update it.
-          // For now, we will just create the registration.
-          // In a real app, you might want to fetch event data from a static source if not in DB.
-          console.log("Event not in Firestore, creating registration only.")
-        } else {
-            // Increment the registered attendees count
-            const newAttendeeCount = (eventDoc.data().registeredAttendees || 0) + 1;
-            transaction.update(eventRef, { registeredAttendees: newAttendeeCount });
-        }
+      const res = await fetch(`/api/events/${eventId}/register`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
+      const data = await res.json();
 
-        // Create a new registration document
-        transaction.set(registrationRef, {
-          userId: user.uid,
-          registrationDate: serverTimestamp(),
-          paymentStatus: 'paid', // Assuming payment is handled
+      if (!res.ok) {
+        throw new Error(data.error || 'Registration failed');
+      }
+
+      if (data.alreadyRegistered) {
+        toast({
+          variant: 'default',
+          title: 'Already Registered',
+          description: 'You are already registered for this event.',
         });
-      });
-
-      toast({
-        title: 'Registration Successful!',
-        description: "You're all set for the event.",
-      });
-    } catch (error) {
-      console.error('Registration failed: ', error);
+      } else {
+        // Update local event count
+        setEvents(prev => 
+          prev.map(e => 
+            e.id === eventId 
+              ? { ...e, registeredAttendees: (e.registeredAttendees || 0) + 1 }
+              : e
+          )
+        );
+        toast({
+          title: 'Registration Successful!',
+          description: "You're all set for the event.",
+        });
+      }
+    } catch (error: any) {
+      console.error('Registration failed:', error);
       toast({
         variant: 'destructive',
         title: 'Registration Failed',
-        description: 'Something went wrong. Please try again.',
+        description: error.message || 'Something went wrong. Please try again.',
       });
     }
   };
-
 
   React.useEffect(() => {
     if (categoryParam) setActiveCategory(categoryParam);
     if (subCategoryParam) setActiveSubCategory(subCategoryParam);
   }, [categoryParam, subCategoryParam]);
 
-   React.useEffect(() => {
+  React.useEffect(() => {
     const subCategoryExists = eventSubCategories[activeCategory]?.some(sc => sc.id === activeSubCategory);
     if (!subCategoryExists) {
       const firstSubCategory = eventSubCategories[activeCategory]?.[0];
@@ -148,51 +167,50 @@ export function EventsPageContent() {
           )}
         </section>
 
-        
-          <div className="flex justify-center">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
-               {isLoading && <p>Loading events...</p>}
-              {filteredItems && filteredItems.map(item => (
-                <MagicCard
-                  key={item.id}
-                  className="w-[350px] flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105 h-full"
-                >
-                  <Card className="bg-card/50 backdrop-blur-sm border-0 shadow-none overflow-hidden group w-full h-full flex flex-col">
-                    <div className="relative aspect-video overflow-hidden">
-                      <Image
-                        src={item.image.imageUrl}
-                        alt={item.title || item.name || ''}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-110"
-                        data-ai-hint={item.image.imageHint}
-                      />
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 py-10">
+            {isLoading && <p>Loading events...</p>}
+            {filteredItems && filteredItems.map(item => (
+              <MagicCard
+                key={item.id}
+                className="w-[350px] flex flex-col overflow-hidden transition-transform duration-300 ease-in-out hover:scale-105 h-full"
+              >
+                <Card className="bg-card/50 backdrop-blur-sm border-0 shadow-none overflow-hidden group w-full h-full flex flex-col">
+                  <div className="relative aspect-video overflow-hidden">
+                    <Image
+                      src={item.image.imageUrl}
+                      alt={item.title || item.name || ''}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      data-ai-hint={item.image.imageHint}
+                    />
+                  </div>
+                  <CardContent className="p-6 text-center flex flex-col flex-1">
+                    <h3 className="font-headline text-2xl text-white mb-2">{item.name}</h3>
+                    <p className="text-muted-foreground text-sm flex-grow">{item.description}</p>
+                    <div className="mt-auto pt-4">
+                      <p className="text-sm text-muted-foreground mb-2">{item.registeredAttendees || 0} registered</p>
+                      <p className="font-bold text-lg text-accent mb-4">{formatCurrency(item.price || 150)}</p>
+                      <ShimmerButton
+                        variant="outline"
+                        onClick={() => handleRegister(item.id)}
+                        className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full"
+                      >
+                        Register Now
+                      </ShimmerButton>
                     </div>
-                    <CardContent className="p-6 text-center flex flex-col flex-1">
-                      <h3 className="font-headline text-2xl text-white mb-2">{item.name}</h3>
-                      <p className="text-muted-foreground text-sm flex-grow">{item.description}</p>
-                      <div className="mt-auto pt-4">
-                        <p className="font-bold text-lg text-accent mb-4">{formatCurrency(item.price || 150)}</p>
-                          <ShimmerButton
-                          variant="outline"
-                          onClick={() => handleRegister(item.id)}
-                          className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full"
-                          >
-                          Register Now
-                          </ShimmerButton>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </MagicCard>
-              ))}
-              {!isLoading && (!filteredItems || filteredItems.length === 0) && (
-                <div className="col-span-full text-center py-16">
-                  <h3 className="text-2xl font-headline">No Events Found</h3>
-                  <p className="text-muted-foreground">Please select a different category.</p>
-                </div>
-              )}
-            </div>
+                  </CardContent>
+                </Card>
+              </MagicCard>
+            ))}
+            {!isLoading && (!filteredItems || filteredItems.length === 0) && (
+              <div className="col-span-full text-center py-16">
+                <h3 className="text-2xl font-headline">No Events Found</h3>
+                <p className="text-muted-foreground">Please select a different category.</p>
+              </div>
+            )}
           </div>
-        
+        </div>
       </div>
     </WarpBackground>
   );

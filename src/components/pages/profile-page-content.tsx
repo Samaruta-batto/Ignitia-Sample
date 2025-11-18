@@ -6,71 +6,244 @@ import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { 
-  User, 
-  Wallet, 
-  Calendar, 
-  Edit, 
-  LogOut, 
+import {
+  User,
+  Wallet,
+  Calendar,
+  Edit,
+  LogOut,
   ShoppingBag,
-  Trophy,
 } from 'lucide-react';
-import { mockWalletTransactions, mockEventRegistrations, mockMerchOrders } from '@/lib/data/mock-profile-data';
 import Loading from '@/app/(app)/loading';
-import { useAuth, useUser } from '@/firebase/provider';
-import { signOut, type User as AuthUser } from 'firebase/auth';
-import { PlaceHolderImages } from '@/lib/data/placeholder-images';
+import type { EventRegistration } from '@/backend/services/registrationService';
+import type { WalletTransaction } from '@/backend/services/walletService';
 
+interface UserProfile {
+  id: string;
+  email: string;
+  name?: string;
+}
+
+interface WalletData {
+  balance: number;
+  transactions: WalletTransaction[];
+}
 
 export function ProfilePageContent() {
-  const { user, isUserLoading } = useUser();
-  const auth = useAuth();
   const router = useRouter();
+  const [token, setToken] = useState<string | null>(null);
+  const [authLoading, setAuthLoading] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [authMode, setAuthMode] = useState<'signin' | 'signup'>('signin');
+  const [authEmail, setAuthEmail] = useState('');
+  const [authPassword, setAuthPassword] = useState('');
+  const [authName, setAuthName] = useState('');
+  const [user, setUser] = useState<UserProfile | null>(null);
+  const [wallet, setWallet] = useState<WalletData | null>(null);
+  const [registrations, setRegistrations] = useState<EventRegistration[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedUser, setEditedUser] = useState<AuthUser | null>(user);
-  const pravatarPlaceholder = PlaceHolderImages.find(p => p.id === 'pravatar-placeholder');
+  const [editedName, setEditedName] = useState('');
 
-
+  // Load token from localStorage
   useEffect(() => {
-    if (!isUserLoading && !user) {
-      router.push('/user-login');
+    const saved = localStorage.getItem('auth_token');
+    if (saved) {
+      setToken(saved);
     }
-  }, [user, isUserLoading, router]);
+  }, []);
 
+  // Auth handlers (sign in / sign up)
+  const handleSignIn = async () => {
+    setAuthError(null);
+    setAuthLoading(true);
+    try {
+      const res = await fetch('/api/auth/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: authEmail, password: authPassword }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || data.message || 'Sign in failed');
+      if (data.token) {
+        localStorage.setItem('auth_token', data.token);
+        setToken(data.token);
+      }
+    } catch (err: any) {
+      setAuthError(err.message || 'Sign in failed');
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  const handleSignUp = async () => {
+    setAuthError(null);
+    setAuthLoading(true);
+    try {
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: authEmail, password: authPassword, name: authName }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || data.message || 'Sign up failed');
+      if (data.token) {
+        localStorage.setItem('auth_token', data.token);
+        setToken(data.token);
+      }
+    } catch (err: any) {
+      setAuthError(err.message || 'Sign up failed');
+    } finally {
+      setAuthLoading(false);
+    }
+  };
+
+  // Fetch user profile and wallet data
   useEffect(() => {
-    setEditedUser(user);
-  }, [user]);
+    if (!token) {
+      setIsLoading(false);
+      return;
+    }
 
-  if (isUserLoading || !user) {
-    return <Loading />;
-  }
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const [profileRes, walletRes, registrationsRes] = await Promise.all([
+          fetch('/api/user/profile', {
+            headers: { 'Authorization': `Bearer ${token}` },
+          }),
+          fetch('/api/user/wallet', {
+            headers: { 'Authorization': `Bearer ${token}` },
+          }),
+          fetch('/api/user/registrations', {
+            headers: { 'Authorization': `Bearer ${token}` },
+          }),
+        ]);
 
+        if (profileRes.ok) {
+          const profileData = await profileRes.json();
+          setUser(profileData.user);
+          setEditedName(profileData.user.name || '');
+        }
+
+        if (walletRes.ok) {
+          const walletData = await walletRes.json();
+          setWallet(walletData);
+        }
+
+        if (registrationsRes.ok) {
+          const regsData = await registrationsRes.json();
+          setRegistrations(regsData);
+        }
+      } catch (err) {
+        console.error('Failed to fetch user data:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [token]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('auth_token');
+    router.push('/');
+  };
 
   const handleSaveProfile = () => {
-    // In a real app, you'd call an API to save the user data
+    // TODO: Add API call to update profile
     setIsEditing(false);
   };
 
-  const handleLogout = () => {
-    if(auth) {
-      signOut(auth);
-    }
-    router.push('/');
-  };
-  
-  const userInitial = (user.displayName || user.email)?.charAt(0).toUpperCase();
+  const handleAddFunds = async (amount: number) => {
+    if (!token) return;
+    try {
+      const res = await fetch('/api/user/wallet', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({ amount }),
+      });
 
-  const getAvatarUrl = () => {
-    if (user?.photoURL) return user.photoURL;
-    if (pravatarPlaceholder && user?.uid) {
-      return `${pravatarPlaceholder.imageUrl}${user.uid}`;
+      if (res.ok) {
+        const updated = await res.json();
+        setWallet(updated.wallet);
+      }
+    } catch (err) {
+      console.error('Failed to add funds:', err);
     }
-    return '';
+  };
+
+  // If no token, show sign-in / sign-up UI inside profile page
+  if (!token) {
+    return (
+      <div className="min-h-screen py-12 px-4">
+        <div className="max-w-md mx-auto">
+          <div className="mb-6 text-center">
+            <h1 className="text-3xl font-bold">Welcome</h1>
+            <p className="text-gray-400">Sign in or create an account to view your profile</p>
+          </div>
+
+          <div className="bg-[#1A1625] p-6 rounded-lg border border-[#D4AF37]/10">
+            <div className="flex justify-center gap-2 mb-4">
+              <ShimmerButton onClick={() => setAuthMode('signin')} variant={authMode === 'signin' ? undefined : 'outline'}>
+                Sign In
+              </ShimmerButton>
+              <ShimmerButton onClick={() => setAuthMode('signup')} variant={authMode === 'signup' ? undefined : 'outline'}>
+                Sign Up
+              </ShimmerButton>
+            </div>
+
+            {authError && <p className="text-red-500 text-sm mb-2">{authError}</p>}
+
+            <div className="space-y-3">
+              {authMode === 'signup' && (
+                <div>
+                  <Label className="text-gray-300">Name</Label>
+                  <Input value={authName} onChange={(e) => setAuthName(e.target.value)} className="bg-[#111015]" />
+                </div>
+              )}
+
+              <div>
+                <Label className="text-gray-300">Email</Label>
+                <Input value={authEmail} onChange={(e) => setAuthEmail(e.target.value)} className="bg-[#111015]" />
+              </div>
+
+              <div>
+                <Label className="text-gray-300">Password</Label>
+                <Input type="password" value={authPassword} onChange={(e) => setAuthPassword(e.target.value)} className="bg-[#111015]" />
+              </div>
+
+              <div className="flex gap-2">
+                {authMode === 'signin' ? (
+                  <ShimmerButton onClick={handleSignIn} className="flex-1" disabled={authLoading}>
+                    {authLoading ? 'Signing in...' : 'Sign In'}
+                  </ShimmerButton>
+                ) : (
+                  <ShimmerButton onClick={handleSignUp} className="flex-1" disabled={authLoading}>
+                    {authLoading ? 'Signing up...' : 'Create Account'}
+                  </ShimmerButton>
+                )}
+                <ShimmerButton onClick={() => { setAuthEmail(''); setAuthPassword(''); setAuthName(''); }} variant="outline" className="flex-1">
+                  Clear
+                </ShimmerButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
+
+  const userInitial = (user.name || user.email)?.charAt(0).toUpperCase() || 'U';
 
   return (
     <div className="min-h-screen py-12 px-4">
@@ -80,9 +253,9 @@ export function ProfilePageContent() {
             <h1 className="text-4xl font-bold text-white mb-2">My Profile</h1>
             <p className="text-gray-400">Manage your account and preferences</p>
           </div>
-          
+
           <div className="flex gap-3">
-            <ShimmerButton 
+            <ShimmerButton
               onClick={handleLogout}
               variant="outline"
               className="border-[#D4AF37]/30 hover:bg-[#D4AF37]/10"
@@ -102,12 +275,11 @@ export function ProfilePageContent() {
               <CardContent>
                 <div className="flex flex-col items-center mb-6">
                   <Avatar className="w-32 h-32 mb-4 border-4 border-[#D4AF37]">
-                    <AvatarImage src={getAvatarUrl()} alt={user.displayName || ''} />
                     <AvatarFallback className="text-3xl bg-[#D4AF37] text-[#1A1625]">
                       {userInitial}
                     </AvatarFallback>
                   </Avatar>
-                  <h2 className="text-2xl font-bold text-white mb-1">{user.displayName || 'User'}</h2>
+                  <h2 className="text-2xl font-bold text-white mb-1">{user.name || 'User'}</h2>
                 </div>
 
                 {isEditing ? (
@@ -115,17 +287,17 @@ export function ProfilePageContent() {
                     <div>
                       <Label className="text-gray-300">Name</Label>
                       <Input
-                        value={editedUser?.displayName || ''}
-                        onChange={(e) => setEditedUser({ ...editedUser!, displayName: e.target.value, reload: async () => {} })}
+                        value={editedName}
+                        onChange={(e) => setEditedName(e.target.value)}
                         className="bg-[#1A1625] border-[#D4AF37]/20 text-white"
                       />
                     </div>
                     <div>
                       <Label className="text-gray-300">Email</Label>
                       <Input
-                        value={editedUser?.email || ''}
-                        onChange={(e) => setEditedUser({ ...editedUser!, email: e.target.value, reload: async () => {} })}
-                        className="bg-[#1A1625] border-[#D4AF37]/20 text-white"
+                        value={user.email}
+                        disabled
+                        className="bg-[#1A1625] border-[#D4AF37]/20 text-gray-500"
                       />
                     </div>
                     <div className="flex gap-2">
@@ -143,17 +315,13 @@ export function ProfilePageContent() {
                       <User className="w-4 h-4 text-[#D4AF37]" />
                       <span>{user.email}</span>
                     </div>
-                    <div className="flex items-center gap-3 text-gray-300">
-                      <span className="text-[#D4AF37]">📞</span>
-                      <span>{user.phoneNumber || 'Not provided'}</span>
-                    </div>
-                      <ShimmerButton 
-                        onClick={() => setIsEditing(true)}
-                        className="w-full mt-4 bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]"
-                      >
-                        <Edit className="w-4 h-4 mr-2" />
-                        Edit Profile
-                      </ShimmerButton>
+                    <ShimmerButton
+                      onClick={() => setIsEditing(true)}
+                      className="w-full mt-4 bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]"
+                    >
+                      <Edit className="w-4 h-4 mr-2" />
+                      Edit Profile
+                    </ShimmerButton>
                   </div>
                 )}
               </CardContent>
@@ -168,11 +336,14 @@ export function ProfilePageContent() {
               </CardHeader>
               <CardContent>
                 <div className="text-4xl font-bold text-[#D4AF37]">
-                  ₹{/* Placeholder balance */ '1,234'}
+                  ₹{wallet?.balance || 0}
                 </div>
                 <p className="text-gray-400 text-sm mb-4">Available balance</p>
-                <ShimmerButton className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]">
-                  Add Money
+                <ShimmerButton
+                  onClick={() => handleAddFunds(500)}
+                  className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]"
+                >
+                  Add ₹500
                 </ShimmerButton>
               </CardContent>
             </Card>
@@ -180,15 +351,12 @@ export function ProfilePageContent() {
 
           <div className="lg:col-span-2">
             <Tabs defaultValue="events" className="w-full">
-              <TabsList className="grid w-full grid-cols-3 bg-[#312A41]">
+              <TabsList className="grid w-full grid-cols-2 bg-[#312A41]">
                 <TabsTrigger value="events" className="data-[state=active]:bg-[#D4AF37] data-[state=active]:text-[#1A1625]">
                   Events
                 </TabsTrigger>
                 <TabsTrigger value="wallet" className="data-[state=active]:bg-[#D4AF37] data-[state=active]:text-[#1A1625]">
                   Wallet
-                </TabsTrigger>
-                <TabsTrigger value="merch" className="data-[state=active]:bg-[#D4AF37] data-[state=active]:text-[#1A1625]">
-                  Merch
                 </TabsTrigger>
               </TabsList>
 
@@ -202,33 +370,37 @@ export function ProfilePageContent() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-4">
-                      {mockEventRegistrations.map((event) => (
-                        <div
-                          key={event.eventId}
-                          className="p-4 bg-[#1A1625] rounded-lg border border-[#D4AF37]/10 hover:border-[#D4AF37]/30 transition-colors"
-                        >
-                          <div className="flex items-start justify-between mb-2">
-                            <div>
-                              <h3 className="text-white font-semibold text-lg">{event.eventName}</h3>
-                              <p className="text-gray-400 text-sm">Registered on {event.registrationDate}</p>
+                      {registrations.length === 0 ? (
+                        <p className="text-gray-400">No event registrations yet.</p>
+                      ) : (
+                        registrations.map((event) => (
+                          <div
+                            key={event.eventId}
+                            className="p-4 bg-[#1A1625] rounded-lg border border-[#D4AF37]/10 hover:border-[#D4AF37]/30 transition-colors"
+                          >
+                            <div className="flex items-start justify-between mb-2">
+                              <div>
+                                <h3 className="text-white font-semibold text-lg">{event.eventName}</h3>
+                                <p className="text-gray-400 text-sm">Registered on {event.registrationDate}</p>
+                              </div>
+                              <Badge
+                                className={
+                                  event.status === 'participated'
+                                    ? 'bg-green-500'
+                                    : event.status === 'registered'
+                                    ? 'bg-blue-500'
+                                    : 'bg-red-500'
+                                }
+                              >
+                                {event.status}
+                              </Badge>
                             </div>
-                            <Badge 
-                              className={
-                                event.status === 'participated' 
-                                  ? 'bg-green-500' 
-                                  : event.status === 'registered' 
-                                  ? 'bg-blue-500' 
-                                  : 'bg-red-500'
-                              }
-                            >
-                              {event.status}
-                            </Badge>
+                            {event.paymentAmount && (
+                              <p className="text-[#D4AF37] font-semibold">₹{event.paymentAmount}</p>
+                            )}
                           </div>
-                          {event.paymentAmount && (
-                            <p className="text-[#D4AF37] font-semibold">₹{event.paymentAmount}</p>
-                          )}
-                        </div>
-                      ))}
+                        ))
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -244,73 +416,42 @@ export function ProfilePageContent() {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      {mockWalletTransactions.map((txn) => (
-                        <div
-                          key={txn.id}
-                          className="p-4 bg-[#1A1625] rounded-lg border border-[#D4AF37]/10 flex items-center justify-between"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                              txn.type === 'credit' ? 'bg-green-500/20' : 'bg-red-500/20'
-                            }`}>
-                              {txn.type === 'credit' ? '↓' : '↑'}
-                            </div>
-                            <div>
-                              <p className="text-white font-medium">{txn.description}</p>
-                              <p className="text-gray-400 text-sm">{txn.date}</p>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <p className={`font-bold ${txn.type === 'credit' ? 'text-green-500' : 'text-red-500'}`}>
-                              {txn.type === 'credit' ? '+' : '-'}₹{txn.amount}
-                            </p>
-                            <Badge variant="outline" className="mt-1 text-xs border-[#D4AF37]/30">
-                              {txn.status}
-                            </Badge>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="merch" className="mt-6">
-                <Card className="bg-[#312A41] border-[#D4AF37]/20">
-                  <CardHeader>
-                    <CardTitle className="text-white">Merchandise Orders</CardTitle>
-                    <CardDescription className="text-gray-400">
-                      Track your merchandise purchases
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      {mockMerchOrders.map((order) => (
-                        <div
-                          key={order.id}
-                          className="p-4 bg-[#1A1625] rounded-lg border border-[#D4AF37]/10"
-                        >
-                          <div className="flex items-center justify-between mb-2">
+                      {!wallet || wallet.transactions.length === 0 ? (
+                        <p className="text-gray-400">No transactions yet.</p>
+                      ) : (
+                        wallet.transactions.map((txn) => (
+                          <div
+                            key={txn.id}
+                            className="p-4 bg-[#1A1625] rounded-lg border border-[#D4AF37]/10 flex items-center justify-between"
+                          >
                             <div className="flex items-center gap-3">
-                              <ShoppingBag className="w-5 h-5 text-[#D4AF37]" />
+                              <div
+                                className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                                  txn.type === 'credit' ? 'bg-green-500/20' : 'bg-red-500/20'
+                                }`}
+                              >
+                                {txn.type === 'credit' ? '↓' : '↑'}
+                              </div>
                               <div>
-                                <h3 className="text-white font-semibold">{order.itemName}</h3>
-                                <p className="text-gray-400 text-sm">Quantity: {order.quantity} • {order.date}</p>
+                                <p className="text-white font-medium">{txn.description}</p>
+                                <p className="text-gray-400 text-sm">{txn.date}</p>
                               </div>
                             </div>
-                            <Badge 
-                              className={
-                                order.status === 'delivered' 
-                                  ? 'bg-green-500' 
-                                  : 'bg-yellow-500'
-                              }
-                            >
-                              {order.status}
-                            </Badge>
+                            <div className="text-right">
+                              <p
+                                className={`font-bold ${
+                                  txn.type === 'credit' ? 'text-green-500' : 'text-red-500'
+                                }`}
+                              >
+                                {txn.type === 'credit' ? '+' : '-'}₹{txn.amount}
+                              </p>
+                              <Badge variant="outline" className="mt-1 text-xs border-[#D4AF37]/30">
+                                {txn.status}
+                              </Badge>
+                            </div>
                           </div>
-                          <p className="text-[#D4AF37] font-semibold">₹{order.amount}</p>
-                        </div>
-                      ))}
+                        ))
+                      )}
                     </div>
                   </CardContent>
                 </Card>

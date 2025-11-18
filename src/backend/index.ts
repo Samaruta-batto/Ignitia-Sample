@@ -1,0 +1,10 @@
+export * as AuthController from './controllers/authController';
+export * as AuthService from './auth/authService';
+export * as UserService from './services/userService';
+export * as EventService from './services/eventService';
+export * as WalletService from './services/walletService';
+export * as RegistrationService from './services/registrationService';
+export * as PaymentService from './services/paymentService';
+export * as PaymentController from './controllers/paymentController';
+export * as MerchService from './services/merchService';
+export * as MerchController from './controllers/merchController';

@@ -9,8 +9,32 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { IndianRupee, Users, ShoppingCart, AlertTriangle } from "lucide-react"
+import { useEffect, useState } from 'react'
 
 export function AdminDashboardContent() {
+  const [loading, setLoading] = useState(true)
+  const [stats, setStats] = useState<any>({})
+
+  useEffect(() => {
+    const token = typeof window !== 'undefined' ? localStorage.getItem('auth_token') : null
+    const fetchAudit = async () => {
+      setLoading(true)
+      try {
+        const res = await fetch('/api/admin/audit', {
+          headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+        })
+        if (!res.ok) throw new Error('Failed to load audit')
+        const data = await res.json()
+        setStats(data)
+      } catch (err) {
+        console.error('Failed to load admin audit', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchAudit()
+  }, [])
+
   return (
     <div className="space-y-8">
       <h1 className="text-3xl font-bold tracking-tight">Admin Dashboard</h1>
@@ -23,10 +47,8 @@ export function AdminDashboardContent() {
             <IndianRupee className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">₹1,25,34,890</div>
-            <p className="text-xs text-muted-foreground">
-              +20.1% from last month
-            </p>
+            <div className="text-2xl font-bold">{loading ? '—' : `₹${stats.revenue || 0}`}</div>
+            <p className="text-xs text-muted-foreground">Aggregated from payments and orders</p>
           </CardContent>
         </Card>
         <Card>
@@ -37,10 +59,8 @@ export function AdminDashboardContent() {
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+2350</div>
-            <p className="text-xs text-muted-foreground">
-              +180.1% from last month
-            </p>
+            <div className="text-2xl font-bold">{loading ? '—' : stats.registrationsCount ?? 0}</div>
+            <p className="text-xs text-muted-foreground">Total event registrations</p>
           </CardContent>
         </Card>
         <Card>
@@ -49,10 +69,8 @@ export function AdminDashboardContent() {
             <ShoppingCart className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">+12,234</div>
-            <p className="text-xs text-muted-foreground">
-              +19% from last month
-            </p>
+            <div className="text-2xl font-bold">{loading ? '—' : stats.merchOrdersCount ?? 0}</div>
+            <p className="text-xs text-muted-foreground">Orders completed: {loading ? '—' : stats.merchRevenue ?? 0}</p>
           </CardContent>
         </Card>
         <Card>
@@ -63,10 +81,8 @@ export function AdminDashboardContent() {
             <AlertTriangle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-destructive">+5</div>
-            <p className="text-xs text-muted-foreground">
-              New security compromises attempted
-            </p>
+            <div className="text-2xl font-bold text-destructive">—</div>
+            <p className="text-xs text-muted-foreground">Security events (not tracked)</p>
           </CardContent>
         </Card>
       </div>

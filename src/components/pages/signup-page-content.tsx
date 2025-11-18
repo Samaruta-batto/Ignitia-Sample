@@ -2,12 +2,10 @@
 'use client';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
-import { useAuth } from '@/firebase/provider';
 import { useRouter } from 'next/navigation';
 import { User, School, Mail, Lock } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Link from 'next/link';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -68,7 +66,6 @@ export function SignupPageContent() {
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-  const auth = useAuth();
   const { toast } = useToast();
 
   const methods = useForm<FormData>({
@@ -92,20 +89,27 @@ export function SignupPageContent() {
 
   const handleFinalSubmit = async (data: FormData) => {
     setIsSubmitting(true);
-    if (!auth) {
-      toast({
-        variant: 'destructive',
-        title: 'Firebase not configured',
-        description: 'Authentication service is not available.',
-      });
-      setIsSubmitting(false);
-      return;
-    }
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
-      await updateProfile(userCredential.user, { displayName: data.fullName });
-      
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+          name: data.fullName,
+        }),
+      });
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.error || 'Sign-up failed');
+      }
+
+      // Save token to localStorage
+      localStorage.setItem('auth_token', result.token);
+
       toast({
         title: 'Sign-up Successful!',
         description: 'Welcome to Ignitia!',
@@ -115,7 +119,7 @@ export function SignupPageContent() {
       toast({
         variant: 'destructive',
         title: 'Sign-up Failed',
-        description: error.message,
+        description: error.message || 'Failed to create account.',
       });
     } finally {
       setIsSubmitting(false);

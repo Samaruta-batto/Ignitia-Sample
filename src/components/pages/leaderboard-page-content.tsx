@@ -22,6 +22,7 @@ import { Trophy, Users, IndianRupee } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
 import type { Event } from '@/lib/data/types';
 import { events as staticEvents } from '@/lib/data/placeholder-data';
+import { use } from 'react';
 import { WarpBackground } from '@/components/ui/warp-background';
 
 type EventWithRegistrations = Event & { registeredAttendees: number };
@@ -33,12 +34,25 @@ export function LeaderboardPageContent() {
   const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
-    const sortedEvents = [...staticEvents]
-      .sort((a, b) => (b.registeredAttendees || 0) - (a.registeredAttendees || 0))
-      .map(e => ({...e, registeredAttendees: e.registeredAttendees || 0}));
-    
-    setEvents(sortedEvents);
-    setIsLoading(false);
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch('/api/events/leaderboard');
+        const data = await res.json();
+        if (!cancelled) {
+          setEvents(data.map((e: any) => ({ ...e, registeredAttendees: e.registeredAttendees || 0 })));
+        }
+      } catch (err) {
+        // fallback to static data
+        const sortedEvents = [...staticEvents]
+          .sort((a, b) => (b.registeredAttendees || 0) - (a.registeredAttendees || 0))
+          .map(e => ({...e, registeredAttendees: e.registeredAttendees || 0}));
+        if (!cancelled) setEvents(sortedEvents);
+      } finally {
+        if (!cancelled) setIsLoading(false);
+      }
+    })();
+    return () => { cancelled = true };
   }, []);
 
   const handleRowClick = (event: Event) => {
