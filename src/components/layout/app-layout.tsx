@@ -67,7 +67,7 @@ export function AppLayout({
         transition={{ duration: 0.5 }}
     >
       <ConsoleWarning />
-      <AppHeader user={user} />
+      <AppHeader />
       <main className={`flex-1 ${isHomePage ? '' : 'container mx-auto'}`}>
         {children}
       </main>

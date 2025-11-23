@@ -14,6 +14,7 @@ export type Database = {
           email: string;
           name: string;
           password_hash: string;
+          role: string;
           created_at: string;
         };
       };

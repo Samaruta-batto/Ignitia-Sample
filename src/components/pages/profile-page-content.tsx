@@ -48,6 +48,7 @@ export function ProfilePageContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState('');
+  const [profileError, setProfileError] = useState<string | null>(null);
 
   // Load token from localStorage
   useEffect(() => {
@@ -108,12 +109,15 @@ export function ProfilePageContent() {
   useEffect(() => {
     if (!token) {
       setIsLoading(false);
+      setProfileError(null);
       return;
     }
 
     const fetchData = async () => {
       setIsLoading(true);
+      setProfileError(null);
       try {
+        console.log('[DEBUG] profile-page: fetching with token:', token.slice(0, 30) + (token.length > 30 ? '...' : ''));
         const [profileRes, walletRes, registrationsRes] = await Promise.all([
           fetch('/api/user/profile', {
             headers: { 'Authorization': `Bearer ${token}` },
@@ -126,10 +130,16 @@ export function ProfilePageContent() {
           }),
         ]);
 
+        console.log('[DEBUG] profile-page: profileRes status:', profileRes.status);
         if (profileRes.ok) {
           const profileData = await profileRes.json();
+          console.log('[DEBUG] profile-page: profile data:', profileData);
           setUser(profileData.user);
           setEditedName(profileData.user.name || '');
+        } else {
+          const errData = await profileRes.json().catch(() => ({}));
+          console.error('[DEBUG] profile-page: profile fetch failed:', profileRes.status, errData);
+          setProfileError(`Failed to load profile: ${errData.error || 'Unknown error'}`);
         }
 
         if (walletRes.ok) {
@@ -142,7 +152,8 @@ export function ProfilePageContent() {
           setRegistrations(regsData);
         }
       } catch (err) {
-        console.error('Failed to fetch user data:', err);
+        console.error('[DEBUG] profile-page: fetch error:', err);
+        setProfileError(err instanceof Error ? err.message : 'Failed to load profile');
       } finally {
         setIsLoading(false);
       }
@@ -243,7 +254,7 @@ export function ProfilePageContent() {
     );
   }
 
-  const userInitial = (user.name || user.email)?.charAt(0).toUpperCase() || 'U';
+  const userInitial = (user?.name || user?.email)?.charAt(0).toUpperCase() || 'U';
 
   return (
     <div className="min-h-screen py-12 px-4">
@@ -252,6 +263,7 @@ export function ProfilePageContent() {
           <div>
             <h1 className="text-4xl font-bold text-white mb-2">My Profile</h1>
             <p className="text-gray-400">Manage your account and preferences</p>
+            {profileError && <p className="text-red-400 text-sm mt-2">{profileError}</p>}
           </div>
 
           <div className="flex gap-3">
@@ -268,6 +280,23 @@ export function ProfilePageContent() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-1 space-y-6">
+            {isLoading ? (
+              <Card className="bg-[#312A41] border-[#D4AF37]/20">
+                <CardContent className="p-6">
+                  <p className="text-gray-400">Loading profile...</p>
+                </CardContent>
+              </Card>
+            ) : !user ? (
+              <Card className="bg-[#312A41] border-[#D4AF37]/20">
+                <CardContent className="p-6">
+                  <p className="text-red-400">Unable to load profile. {profileError ? `Error: ${profileError}` : 'Please try signing in again.'}</p>
+                  <ShimmerButton onClick={handleLogout} className="w-full mt-4 bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]">
+                    Sign In Again
+                  </ShimmerButton>
+                </CardContent>
+              </Card>
+            ) : (
+              <>
             <Card className="bg-[#312A41] border-[#D4AF37]/20">
               <CardHeader>
                 <CardTitle className="text-white">Profile Information</CardTitle>
@@ -347,6 +376,8 @@ export function ProfilePageContent() {
                 </ShimmerButton>
               </CardContent>
             </Card>
+              </>
+            )}
           </div>
 
           <div className="lg:col-span-2">

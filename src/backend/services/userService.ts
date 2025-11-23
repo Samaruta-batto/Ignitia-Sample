@@ -2,9 +2,9 @@
 
 import { supabase } from '@/lib/supabase';
 
-export type User = { id: string; email: string; password_hash: string; name?: string };
+export type User = { id: string; email: string; password_hash: string; name?: string; role?: string };
 
-export async function createUser(data: { email: string; password: string; name?: string }) {
+export async function createUser(data: { email: string; password: string; name?: string; role?: string }) {
   try {
     const { data: user, error } = await supabase
       .from('users')
@@ -12,6 +12,7 @@ export async function createUser(data: { email: string; password: string; name?:
         email: data.email,
         password_hash: data.password,
         name: data.name || '',
+        role: data.role || 'user',
       }])
       .select()
       .single();
@@ -25,6 +26,7 @@ export async function createUser(data: { email: string; password: string; name?:
       email: user.email,
       password_hash: user.password_hash,
       name: user.name,
+      role: (user as any).role || 'user',
     };
   } catch (err: any) {
     throw new Error(err.message || 'Failed to create user');
@@ -49,6 +51,7 @@ export async function findUserByEmail(email: string) {
       email: user.email,
       password_hash: user.password_hash,
       name: user.name,
+      role: (user as any).role || 'user',
     } : null;
   } catch (err: any) {
     if (err.message?.includes('no rows')) return null;
@@ -73,6 +76,7 @@ export async function findUserById(id: string) {
       email: user.email,
       password_hash: user.password_hash,
       name: user.name,
+      role: (user as any).role || 'user',
     } : null;
   } catch (err: any) {
     if (err.message?.includes('no rows')) return null;

@@ -14,40 +14,40 @@ import { LogIn, UserPlus, LogOut, Wallet, User as UserIcon, ShoppingCart } from 
 import { TopNav } from './top-nav';
 import { Logo } from '../icons/logo';
 import Link from 'next/link';
-import type { User } from 'firebase/auth';
-import { useAuth } from '@/firebase';
 import { useRouter } from 'next/navigation';
-import { signOut } from 'firebase/auth';
 import { useCartStore } from '@/hooks/use-cart-store';
 import { Badge } from '../ui/badge';
 import { Button } from '../ui/button';
 import { PlaceHolderImages } from '@/lib/data/placeholder-images';
+import { useEffect, useState } from 'react';
 
-export function AppHeader({ user }: { user: User | null }) {
+export function AppHeader() {
   const router = useRouter();
-  const auth = useAuth();
   const { cart, toggleCart } = useCartStore();
+  const [token, setToken] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const pravatarPlaceholder = PlaceHolderImages.find(p => p.id === 'pravatar-placeholder');
 
-  const handleSignOut = async () => {
-    if (auth) {
-      await signOut(auth);
+  useEffect(() => {
+    const saved = localStorage.getItem('auth_token');
+    setToken(saved);
+    if (saved) {
+      const decoded = JSON.parse(atob(saved.split('.')[1]));
+      setUserEmail(decoded.email || null);
     }
+  }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem('auth_token');
+    setToken(null);
+    setUserEmail(null);
     router.push('/');
     router.refresh();
   };
   
-  const userInitial = (user?.displayName || user?.email)?.charAt(0).toUpperCase();
+  const userInitial = (userEmail)?.charAt(0).toUpperCase() || 'U';
 
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-  const getAvatarUrl = () => {
-    if (user?.photoURL) return user.photoURL;
-    if (pravatarPlaceholder && user?.uid) {
-      return `${pravatarPlaceholder.imageUrl}${user.uid}`;
-    }
-    return '';
-  }
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-black/10 bg-background/30 backdrop-blur-lg">
@@ -65,12 +65,11 @@ export function AppHeader({ user }: { user: User | null }) {
                 <Badge variant="destructive" className="absolute -top-1 -right-1 h-5 w-5 justify-center p-0">{cartItemCount}</Badge>
               )}
            </Button>
-          {user ? (
+          {token ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                   <Avatar className="h-10 w-10">
-                     <AvatarImage src={getAvatarUrl()} />
                     <AvatarFallback>{userInitial}</AvatarFallback>
                   </Avatar>
                 </Button>
@@ -78,9 +77,9 @@ export function AppHeader({ user }: { user: User | null }) {
               <DropdownMenuContent className="w-56" align="end" forceMount>
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
-                    <p className="text-sm font-medium leading-none">{user.displayName || 'Signed In'}</p>
+                    <p className="text-sm font-medium leading-none">Signed In</p>
                     <p className="text-xs leading-none text-muted-foreground">
-                      {user.email}
+                      {userEmail}
                     </p>
                   </div>
                 </DropdownMenuLabel>

@@ -24,10 +24,27 @@ export function signToken(payload: object) {
 
 export function verifyToken(token: string) {
   try {
-    return jwt.verify(token, JWT_SECRET) as { [key: string]: any };
-  } catch (err) {
+    const payload = jwt.verify(token, JWT_SECRET) as { [key: string]: any };
+    console.log('[DEBUG] verifyToken success, payload:', payload);
+    return payload;
+  } catch (err: any) {
+    console.error('[DEBUG] verifyToken failed:', err.message);
     return null;
   }
+}
+
+export async function getUserFromToken(token: string) {
+  console.log('[DEBUG] getUserFromToken called with token:', token.slice(0, 30) + (token.length > 30 ? '...' : ''));
+  const payload = verifyToken(token);
+  console.log('[DEBUG] payload after verify:', payload);
+  if (!payload || !payload.sub) {
+    console.log('[DEBUG] payload invalid or no sub');
+    return null;
+  }
+  const user = await findUserById(String(payload.sub));
+  console.log('[DEBUG] findUserById returned:', user);
+  if (!user) return null;
+  return { id: user.id, email: user.email, name: user.name };
 }
 
 export async function signUp(input: SignUpInput) {
@@ -48,12 +65,4 @@ export async function signIn(input: SignInInput) {
   if (!ok) throw new Error('Invalid credentials');
   const token = signToken({ sub: user.id, email: user.email });
   return { user: { id: user.id, email: user.email, name: user.name }, token };
-}
-
-export async function getUserFromToken(token: string) {
-  const payload = verifyToken(token);
-  if (!payload || !payload.sub) return null;
-  const user = await findUserById(String(payload.sub));
-  if (!user) return null;
-  return { id: user.id, email: user.email, name: user.name };
 }
