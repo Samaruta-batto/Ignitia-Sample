@@ -3,8 +3,7 @@
 
 import { AppLayout } from '@/components/layout/app-layout';
 import { usePathname } from 'next/navigation';
-import { useUser } from '@/firebase';
-import type { User } from 'firebase/auth';
+import { useUser, type User } from '@/lib/auth';
 import { motion } from 'framer-motion';
 
 export default function MainAppLayout({

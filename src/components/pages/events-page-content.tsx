@@ -74,29 +74,57 @@ export function EventsPageContent() {
     try {
       const res = await fetch(`/api/events/${eventId}/register`, {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` },
+        headers: { 
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
       });
-      const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.error || 'Registration failed');
+      let data;
+      let responseText = '';
+      try {
+        responseText = await res.text();
+        console.log('Registration response text:', responseText);
+        data = responseText ? JSON.parse(responseText) : {};
+      } catch (parseError) {
+        console.error('Failed to parse response as JSON:', parseError);
+        console.error('Response text was:', responseText);
+        data = {};
       }
 
-      if (data.alreadyRegistered) {
+      if (!res.ok) {
+        throw new Error(data.error || `Registration failed (${res.status})`);
+      }
+
+      if (data.message && data.message.includes('already registered')) {
         toast({
           variant: 'default',
           title: 'Already Registered',
           description: 'You are already registered for this event.',
         });
       } else {
-        // Update local event count
-        setEvents(prev => 
-          prev.map(e => 
-            e.id === eventId 
-              ? { ...e, registeredAttendees: (e.registeredAttendees || 0) + 1 }
-              : e
-          )
-        );
+        // Refresh events data from backend to get updated counts
+        try {
+          const refreshRes = await fetch('/api/events/leaderboard');
+          const refreshData = await refreshRes.json();
+          const merged = allEvents.map(e => {
+            const backendEvent = refreshData.find((be: any) => be.id === e.id);
+            return { ...e, registeredAttendees: backendEvent?.registeredAttendees || 0 };
+          });
+          setEvents(merged);
+        } catch (refreshErr) {
+          console.warn('Failed to refresh event counts:', refreshErr);
+          // Fallback to local update
+          setEvents(prev => 
+            prev.map(e => 
+              e.id === eventId 
+                ? { ...e, registeredAttendees: (e.registeredAttendees || 0) + 1 }
+                : e
+            )
+          );
+        }
+        
         toast({
           title: 'Registration Successful!',
           description: "You're all set for the event.",
@@ -192,9 +220,8 @@ export function EventsPageContent() {
                       <p className="text-sm text-muted-foreground mb-2">{item.registeredAttendees || 0} registered</p>
                       <p className="font-bold text-lg text-accent mb-4">{formatCurrency(item.price || 150)}</p>
                       <ShimmerButton
-                        variant="outline"
                         onClick={() => handleRegister(item.id)}
-                        className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full"
+                        className="border-accent/50 text-accent bg-transparent hover:bg-accent hover:text-accent-foreground w-full border"
                       >
                         Register Now
                       </ShimmerButton>

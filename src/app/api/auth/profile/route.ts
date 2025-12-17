@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { handleGetProfile } from '@/backend/controllers/authController';
+
+const RUST_BACKEND_URL = process.env.RUST_BACKEND_URL || 'http://localhost:8081';
 
 export async function GET(req: Request) {
   try {
@@ -15,9 +16,17 @@ export async function GET(req: Request) {
 
     if (!token) return NextResponse.json({ error: 'Missing token' }, { status: 401 });
 
-    const result = await handleGetProfile(token);
-    return NextResponse.json(result.body, { status: result.status });
+    const response = await fetch(`${RUST_BACKEND_URL}/api/auth/profile`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    const data = await response.json();
+    return NextResponse.json(data, { status: response.status });
   } catch (err: any) {
-    return NextResponse.json({ error: err?.message || 'Unexpected error' }, { status: 500 });
+    return NextResponse.json({ error: err?.message || 'Backend connection failed' }, { status: 500 });
   }
 }

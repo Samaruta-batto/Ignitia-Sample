@@ -1,0 +1,10 @@
+C:\Users\sharm\Desktop\Ignitia-Sample\rust-backend\target\debug\deps\ar_archive_writer-24a4f2557c65edfb.d: C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\lib.rs C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\alignment.rs C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\archive.rs C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\archive_writer.rs
+
+C:\Users\sharm\Desktop\Ignitia-Sample\rust-backend\target\debug\deps\libar_archive_writer-24a4f2557c65edfb.rlib: C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\lib.rs C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\alignment.rs C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\archive.rs C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\archive_writer.rs
+
+C:\Users\sharm\Desktop\Ignitia-Sample\rust-backend\target\debug\deps\libar_archive_writer-24a4f2557c65edfb.rmeta: C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\lib.rs C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\alignment.rs C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\archive.rs C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\archive_writer.rs
+
+C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\lib.rs:
+C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\alignment.rs:
+C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\archive.rs:
+C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\ar_archive_writer-0.2.0\src\archive_writer.rs:

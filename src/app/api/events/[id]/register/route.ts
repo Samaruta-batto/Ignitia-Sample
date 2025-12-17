@@ -1,21 +1,47 @@
 import { NextResponse } from 'next/server';
-import { handleRegister } from '@/backend/controllers/eventsController';
 
-export async function POST(req: Request, { params }: { params: { id: string } }) {
+const RUST_BACKEND_URL = process.env.RUST_BACKEND_URL || 'http://localhost:8081';
+
+export async function POST(req: Request, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   try {
-    const auth = req.headers.get('authorization') || '';
-    let token = '';
-    if (auth.startsWith('Bearer ')) token = auth.replace('Bearer ', '');
-    if (!token) {
-      const cookie = req.headers.get('cookie') || '';
-      const match = cookie.match(/(?:^|; )token=([^;]+)/);
-      if (match) token = decodeURIComponent(match[1]);
+    let body = {};
+    try {
+      body = await req.json();
+    } catch (e) {
+      // If no body or invalid JSON, use empty object
+      console.log('No JSON body provided, using empty object');
     }
-    if (!token) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    
+    const authHeader = req.headers.get('authorization');
+    
+    console.log(`Proxying registration request for event ${id} to Rust backend`);
+    
+    const response = await fetch(`${RUST_BACKEND_URL}/api/events/${id}/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(authHeader && { 'Authorization': authHeader }),
+      },
+      body: JSON.stringify(body),
+    });
 
-    const result = await handleRegister(params.id, token);
-    return NextResponse.json(result.body, { status: result.status });
+    if (!response.ok) {
+      console.error(`Rust backend returned ${response.status}: ${response.statusText}`);
+    }
+
+    let data;
+    try {
+      const text = await response.text();
+      data = text ? JSON.parse(text) : {};
+    } catch (parseError) {
+      console.error('Failed to parse Rust backend response:', parseError);
+      data = { error: 'Invalid response from backend' };
+    }
+
+    return NextResponse.json(data, { status: response.status });
   } catch (err: any) {
-    return NextResponse.json({ error: err?.message || 'Unexpected error' }, { status: 500 });
+    console.error('Proxy error:', err);
+    return NextResponse.json({ error: err?.message || 'Backend connection failed' }, { status: 500 });
   }
 }

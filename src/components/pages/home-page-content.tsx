@@ -99,8 +99,8 @@ export function HomePageContent() {
               whileInView="visible"
               viewport={{ once: true, amount: 0.5 }}
           >
-              {siteConfig.socials.map((social) => (
-                <motion.div key={social.href} variants={itemVariants}>
+              {siteConfig.socials.map((social, index) => (
+                <motion.div key={social['aria-label']} variants={itemVariants}>
                   <ShimmerButton size="icon" asChild className="bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
                       <a href={social.href} aria-label={social['aria-label']}><social.icon className="text-white"/></a>
                   </ShimmerButton>

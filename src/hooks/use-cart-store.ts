@@ -2,8 +2,6 @@
 'use client';
 import { create } from 'zustand';
 import type { Product } from '@/lib/data/types';
-import { useUser, useFirestore } from '@/firebase/provider';
-import { collection, doc, updateDoc, deleteDoc, addDoc, serverTimestamp, getDocs, query, where } from 'firebase/firestore';
 
 export type CartItem = Product & { quantity: number };
 
@@ -18,22 +16,8 @@ type CartState = {
   updateQuantity: (productId: string, quantity: number) => void;
   toggleCart: () => void;
   clearCart: () => void;
+  checkoutWithWallet: (token: string) => Promise<{ success: boolean; message: string; newBalance?: number }>;
 };
-
-// Helper function to get Firebase services
-const getFirebase = () => {
-    try {
-        return {
-            user: useUser.getState().user,
-            firestore: useFirestore.getState(),
-        };
-    } catch (e) {
-        // This can happen if the hook is used outside of a provider,
-        // which might occur during store initialization. We'll handle it gracefully.
-        return { user: null, firestore: null };
-    }
-};
-
 export const useCartStore = create<CartState>((set, get) => ({
   cart: [],
   total: 0,
@@ -57,18 +41,8 @@ export const useCartStore = create<CartState>((set, get) => ({
     });
   },
 
-  removeFromCart: async (productId) => {
-    const { user, firestore } = getFirebase();
-    if (user && firestore) {
-        const cartRef = collection(firestore, 'users', user.uid, 'cart');
-        const q = query(cartRef, where('productId', '==', productId));
-        const querySnapshot = await getDocs(q);
-        if (!querySnapshot.empty) {
-            const docRef = querySnapshot.docs[0].ref;
-            await deleteDoc(docRef);
-        }
-    }
-
+  removeFromCart: (productId) => {
+    // TODO: Sync with Rust backend
     set((state) => {
       const newCart = state.cart.filter((item) => item.id !== productId);
       const newTotal = newCart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -76,23 +50,13 @@ export const useCartStore = create<CartState>((set, get) => ({
     });
   },
 
-  updateQuantity: async (productId, quantity) => {
+  updateQuantity: (productId, quantity) => {
     if (quantity <= 0) {
       get().removeFromCart(productId);
       return;
     }
 
-    const { user, firestore } = getFirebase();
-    if (user && firestore) {
-        const cartRef = collection(firestore, 'users', user.uid, 'cart');
-        const q = query(cartRef, where('productId', '==', productId));
-        const querySnapshot = await getDocs(q);
-        if (!querySnapshot.empty) {
-            const docRef = querySnapshot.docs[0].ref;
-            await updateDoc(docRef, { quantity });
-        }
-    }
-
+    // TODO: Sync with Rust backend
     set((state) => {
       const newCart = state.cart.map((item) =>
         item.id === productId ? { ...item, quantity } : item
@@ -104,4 +68,48 @@ export const useCartStore = create<CartState>((set, get) => ({
 
   toggleCart: () => set((state) => ({ isCartOpen: !state.isCartOpen })),
   clearCart: () => set({ cart: [], total: 0 }),
+  
+  checkoutWithWallet: async (token: string) => {
+    const { cart, total } = get();
+    
+    if (cart.length === 0) {
+      return { success: false, message: 'Cart is empty' };
+    }
+    
+    try {
+      const response = await fetch('/api/user/wallet/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          items: cart,
+          total: total,
+        }),
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok) {
+        // Clear cart on successful purchase
+        set({ cart: [], total: 0, isCartOpen: false });
+        return { 
+          success: true, 
+          message: result.message || 'Purchase successful!',
+          newBalance: result.newBalance 
+        };
+      } else {
+        return { 
+          success: false, 
+          message: result.error || 'Purchase failed' 
+        };
+      }
+    } catch (error) {
+      return { 
+        success: false, 
+        message: 'Network error. Please try again.' 
+      };
+    }
+  },
 }));

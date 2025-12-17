@@ -1,4 +1,6 @@
 
+'use client';
+
 import { RegistrationsChart } from "@/components/dashboard/registrations-chart"
 import { SalesChart } from "@/components/dashboard/sales-chart"
 import {

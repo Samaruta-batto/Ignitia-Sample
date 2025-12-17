@@ -14,8 +14,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { useFirestore } from '@/firebase/provider';
+// Firebase removed - using Rust backend
+// TODO: Implement event creation API calls to Rust backend
 import { useToast } from '@/hooks/use-toast';
 import { PlaceHolderImages } from '@/lib/data/placeholder-images';
 import {
@@ -38,7 +38,6 @@ const formSchema = z.object({
 });
 
 export function AddEventForm() {
-  const firestore = useFirestore();
   const { toast } = useToast();
   const [selectedCategory, setSelectedCategory] = useState<string>('');
 
@@ -55,15 +54,13 @@ export function AddEventForm() {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (!firestore) {
-      toast({ variant: 'destructive', title: 'Error', description: 'Firestore is not available.' });
-      return;
-    }
-    
     try {
+        // TODO: Implement event creation with Rust backend
+        // For now, show success message
         const randomImage = PlaceHolderImages[Math.floor(Math.random() * PlaceHolderImages.length)];
         
-        await addDoc(collection(firestore, 'events'), {
+        // TODO: Send POST request to Rust backend /api/events
+        console.log('Event data to send to Rust backend:', {
             ...values,
             price: 150, // Default price
             registeredAttendees: 0,
@@ -71,7 +68,6 @@ export function AddEventForm() {
                 imageUrl: randomImage.imageUrl,
                 imageHint: randomImage.imageHint,
             },
-            createdAt: serverTimestamp(),
         });
 
         toast({
@@ -81,7 +77,7 @@ export function AddEventForm() {
         form.reset();
         setSelectedCategory('');
     } catch (error: any) {
-        console.error("Error adding document: ", error);
+        console.error("Error creating event: ", error);
         toast({
             variant: 'destructive',
             title: 'Uh oh! Something went wrong.',

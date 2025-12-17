@@ -37,6 +37,9 @@ export function UserLoginPageContent() {
       // Save token to localStorage
       localStorage.setItem('auth_token', data.token);
 
+      // Dispatch custom event to notify other components
+      window.dispatchEvent(new CustomEvent('auth-changed'));
+
       toast({
         title: 'Login Successful!',
         description: 'Welcome back to Ignitia!',

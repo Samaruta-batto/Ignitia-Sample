@@ -47,7 +47,8 @@ export function ContactPageContent() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const response = await fetch('/api/contact', {
+      // Use Rust backend for contact form submission
+      const response = await fetch(`${process.env.NEXT_PUBLIC_RUST_BACKEND_URL || 'http://localhost:8081'}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,9 +60,11 @@ export function ContactPageContent() {
         throw new Error('Something went wrong');
       }
 
+      const result = await response.json();
+
       toast({
         title: 'Message Sent!',
-        description: 'Thanks for reaching out. We will get back to you shortly.',
+        description: result.message || 'Thanks for reaching out. We will get back to you shortly.',
       });
       form.reset();
     } catch (error) {

@@ -1,12 +1,22 @@
 import { NextResponse } from 'next/server';
-import { handleSignIn } from '@/backend/controllers/authController';
+
+const RUST_BACKEND_URL = process.env.RUST_BACKEND_URL || 'http://localhost:8081';
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const result = await handleSignIn(body);
-    return NextResponse.json(result.body, { status: result.status });
+    
+    const response = await fetch(`${RUST_BACKEND_URL}/api/auth/signin`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    });
+
+    const data = await response.json();
+    return NextResponse.json(data, { status: response.status });
   } catch (err: any) {
-    return NextResponse.json({ error: err?.message || 'Unexpected error' }, { status: 500 });
+    return NextResponse.json({ error: err?.message || 'Backend connection failed' }, { status: 500 });
   }
 }

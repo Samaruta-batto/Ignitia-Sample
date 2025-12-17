@@ -13,14 +13,26 @@ import { Label } from '@/components/ui/label';
 import {
   User,
   Wallet,
-  Calendar,
   Edit,
   LogOut,
-  ShoppingBag,
 } from 'lucide-react';
-import Loading from '@/app/(app)/loading';
-import type { EventRegistration } from '@/backend/services/registrationService';
-import type { WalletTransaction } from '@/backend/services/walletService';
+// Remove backend service imports - using types from Rust backend responses
+interface EventRegistration {
+  eventId: string;
+  eventName: string;
+  registrationDate: string;
+  status: string;
+  paymentAmount?: number;
+}
+
+interface WalletTransaction {
+  id: string;
+  type: string;
+  amount: number;
+  description: string;
+  date: string;
+  status: string;
+}
 
 interface UserProfile {
   id: string;
@@ -49,6 +61,7 @@ export function ProfilePageContent() {
   const [isEditing, setIsEditing] = useState(false);
   const [editedName, setEditedName] = useState('');
   const [profileError, setProfileError] = useState<string | null>(null);
+  const [addFundsAmount, setAddFundsAmount] = useState<string>('500');
 
   // Load token from localStorage
   useEffect(() => {
@@ -118,14 +131,15 @@ export function ProfilePageContent() {
       setProfileError(null);
       try {
         console.log('[DEBUG] profile-page: fetching with token:', token.slice(0, 30) + (token.length > 30 ? '...' : ''));
+        const backendUrl = process.env.NEXT_PUBLIC_RUST_BACKEND_URL || 'http://localhost:8081';
         const [profileRes, walletRes, registrationsRes] = await Promise.all([
-          fetch('/api/user/profile', {
+          fetch(`${backendUrl}/api/user/profile`, {
             headers: { 'Authorization': `Bearer ${token}` },
           }),
-          fetch('/api/user/wallet', {
+          fetch(`${backendUrl}/api/user/wallet`, {
             headers: { 'Authorization': `Bearer ${token}` },
           }),
-          fetch('/api/user/registrations', {
+          fetch(`${backendUrl}/api/user/registrations`, {
             headers: { 'Authorization': `Bearer ${token}` },
           }),
         ]);
@@ -162,6 +176,18 @@ export function ProfilePageContent() {
     fetchData();
   }, [token]);
 
+  // Auto-refresh data when page becomes visible (for better sync)
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden && token) {
+        refreshWalletData();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, [token]);
+
   const handleLogout = () => {
     localStorage.removeItem('auth_token');
     router.push('/');
@@ -172,24 +198,123 @@ export function ProfilePageContent() {
     setIsEditing(false);
   };
 
-  const handleAddFunds = async (amount: number) => {
+  const refreshWalletData = async () => {
     if (!token) return;
     try {
-      const res = await fetch('/api/user/wallet', {
+      const backendUrl = process.env.NEXT_PUBLIC_RUST_BACKEND_URL || 'http://localhost:8081';
+      const [walletRes, registrationsRes] = await Promise.all([
+        fetch(`${backendUrl}/api/user/wallet`, {
+          headers: { 'Authorization': `Bearer ${token}` },
+        }),
+        fetch(`${backendUrl}/api/user/registrations`, {
+          headers: { 'Authorization': `Bearer ${token}` },
+        }),
+      ]);
+
+      if (walletRes.ok) {
+        const walletData = await walletRes.json();
+        setWallet(walletData);
+      }
+
+      if (registrationsRes.ok) {
+        const regsData = await registrationsRes.json();
+        setRegistrations(regsData);
+      }
+    } catch (err) {
+      console.error('Failed to refresh wallet data:', err);
+    }
+  };
+
+  const handleAddFunds = async (amount: number) => {
+    if (!token || !user) return;
+    
+    try {
+      // Load Razorpay script
+      const { loadRazorpayScript, RAZORPAY_KEY_ID } = await import('@/lib/razorpay');
+      const isLoaded = await loadRazorpayScript();
+      
+      if (!isLoaded) {
+        alert('Failed to load payment gateway. Please try again.');
+        return;
+      }
+
+      // Create payment order
+      const orderRes = await fetch('/api/payment/create-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ amount }),
+        body: JSON.stringify({ amount, currency: 'INR' }),
       });
 
-      if (res.ok) {
-        const updated = await res.json();
-        setWallet(updated.wallet);
+      if (!orderRes.ok) {
+        const error = await orderRes.json();
+        alert(`Failed to create payment order: ${error.error || 'Unknown error'}`);
+        return;
       }
+
+      const order = await orderRes.json();
+
+      // Initialize Razorpay checkout
+      const options = {
+        key: RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: order.currency,
+        name: 'Ignitia Wallet',
+        description: `Add ₹${amount} to wallet`,
+        order_id: order.razorpay_order_id,
+        handler: async (response: any) => {
+          try {
+            // Verify payment
+            const verifyRes = await fetch('/api/payment/verify', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+              },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature,
+                amount: amount,
+              }),
+            });
+
+            const result = await verifyRes.json();
+            
+            if (result.success) {
+              // Refresh wallet data
+              await refreshWalletData();
+              alert(`${result.message} New balance: ₹${result.newBalance}`);
+            } else {
+              alert(`Payment verification failed: ${result.message}`);
+            }
+          } catch (err) {
+            console.error('Payment verification error:', err);
+            alert('Payment verification failed. Please contact support.');
+          }
+        },
+        prefill: {
+          name: user.name || 'User',
+          email: user.email,
+        },
+        theme: {
+          color: '#D4AF37',
+        },
+        modal: {
+          ondismiss: () => {
+            console.log('Payment cancelled by user');
+          },
+        },
+      };
+
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+      
     } catch (err) {
-      console.error('Failed to add funds:', err);
+      console.error('Failed to initiate payment:', err);
+      alert('Failed to initiate payment. Please try again.');
     }
   };
 
@@ -205,10 +330,16 @@ export function ProfilePageContent() {
 
           <div className="bg-[#1A1625] p-6 rounded-lg border border-[#D4AF37]/10">
             <div className="flex justify-center gap-2 mb-4">
-              <ShimmerButton onClick={() => setAuthMode('signin')} variant={authMode === 'signin' ? undefined : 'outline'}>
+              <ShimmerButton 
+                onClick={() => setAuthMode('signin')} 
+                className={authMode === 'signin' ? '' : 'bg-transparent border border-input hover:bg-accent hover:text-accent-foreground'}
+              >
                 Sign In
               </ShimmerButton>
-              <ShimmerButton onClick={() => setAuthMode('signup')} variant={authMode === 'signup' ? undefined : 'outline'}>
+              <ShimmerButton 
+                onClick={() => setAuthMode('signup')} 
+                className={authMode === 'signup' ? '' : 'bg-transparent border border-input hover:bg-accent hover:text-accent-foreground'}
+              >
                 Sign Up
               </ShimmerButton>
             </div>
@@ -243,7 +374,7 @@ export function ProfilePageContent() {
                     {authLoading ? 'Signing up...' : 'Create Account'}
                   </ShimmerButton>
                 )}
-                <ShimmerButton onClick={() => { setAuthEmail(''); setAuthPassword(''); setAuthName(''); }} variant="outline" className="flex-1">
+                <ShimmerButton onClick={() => { setAuthEmail(''); setAuthPassword(''); setAuthName(''); }} className="flex-1 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground">
                   Clear
                 </ShimmerButton>
               </div>
@@ -269,8 +400,7 @@ export function ProfilePageContent() {
           <div className="flex gap-3">
             <ShimmerButton
               onClick={handleLogout}
-              variant="outline"
-              className="border-[#D4AF37]/30 hover:bg-[#D4AF37]/10"
+              className="bg-transparent border border-[#D4AF37]/30 hover:bg-[#D4AF37]/10"
             >
               <LogOut className="w-4 h-4 mr-2" />
               Logout
@@ -333,7 +463,7 @@ export function ProfilePageContent() {
                       <ShimmerButton onClick={handleSaveProfile} className="flex-1 bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]">
                         Save
                       </ShimmerButton>
-                      <ShimmerButton onClick={() => setIsEditing(false)} variant="outline" className="flex-1 border-[#D4AF37]/30">
+                      <ShimmerButton onClick={() => setIsEditing(false)} className="flex-1 bg-transparent border border-[#D4AF37]/30">
                         Cancel
                       </ShimmerButton>
                     </div>
@@ -368,12 +498,49 @@ export function ProfilePageContent() {
                   ₹{wallet?.balance || 0}
                 </div>
                 <p className="text-gray-400 text-sm mb-4">Available balance</p>
-                <ShimmerButton
-                  onClick={() => handleAddFunds(500)}
-                  className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]"
-                >
-                  Add ₹500
-                </ShimmerButton>
+                
+                <div className="space-y-3">
+                  <div>
+                    <Label className="text-gray-300 text-sm">Add Amount (₹)</Label>
+                    <Input
+                      type="number"
+                      value={addFundsAmount}
+                      onChange={(e) => setAddFundsAmount(e.target.value)}
+                      placeholder="Enter amount"
+                      className="bg-[#1A1625] border-[#D4AF37]/20 text-white"
+                      min="1"
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-3 gap-2">
+                    <ShimmerButton
+                      onClick={() => setAddFundsAmount('500')}
+                      className="bg-transparent border border-[#D4AF37]/30 text-xs"
+                    >
+                      ₹500
+                    </ShimmerButton>
+                    <ShimmerButton
+                      onClick={() => setAddFundsAmount('1000')}
+                      className="bg-transparent border border-[#D4AF37]/30 text-xs"
+                    >
+                      ₹1000
+                    </ShimmerButton>
+                    <ShimmerButton
+                      onClick={() => setAddFundsAmount('2000')}
+                      className="bg-transparent border border-[#D4AF37]/30 text-xs"
+                    >
+                      ₹2000
+                    </ShimmerButton>
+                  </div>
+                  
+                  <ShimmerButton
+                    onClick={() => handleAddFunds(parseInt(addFundsAmount) || 0)}
+                    className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]"
+                    disabled={!addFundsAmount || parseInt(addFundsAmount) <= 0}
+                  >
+                    Add ₹{addFundsAmount || 0} to Wallet
+                  </ShimmerButton>
+                </div>
               </CardContent>
             </Card>
               </>

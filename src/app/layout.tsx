@@ -5,7 +5,7 @@ import { Toaster } from '@/components/ui/toaster';
 import { ClientProviders } from '@/components/providers/client-providers';
 import './globals.css';
 import { SmoothCursor } from '@/components/ui/smooth-cursor';
-import { FirebaseClientProvider } from '@/firebase';
+// Firebase removed - using Rust backend
 import { AppFooter } from '@/components/layout/footer';
 import { usePathname } from 'next/navigation';
 
@@ -31,16 +31,14 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased cursor-none">
-        <FirebaseClientProvider>
-          <ClientProviders>
-            <SmoothCursor />
-            <div className="flex flex-col min-h-screen">
-              <main className="flex-1 flex flex-col">{children}</main>
-              {!isLandingPage && <AppFooter />}
-            </div>
-            <Toaster />
-          </ClientProviders>
-        </FirebaseClientProvider>
+        <ClientProviders>
+          <SmoothCursor />
+          <div className="flex flex-col min-h-screen">
+            <main className="flex-1 flex flex-col">{children}</main>
+            {!isLandingPage && <AppFooter />}
+          </div>
+          <Toaster />
+        </ClientProviders>
       </body>
     </html>
   );

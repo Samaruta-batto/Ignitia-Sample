@@ -4,7 +4,7 @@ import { AdminSidebar } from '@/components/layout/admin-sidebar';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import Loading from '../(app)/loading';
-import { useUser } from '@/firebase';
+import { useUser } from '@/lib/auth';
 
 export default function AdminLayout({
   children,

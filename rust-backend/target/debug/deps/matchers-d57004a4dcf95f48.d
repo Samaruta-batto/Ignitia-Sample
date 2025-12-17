@@ -1,0 +1,5 @@
+C:\Users\sharm\Desktop\Ignitia-Sample\rust-backend\target\debug\deps\matchers-d57004a4dcf95f48.d: C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\matchers-0.2.0\src\lib.rs
+
+C:\Users\sharm\Desktop\Ignitia-Sample\rust-backend\target\debug\deps\libmatchers-d57004a4dcf95f48.rmeta: C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\matchers-0.2.0\src\lib.rs
+
+C:\Users\sharm\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\matchers-0.2.0\src\lib.rs:

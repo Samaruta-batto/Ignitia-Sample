@@ -7,8 +7,7 @@ import { cn } from '@/lib/utils';
 import { ShimmerButton } from '../ui/shimmer-button';
 import { useRouter } from 'next/navigation';
 import { Separator } from '../ui/separator';
-import { useAuth, useUser } from '@/firebase';
-import { signOut } from 'firebase/auth';
+import { useAuth, useUser, signOut } from '@/lib/auth';
 
 const menuItems = [
   { href: '/admin', label: 'Dashboard', icon: Home },

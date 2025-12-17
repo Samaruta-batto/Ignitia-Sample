@@ -9,46 +9,24 @@ import { ShoppingCart } from 'lucide-react';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { useToast } from '@/hooks/use-toast';
 import { useCartStore } from '@/hooks/use-cart-store';
-import { useUser, useFirestore } from '@/firebase/provider';
-import { collection, addDoc, query, where, getDocs, updateDoc, serverTimestamp } from 'firebase/firestore';
+// Firebase removed - using Rust backend
+import { useUser } from '@/lib/auth';
 import { InteractiveGridPattern } from '@/components/ui/interactive-grid-pattern';
 
 export function MerchandisePageContent() {
   const { toast } = useToast();
   const { user } = useUser();
-  const firestore = useFirestore();
   const { addToCart } = useCartStore();
 
   const handleAddToCart = async (product: Product) => {
-    if (!user || !firestore) {
-      toast({
-        variant: 'destructive',
-        title: 'Please log in',
-        description: 'You need to be logged in to add items to your cart.',
-      });
-      return;
-    }
-
+    // TODO: Implement user authentication check with Rust backend
+    // For now, allow adding to cart without authentication
+    
     try {
-      const cartRef = collection(firestore, 'users', user.uid, 'cart');
-      const q = query(cartRef, where('productId', '==', product.id));
-      const querySnapshot = await getDocs(q);
-
-      if (!querySnapshot.empty) {
-        // Item exists, update quantity
-        const docRef = querySnapshot.docs[0].ref;
-        const currentQuantity = querySnapshot.docs[0].data().quantity;
-        await updateDoc(docRef, { quantity: currentQuantity + 1 });
-      } else {
-        // Item does not exist, add new document
-        await addDoc(cartRef, {
-          productId: product.id,
-          quantity: 1,
-          addedAt: serverTimestamp(),
-        });
-      }
-      
+      // Add to local cart store
       addToCart({ ...product, quantity: 1 });
+      
+      // TODO: Sync with Rust backend when user is authenticated
       toast({
         title: 'Added to Cart!',
         description: `${product.name} has been added to your cart.`,

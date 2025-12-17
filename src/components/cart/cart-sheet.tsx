@@ -13,12 +13,44 @@ import { Separator } from '../ui/separator';
 import { useCartStore } from '@/hooks/use-cart-store';
 import { formatCurrency } from '@/lib/utils';
 import Image from 'next/image';
-import { Minus, Plus, Trash2, X } from 'lucide-react';
+import { Minus, Plus, Trash2, X, Wallet } from 'lucide-react';
 import { ShimmerButton } from '../ui/shimmer-button';
 import { ScrollArea } from '../ui/scroll-area';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export function CartSheet() {
-  const { cart, total, isCartOpen, toggleCart, removeFromCart, updateQuantity } = useCartStore();
+  const { cart, total, isCartOpen, toggleCart, removeFromCart, updateQuantity, checkoutWithWallet } = useCartStore();
+  const [token, setToken] = useState<string | null>(null);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const saved = localStorage.getItem('auth_token');
+    setToken(saved);
+  }, []);
+
+  const handleWalletCheckout = async () => {
+    if (!token) {
+      alert('Please login to checkout');
+      router.push('/user-login');
+      return;
+    }
+
+    setIsCheckingOut(true);
+    try {
+      const result = await checkoutWithWallet(token);
+      if (result.success) {
+        alert(`${result.message}${result.newBalance ? ` New wallet balance: ₹${result.newBalance}` : ''}`);
+      } else {
+        alert(result.message);
+      }
+    } catch (error) {
+      alert('Checkout failed. Please try again.');
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
 
   return (
     <Sheet open={isCartOpen} onOpenChange={toggleCart}>
@@ -81,9 +113,19 @@ export function CartSheet() {
                 <span>Subtotal</span>
                 <span>{formatCurrency(total)}</span>
               </div>
-              <ShimmerButton className="w-full">
-                Proceed to Checkout
-              </ShimmerButton>
+              <div className="space-y-2">
+                <ShimmerButton 
+                  className="w-full bg-[#D4AF37] hover:bg-[#D4AF37]/90 text-[#1A1625]"
+                  onClick={handleWalletCheckout}
+                  disabled={isCheckingOut}
+                >
+                  <Wallet className="w-4 h-4 mr-2" />
+                  {isCheckingOut ? 'Processing...' : 'Pay with Wallet'}
+                </ShimmerButton>
+                <p className="text-xs text-muted-foreground text-center">
+                  {token ? 'Use your wallet balance to purchase' : 'Login required for wallet payment'}
+                </p>
+              </div>
             </SheetFooter>
           </>
         )}

@@ -71,6 +71,14 @@ export function SignupPageContent() {
   const methods = useForm<FormData>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
+    defaultValues: {
+      fullName: '',
+      mobileNumber: '',
+      collegeName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
   });
 
   const { trigger, handleSubmit } = methods;
@@ -109,6 +117,9 @@ export function SignupPageContent() {
 
       // Save token to localStorage
       localStorage.setItem('auth_token', result.token);
+
+      // Dispatch custom event to notify other components
+      window.dispatchEvent(new CustomEvent('auth-changed'));
 
       toast({
         title: 'Sign-up Successful!',

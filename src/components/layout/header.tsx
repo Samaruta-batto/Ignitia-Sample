@@ -28,19 +28,74 @@ export function AppHeader() {
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const pravatarPlaceholder = PlaceHolderImages.find(p => p.id === 'pravatar-placeholder');
 
-  useEffect(() => {
+  const checkAuthToken = () => {
     const saved = localStorage.getItem('auth_token');
     setToken(saved);
     if (saved) {
-      const decoded = JSON.parse(atob(saved.split('.')[1]));
-      setUserEmail(decoded.email || null);
+      try {
+        // Check if token has the expected JWT format (3 parts separated by dots)
+        const parts = saved.split('.');
+        if (parts.length === 3) {
+          const decoded = JSON.parse(atob(parts[1]));
+          setUserEmail(decoded.email || null);
+        } else {
+          // Invalid token format, clear it
+          localStorage.removeItem('auth_token');
+          setToken(null);
+        }
+      } catch (error) {
+        // Invalid token, clear it
+        console.warn('Invalid token found, clearing:', error);
+        localStorage.removeItem('auth_token');
+        setToken(null);
+        setUserEmail(null);
+      }
+    } else {
+      setToken(null);
+      setUserEmail(null);
     }
+  };
+
+  useEffect(() => {
+    // Check token on mount
+    checkAuthToken();
+
+    // Listen for storage changes (when token is added/removed in other tabs)
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'auth_token') {
+        checkAuthToken();
+      }
+    };
+
+    // Listen for focus events (when user returns to tab after login)
+    const handleFocus = () => {
+      checkAuthToken();
+    };
+
+    // Listen for custom auth-changed events
+    const handleAuthChanged = () => {
+      checkAuthToken();
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('auth-changed', handleAuthChanged);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('auth-changed', handleAuthChanged);
+    };
   }, []);
 
   const handleSignOut = () => {
     localStorage.removeItem('auth_token');
     setToken(null);
     setUserEmail(null);
+    
+    // Dispatch custom event to notify other components
+    window.dispatchEvent(new CustomEvent('auth-changed'));
+    
     router.push('/');
     router.refresh();
   };
