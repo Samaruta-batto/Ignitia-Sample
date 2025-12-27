@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./rust-backend
+      dockerfile: Dockerfile
+    container_name: ignitia-backend
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./rust-backend/data:/app/data
+    env_file:
+      - ./rust-backend/.env.production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Add a reverse proxy (nginx)
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: ignitia-proxy
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf
+  #   depends_on:
+  #     - backend
+  #   restart: unless-stopped

@@ -11,7 +11,11 @@
     "backend": "cd rust-backend && cargo run",
     "backend:build": "cd rust-backend && cargo build --release",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "deploy:backend": "docker-compose up -d backend",
+    "deploy:backend:build": "docker-compose build backend",
+    "deploy:stop": "docker-compose down",
+    "deploy:logs": "docker-compose logs -f backend"
   },
   "dependencies": {
     "@genkit-ai/google-genai": "^1.20.0",
