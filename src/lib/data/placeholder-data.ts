@@ -230,20 +230,10 @@ export const coreTeam: TeamMember[] = [
 
 export const devTeam: TeamMember[] = [
   {
-    name: 'Ritik Gupta',
-    role: 'Lead Developer',
-    avatar: getImage('avatar-ritik'),
-    bio: 'Architecting the digital backbone of the Ignitia platform.',
-    social: {
-      github: '#',
-      linkedin: '#',
-    },
-  },
-  {
-    name: 'Siddhant Narula',
-    role: 'Frontend Developer',
-    avatar: getImage('avatar-siddhant'),
-    bio: 'Crafting the user experience with React and Tailwind CSS.',
+    name: 'Samartha Bhatt',
+    role: 'Website Head',
+    avatar: getImage('avatar-samartha'),
+    bio: 'Leading the development and design of the Ignitia platform.',
     social: {
       github: '#',
       linkedin: '#',
@@ -251,9 +241,9 @@ export const devTeam: TeamMember[] = [
   },
   {
     name: 'Suryansh Sharan',
-    role: 'UI/UX Designer',
+    role: 'Website Co-head',
     avatar: getImage('avatar-suryansh'),
-    bio: 'Designing the look and feel of the Ignitia experience.',
+    bio: 'Co-leading the technical development and user experience design.',
     social: {
       github: '#',
       linkedin: '#',
@@ -261,9 +251,19 @@ export const devTeam: TeamMember[] = [
   },
   {
     name: 'Divyansh Vijay',
-    role: 'Backend Developer',
+    role: 'Website Co-head',
     avatar: getImage('avatar-divyansh'),
-    bio: 'Developing the robust server-side logic for our platform.',
+    bio: 'Co-leading the backend development and platform architecture.',
+    social: {
+      github: '#',
+      linkedin: '#',
+    },
+  },
+  {
+    name: 'Arpit Bajpai',
+    role: 'Joint Website Co-head',
+    avatar: getImage('avatar-arpit'),
+    bio: 'Supporting the development team with frontend and backend solutions.',
     social: {
       github: '#',
       linkedin: '#',

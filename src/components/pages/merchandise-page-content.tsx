@@ -42,8 +42,9 @@ export function MerchandisePageContent() {
   };
 
   return (
-    <InteractiveGridPattern>
-      <div className="space-y-16">
+    <div className="pt-24">
+      <InteractiveGridPattern>
+        <div className="space-y-16">
       <section className="text-center">
           <h1 className="font-headline text-5xl tracking-wider uppercase">
             Official Merch
@@ -80,5 +81,6 @@ export function MerchandisePageContent() {
         </div>
       </div>
     </InteractiveGridPattern>
+    </div>
   );
 }

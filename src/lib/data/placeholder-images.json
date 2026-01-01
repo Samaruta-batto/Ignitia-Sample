@@ -296,6 +296,12 @@
       "imageHint": "person portrait"
     },
     {
+      "id": "avatar-arpit",
+      "description": "Avatar for Arpit Bajpai",
+      "imageUrl": "https://placehold.co/200x200/312A41/FFFFFF?text=A",
+      "imageHint": "person portrait"
+    },
+    {
       "id": "pravatar-placeholder",
       "description": "Generic user avatar placeholder",
       "imageUrl": "https://placehold.co/150x150/D4AF37/1A1625?text=",

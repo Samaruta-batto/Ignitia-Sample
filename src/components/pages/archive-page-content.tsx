@@ -34,7 +34,7 @@ export function ArchivePageContent() {
 
   return (
     <InteractiveGridPattern>
-        <div className="space-y-8">
+        <div className="space-y-8 py-8">
             <div className="flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
                 <div>
                     <h2 className="font-headline text-2xl uppercase tracking-wider">Filter by Year</h2>

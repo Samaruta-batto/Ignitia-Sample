@@ -20,6 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
+        {/* Favicon */}
+        <link rel="icon" type="image/png" href="https://res.cloudinary.com/dov2etaiw/image/upload/v1767273197/icon_ckp9ro.png" />
+        <link rel="apple-touch-icon" href="https://res.cloudinary.com/dov2etaiw/image/upload/v1767273197/icon_ckp9ro.png" />
+        
         {/* The metadata object is not supported in client components. 
             You can uncomment this if you move this back to a server component.
         <title>Ignitia</title>

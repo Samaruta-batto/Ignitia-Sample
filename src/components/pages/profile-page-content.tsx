@@ -321,7 +321,7 @@ export function ProfilePageContent() {
   // If no token, show sign-in / sign-up UI inside profile page
   if (!token) {
     return (
-      <div className="min-h-screen py-12 px-4">
+      <div className="min-h-screen pt-24 py-12 px-4">
         <div className="max-w-md mx-auto">
           <div className="mb-6 text-center">
             <h1 className="text-3xl font-bold">Welcome</h1>
@@ -388,7 +388,7 @@ export function ProfilePageContent() {
   const userInitial = (user?.name || user?.email)?.charAt(0).toUpperCase() || 'U';
 
   return (
-    <div className="min-h-screen py-12 px-4">
+    <div className="min-h-screen pt-24 py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="mb-8 flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
           <div>

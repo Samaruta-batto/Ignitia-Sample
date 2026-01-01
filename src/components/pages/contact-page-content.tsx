@@ -77,7 +77,7 @@ export function ContactPageContent() {
   }
 
   return (
-    <InteractiveGridPattern>
+    <div className="pt-24 min-h-screen p-4 md:p-8">
         <div className="grid md:grid-cols-2 gap-12">
         <div>
             <h1 className="font-headline text-4xl uppercase tracking-wider mb-4">Get in Touch</h1>
@@ -199,7 +199,7 @@ export function ContactPageContent() {
             </Form>
             </CardContent>
         </Card>
-        </div>
-    </InteractiveGridPattern>
+      </div>
+    </div>
   );
 }

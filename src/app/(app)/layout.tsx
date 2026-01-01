@@ -32,7 +32,7 @@ export default function MainAppLayout({
             initial="hidden"
             animate="enter"
             transition={{ type: 'linear', duration: 0.5 }}
-            className="p-4 md:p-8"
+            className={pathname === '/home' ? '' : 'p-4 md:p-8'}
         >
             {children}
         </motion.div>

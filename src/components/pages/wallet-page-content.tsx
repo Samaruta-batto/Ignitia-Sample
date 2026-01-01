@@ -66,8 +66,9 @@ export function WalletPageContent() {
   }, [token]);
 
   return (
-    <InteractiveGridPattern>
-      <div className="max-w-4xl mx-auto space-y-8">
+    <div className="pt-24">
+      <InteractiveGridPattern>
+        <div className="max-w-4xl mx-auto space-y-8">
         <Card className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground shadow-lg">
           <CardHeader>
             <CardTitle className="text-lg font-medium text-primary-foreground/80">
@@ -132,5 +133,6 @@ export function WalletPageContent() {
         </Card>
       </div>
     </InteractiveGridPattern>
+    </div>
   );
 }

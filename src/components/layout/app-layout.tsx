@@ -35,7 +35,7 @@ export function AppLayout({
     >
       <ConsoleWarning />
       <AppHeader />
-      <main className={`flex-1 ${isHomePage ? '' : 'container mx-auto'}`}>
+      <main className={`flex-1 ${isHomePage ? 'pt-21' : 'container mx-auto pt-21'}`}>
         {children}
       </main>
       <CartSheet />

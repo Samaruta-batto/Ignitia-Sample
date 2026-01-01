@@ -105,11 +105,11 @@ export function AppHeader() {
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-black/10 bg-background/30 backdrop-blur-lg">
-      <div className="container mx-auto flex h-20 items-center justify-between gap-4 px-4 md:px-8">
+    <header className="fixed top-0 left-0 right-0 z-40 w-full border-b border-black/10 bg-background/30 backdrop-blur-lg">
+      <div className="container mx-auto flex h-16 items-center justify-between gap-4 px-4 md:px-8">
         <div className="flex items-center gap-4">
           <Link href="/">
-            <Logo />
+            <Logo size="nav" />
           </Link>
         </div>
         <TopNav />
@@ -160,12 +160,12 @@ export function AppHeader() {
             </DropdownMenu>
           ) : (
             <>
-              <ShimmerButton asChild className="px-4 py-2 bg-transparent text-white">
+              <ShimmerButton asChild className="px-5 py-3 text-base bg-transparent text-white hover:bg-accent/10">
                 <Link href="/user-login">
                   <LogIn className="mr-2 h-4 w-4" /> Login
                 </Link>
               </ShimmerButton>
-              <ShimmerButton asChild className="px-5 py-2.5">
+              <ShimmerButton asChild className="px-6 py-3 text-base">
                 <Link href="/signup">
                   <UserPlus className="mr-2 h-4 w-4" /> Sign Up
                 </Link>

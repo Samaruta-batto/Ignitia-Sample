@@ -50,13 +50,13 @@ export function TopNav() {
   return (
     <>
       <nav className="hidden md:flex items-center justify-center flex-1">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {menuItems.map((item) => (
             <ShimmerButton
               key={item.label}
               asChild
               className={cn(
-                'px-4 py-2 text-sm bg-transparent',
+                'px-5 py-3 text-base bg-transparent hover:bg-accent/10',
                 (pathname === item.href || (item.href !== '/home' && pathname.startsWith(item.href))) 
                 ? 'text-accent' 
                 : 'text-white'
@@ -78,7 +78,7 @@ export function TopNav() {
           <SheetContent side="left" className="flex flex-col p-0">
             <div className="p-4">
               <Link href="/" onClick={() => setIsOpen(false)}>
-                <Logo />
+                <Logo size="nav" />
               </Link>
             </div>
             <Separator />

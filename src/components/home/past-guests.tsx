@@ -15,19 +15,22 @@ import { ShimmerButton } from '../ui/shimmer-button';
 
 const pastCelebrities = [
   {
-      name: 'Kailash Kher',
+      name: 'Neeti Mohan',
       title: 'Playback Singer',
+      image: PlaceHolderImages.find(p => p.id === 'celebrity-neeti-mohan-reveal')!
+  },
+  {
+      name: 'Kailash Kher',
+      title: 'Folk Singer',
       image: PlaceHolderImages.find(p => p.id === 'celebrity-kailash')!
   },
   {
-      name: 'Anupam Kher',
-      title: 'Actor & Author',
-      image: PlaceHolderImages.find(p => p.id === 'celebrity-anupam')!
-  },
-  {
-      name: 'Bhumi Pednekar',
-      title: 'Actress',
-      image: PlaceHolderImages.find(p => p.id === 'celebrity-bhumi')!
+      name: 'Sukhwinder Singh',
+      title: 'Bollywood Singer',
+      image: {
+          imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=600&fit=crop&crop=face',
+          imageHint: 'singer portrait'
+      }
   }
 ];
 

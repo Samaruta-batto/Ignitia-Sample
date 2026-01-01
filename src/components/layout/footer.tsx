@@ -14,11 +14,11 @@ const footerNav = [
 
 export function AppFooter() {
   return (
-    <footer className="bg-primary/20 border-t border-border mt-24">
+    <footer className="bg-background border-t border-border mt-24">
       <div className="container mx-auto py-12 px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="flex flex-col items-start gap-4">
-            <Logo />
+            <Logo size="footer" />
             <p className="text-muted-foreground max-w-xs">
               The premier techno-cultural fest of PSIT, Kanpur.
             </p>

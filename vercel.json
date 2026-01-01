@@ -8,12 +8,10 @@
       "maxDuration": 30
     }
   },
-  "env": {
-    "NEXT_PUBLIC_RUST_BACKEND_URL": "@rust_backend_url"
-  },
-  "build": {
-    "env": {
-      "NEXT_PUBLIC_RUST_BACKEND_URL": "@rust_backend_url"
+  "rewrites": [
+    {
+      "source": "/api/backend/(.*)",
+      "destination": "https://your-backend-url.com/$1"
     }
-  }
+  ]
 }

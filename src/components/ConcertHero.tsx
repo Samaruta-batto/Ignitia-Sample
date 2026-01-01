@@ -4,9 +4,10 @@ import Image from 'next/image';
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowRight, Ticket } from 'lucide-react';
+import { Ticket } from 'lucide-react';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { Logo } from './icons/logo';
+import { FlameIconOnly } from './icons/flame-icon';
 import { navItems } from '@/lib/data/site-config';
 
 export default function ConcertHero() {
@@ -28,24 +29,24 @@ export default function ConcertHero() {
 
   return (
     <section className="relative w-screen h-screen overflow-hidden">
-        <header className="absolute top-0 left-0 right-0 z-50 container mx-auto flex h-20 items-center justify-between">
+        <header className="absolute top-0 left-0 right-0 z-50 container mx-auto flex h-21 items-center justify-between">
             <Link href="/">
             <Logo />
             </Link>
-            <nav className="hidden md:flex items-center gap-2">
+            <nav className="hidden md:flex items-center gap-3">
                 {navItems.map((item) => (
                 <ShimmerButton
                     key={item.label}
                     asChild
-                    className="px-4 py-2 text-sm bg-transparent text-white"
+                    className="px-6 py-3 text-base bg-transparent text-white hover:bg-accent/10"
                 >
                     <Link href={item.href}>{item.label}</Link>
                 </ShimmerButton>
                 ))}
             </nav>
-            <ShimmerButton asChild className="px-5 py-2.5">
-                <Link href="/signup">
-                    Register
+            <ShimmerButton asChild className="px-6 py-3 text-base">
+                <Link href="/home">
+                    Explore Now
                 </Link>
             </ShimmerButton>
         </header>
@@ -99,7 +100,10 @@ export default function ConcertHero() {
 
         <div className="mt-8 flex gap-4">
           <ShimmerButton className="px-8 py-3">
-            <Link href="/events" className="flex items-center gap-2">Register Now <ArrowRight /></Link>
+            <Link href="/home" className="flex items-center gap-2">
+              <FlameIconOnly size={40} />
+              Explore Now
+            </Link>
           </ShimmerButton>
           <ShimmerButton asChild className="px-8 py-3 bg-transparent border border-input hover:bg-accent hover:text-accent-foreground text-foreground">
             <Link href="/events">Explore Events <Ticket /></Link>

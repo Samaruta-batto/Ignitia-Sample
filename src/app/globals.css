@@ -86,6 +86,11 @@
     @apply bg-background text-foreground;
     background-image: radial-gradient(circle at 1px 1px, hsl(var(--border)) 1px, transparent 0);
     background-size: 2rem 2rem;
+    overflow-x: hidden;
+  }
+  
+  html {
+    overflow-x: hidden;
   }
 
   input,
@@ -259,4 +264,190 @@
   .spotlight { filter: blur(18px); opacity: 0.6; }
   .bokeh { opacity: 0.55; }
   .b1, .b3 { display: none; }
+}
+/* ---------- Flip Card Styles ---------- */
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 0.5rem;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Utility classes for 3D transforms */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Hover effect (disabled for now since it's locked) */
+.flip-card.locked:hover .flip-card-inner {
+  transform: none;
+}
+
+/* Animation for the lock icon */
+.flip-card-front .lock-icon {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}/* Marq
+uee Animations */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee-slow {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee-fast {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee-slow {
+  animation: marquee-slow 60s linear infinite;
+}
+
+.animate-marquee-fast {
+  animation: marquee-fast 20s linear infinite;
+}
+
+/* Celebrity Card Styles */
+.celebrity-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.celebrity-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 193, 7, 0.5);
+}
+
+.celebrity-image {
+  transition: all 0.3s ease;
+  filter: grayscale(20%);
+}
+
+.celebrity-card:hover .celebrity-image {
+  filter: grayscale(0%);
+  transform: scale(1.1);
+}/* 
+Enhanced Celebrity Marquee Styles */
+.celebrity-marquee-container {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(0, 0, 0, 0.1) 15%, 
+    rgba(0, 0, 0, 0.1) 85%, 
+    transparent 100%);
+  position: relative;
+}
+
+.celebrity-marquee-container::before,
+.celebrity-marquee-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 100px;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.celebrity-marquee-container::before {
+  left: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 1) 0%, transparent 100%);
+}
+
+.celebrity-marquee-container::after {
+  right: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 1) 100%);
+}
+
+/* Celebrity card glow effect */
+.celebrity-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ffc107, #ff9800, #ffc107, #ff9800);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.celebrity-card:hover::before {
+  opacity: 0.7;
+  animation: glow-rotate 2s linear infinite;
+}
+
+@keyframes glow-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Star rating animation */
+.star-rating {
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; transform: scale(1.1); }
 }

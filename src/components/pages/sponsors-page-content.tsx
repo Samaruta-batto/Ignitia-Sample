@@ -29,8 +29,9 @@ export function SponsorsPageContent() {
   );
 
   return (
-    <InteractiveGridPattern>
-        <div className="space-y-16">
+    <div className="pt-24">
+      <InteractiveGridPattern>
+          <div className="space-y-16">
         <section className="text-center">
             <h1 className="font-headline text-5xl tracking-wider uppercase">Our Sponsors</h1>
             <p className="mt-4 max-w-2xl mx-auto text-lg text-muted-foreground">
@@ -101,5 +102,6 @@ export function SponsorsPageContent() {
         )}
         </div>
     </InteractiveGridPattern>
+    </div>
   );
 }
