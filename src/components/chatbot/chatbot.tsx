@@ -5,12 +5,6 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Input } from '@/components/ui/input';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { Bot, User, CornerDownLeft, Loader2, AlertTriangle, X, Send } from 'lucide-react';
-import {
-  answerQuestion,
-} from '@/ai/flows/chatbot-answers-faqs';
-import {
-  escalateToSupport,
-} from '@/ai/flows/chatbot-escalates-complex-issues';
 import { Avatar, AvatarFallback } from '../ui/avatar';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
@@ -28,6 +22,33 @@ const initialMessages: Message[] = [
       "Hello! I'm the Ignitia AI assistant. How can I help you today? You can ask me about events, merchandise, or general questions.",
   },
 ];
+
+// Mock responses for frontend-only deployment
+const getMockResponse = (question: string): string => {
+  const lowerQuestion = question.toLowerCase();
+  
+  if (lowerQuestion.includes('event') || lowerQuestion.includes('schedule')) {
+    return "Ignitia 2K26 is coming soon! We'll be announcing our exciting lineup of tech events, workshops, and competitions. Stay tuned for updates on our website and social media channels.";
+  }
+  
+  if (lowerQuestion.includes('merch') || lowerQuestion.includes('merchandise')) {
+    return "Our exclusive Ignitia merchandise will be available soon! We'll have t-shirts, hoodies, stickers, and more. Keep an eye out for our merchandise launch announcement.";
+  }
+  
+  if (lowerQuestion.includes('date') || lowerQuestion.includes('when')) {
+    return "Ignitia 2K26 dates will be announced soon! We're working hard to bring you an amazing tech fest experience. Follow us for the latest updates.";
+  }
+  
+  if (lowerQuestion.includes('register') || lowerQuestion.includes('signup')) {
+    return "Registration for Ignitia 2K26 will open soon! We'll announce registration details on our website and social media. Make sure to follow us so you don't miss out!";
+  }
+  
+  if (lowerQuestion.includes('location') || lowerQuestion.includes('venue')) {
+    return "Ignitia 2K26 will be held at our campus. Detailed venue information and maps will be shared closer to the event date.";
+  }
+  
+  return "Thanks for your question! Ignitia 2K26 is still in the planning phase. For the most up-to-date information, please check our website regularly or contact our team directly.";
+};
 
 export function Chatbot({ isOpen, onClose }: { isOpen: boolean, onClose: () => void}) {
   const [input, setInput] = React.useState('');
@@ -51,30 +72,19 @@ export function Chatbot({ isOpen, onClose }: { isOpen: boolean, onClose: () => v
 
     const userMessage: Message = { role: 'user', content: input };
     setMessages((prev) => [...prev, userMessage]);
+    const currentInput = input;
     setInput('');
     setIsLoading(true);
 
-    try {
-      const response = await answerQuestion({ question: input });
+    // Simulate API delay
+    setTimeout(() => {
       const assistantMessage: Message = {
         role: 'assistant',
-        content: response.answer,
+        content: getMockResponse(currentInput),
       };
       setMessages((prev) => [...prev, assistantMessage]);
-    } catch (error) {
-      const errorMessage: Message = {
-        role: 'system',
-        content: "Sorry, I encountered an error. Please try again.",
-      };
-      setMessages((prev) => [...prev, errorMessage]);
-      toast({
-        variant: "destructive",
-        title: "Chatbot Error",
-        description: "Could not get a response from the AI assistant."
-      })
-    } finally {
       setIsLoading(false);
-    }
+    }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
   };
   
   const handleEscalation = async () => {
@@ -82,29 +92,15 @@ export function Chatbot({ isOpen, onClose }: { isOpen: boolean, onClose: () => v
     const systemMessage: Message = { role: 'system', content: 'Escalating to human support...' };
     setMessages((prev) => [...prev, systemMessage]);
 
-    try {
-      const chatHistory = messages.map(m => `${m.role}: ${m.content}`).join('\n');
-      const userQuery = messages.filter(m => m.role === 'user').pop()?.content || "User needs help.";
-      
-      const response = await escalateToSupport({ userQuery, chatHistory });
-      
-      const escalationMessage: Message = { role: 'assistant', content: response.escalationMessage };
-      setMessages((prev) => [...prev, escalationMessage]);
-
-    } catch (error) {
-       const errorMessage: Message = {
-        role: 'system',
-        content: "Sorry, I couldn't process the escalation request. Please contact support directly.",
+    // Simulate escalation delay
+    setTimeout(() => {
+      const escalationMessage: Message = { 
+        role: 'assistant', 
+        content: "I've escalated your query to our human support team. They'll get back to you soon via email or phone. For immediate assistance, you can also contact us directly through our contact page."
       };
-      setMessages((prev) => [...prev, errorMessage]);
-       toast({
-        variant: "destructive",
-        title: "Escalation Error",
-        description: "Failed to escalate to human support."
-      })
-    } finally {
+      setMessages((prev) => [...prev, escalationMessage]);
       setIsLoading(false);
-    }
+    }, 1500);
   };
 
   return (
