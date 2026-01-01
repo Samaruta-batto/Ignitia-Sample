@@ -7,11 +7,5 @@
     "src/app/api/**/*.ts": {
       "maxDuration": 30
     }
-  },
-  "rewrites": [
-    {
-      "source": "/api/backend/(.*)",
-      "destination": "https://your-backend-url.com/$1"
-    }
-  ]
+  }
 }
