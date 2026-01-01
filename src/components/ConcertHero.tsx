@@ -1,13 +1,12 @@
 
 'use client';
 import Image from 'next/image';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Ticket } from 'lucide-react';
 import { ShimmerButton } from '@/components/ui/shimmer-button';
 import { Logo } from './icons/logo';
-import { FlameIconOnly } from './icons/flame-icon';
 import { navItems } from '@/lib/data/site-config';
 
 export default function ConcertHero() {
@@ -44,11 +43,6 @@ export default function ConcertHero() {
                 </ShimmerButton>
                 ))}
             </nav>
-            <ShimmerButton asChild className="px-6 py-3 text-base">
-                <Link href="/home">
-                    Explore Now
-                </Link>
-            </ShimmerButton>
         </header>
 
       {/* background image (parallax wrapper) */}
@@ -87,21 +81,25 @@ export default function ConcertHero() {
 
       {/* hero content */}
       <motion.div
-        className="relative z-40 flex flex-col items-center justify-center text-center px-6 py-12 max-w-4xl mx-auto h-full"
+        className="relative z-40 flex flex-col items-center justify-center text-center px-6 py-12 max-w-6xl mx-auto h-full"
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
       >
-        <h1 className="font-headline text-5xl md:text-7xl lg:text-8xl uppercase tracking-wider text-white drop-shadow-lg">
-          IGNITIA 2k26
-        </h1>
-        <p className="mt-4 text-accent text-xl md:text-2xl font-semibold drop-shadow-md">Where Technology Meets Culture</p>
-        <p className="mt-4 text-lg md:text-xl text-white/80">April 28–29, 2026 | PSIT Kanpur</p>
+        <div className="mb-2 group cursor-pointer">
+          <Image
+            src="/images/ignitia2k26.png"
+            alt="Ignitia 2K26"
+            width={2400}
+            height={800}
+            className="h-96 md:h-[28rem] lg:h-[32rem] w-auto drop-shadow-2xl transition-all duration-500 ease-out group-hover:scale-105 group-hover:drop-shadow-[0_0_50px_rgba(255,215,0,0.6)] group-hover:brightness-110"
+            priority
+          />
+        </div>
 
-        <div className="mt-8 flex gap-4">
+        <div className="mt-12 flex gap-4">
           <ShimmerButton className="px-8 py-3">
-            <Link href="/home" className="flex items-center gap-2">
-              <FlameIconOnly size={40} />
+            <Link href="/home">
               Explore Now
             </Link>
           </ShimmerButton>
